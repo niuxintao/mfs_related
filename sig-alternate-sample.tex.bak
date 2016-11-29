@@ -1,0 +1,499 @@
+% This is "sig-alternate.tex" V2.1 April 2013
+% This file should be compiled with V2.5 of "sig-alternate.cls" May 2012
+%
+% This example file demonstrates the use of the 'sig-alternate.cls'
+% V2.5 LaTeX2e document class file. It is for those submitting
+% articles to ACM Conference Proceedings WHO DO NOT WISH TO
+% STRICTLY ADHERE TO THE SIGS (PUBS-BOARD-ENDORSED) STYLE.
+% The 'sig-alternate.cls' file will produce a similar-looking,
+% albeit, 'tighter' paper resulting in, invariably, fewer pages.
+%
+% ----------------------------------------------------------------------------------------------------------------
+% This .tex file (and associated .cls V2.5) produces:
+%       1) The Permission Statement
+%       2) The Conference (location) Info information
+%       3) The Copyright Line with ACM data
+%       4) NO page numbers
+%
+% as against the acm_proc_article-sp.cls file which
+% DOES NOT produce 1) thru' 3) above.
+%
+% Using 'sig-alternate.cls' you have control, however, from within
+% the source .tex file, over both the CopyrightYear
+% (defaulted to 200X) and the ACM Copyright Data
+% (defaulted to X-XXXXX-XX-X/XX/XX).
+% e.g.
+% \CopyrightYear{2007} will cause 2007 to appear in the copyright line.
+% \crdata{0-12345-67-8/90/12} will cause 0-12345-67-8/90/12 to appear in the copyright line.
+%
+% ---------------------------------------------------------------------------------------------------------------
+% This .tex source is an example which *does* use
+% the .bib file (from which the .bbl file % is produced).
+% REMEMBER HOWEVER: After having produced the .bbl file,
+% and prior to final submission, you *NEED* to 'insert'
+% your .bbl file into your source .tex file so as to provide
+% ONE 'self-contained' source file.
+%
+% ================= IF YOU HAVE QUESTIONS =======================
+% Questions regarding the SIGS styles, SIGS policies and
+% procedures, Conferences etc. should be sent to
+% Adrienne Griscti (griscti@acm.org)
+%
+% Technical questions _only_ to
+% Gerald Murray (murray@hq.acm.org)
+% ===============================================================
+%
+% For tracking purposes - this is V2.0 - May 2012
+
+\documentclass{sig-alternate-05-2015}
+
+
+\begin{document}
+
+% Copyright
+\setcopyright{acmcopyright}
+%\setcopyright{acmlicensed}
+%\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+
+
+% DOI
+\doi{10.475/123_4}
+
+% ISBN
+\isbn{123-4567-24-567/08/06}
+
+%Conference
+\conferenceinfo{PLDI '13}{June 16--19, 2013, Seattle, WA, USA}
+
+\acmPrice{\$15.00}
+
+%
+% --- Author Metadata here ---
+\conferenceinfo{WOODSTOCK}{'97 El Paso, Texas USA}
+%\CopyrightYear{2007} % Allows default copyright year (20XX) to be over-ridden - IF NEED BE.
+%\crdata{0-12345-67-8/90/01}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
+% --- End of Author Metadata ---
+
+\title{Is MFS Strongly Correlated with faulty code?
+\titlenote{(Produces the permission block, and
+copyright information). For use with
+SIG-ALTERNATE.CLS. Supported by ACM.}}
+%\subtitle{
+%\titlenote{A full version of this paper is available as
+%\textit{Author's Guide to Preparing ACM SIG Proceedings Using
+%\LaTeX$2_\epsilon$\ and BibTeX} at
+%\texttt{www.acm.org/eaddress.htm}}}
+%
+% You need the command \numberofauthors to handle the 'placement
+% and alignment' of the authors beneath the title.
+%
+% For aesthetic reasons, we recommend 'three authors at a time'
+% i.e. three 'name/affiliation blocks' be placed beneath the title.
+%
+% NOTE: You are NOT restricted in how many 'rows' of
+% "name/affiliations" may appear. We just ask that you restrict
+% the number of 'columns' to three.
+%
+% Because of the available 'opening page real-estate'
+% we ask you to refrain from putting more than six authors
+% (two rows with three columns) beneath the article title.
+% More than six makes the first-page appear very cluttered indeed.
+%
+% Use the \alignauthor commands to handle the names
+% and affiliations for an 'aesthetic maximum' of six authors.
+% Add names, affiliations, addresses for
+% the seventh etc. author(s) as the argument for the
+% \additionalauthors command.
+% These 'additional authors' will be output/set for you
+% without further effort on your part as the last section in
+% the body of your article BEFORE References or any Appendices.
+
+\numberofauthors{5} %  in this sample file, there are a *total*
+% of EIGHT authors. SIX appear on the 'first-page' (for formatting
+% reasons) and the remaining two appear in the \additionalauthors section.
+%
+\author{
+% You can go ahead and credit any number of authors here,
+% e.g. one 'row of three' or two rows (consisting of one row of three
+% and a second row of one, two or three).
+%
+% The command \alignauthor (no curly braces needed) should
+% precede each author name, affiliation/snail-mail address and
+% e-mail address. Additionally, tag each line of
+% affiliation/address with \affaddr, and tag the
+% e-mail address with \email.
+%
+% 1st. author
+\alignauthor
+Xintao Niu\\
+       \affaddr{State Key Laboratory for Novel Software Technology}\\
+       \affaddr{Nanjing University}\\
+       \affaddr{China, 210023}\\
+       \email{niuxintao@gmail.com}
+% 2nd. author
+\alignauthor
+Changhai Nie\\
+       \affaddr{State Key Laboratory for Novel Software Technology}\\
+       \affaddr{Nanjing University}\\
+       \affaddr{China, 210023}\\
+       \email{changhainie@nju.edu.cn}
+% 3rd. author
+\alignauthor
+Xiaoyin Wang \\
+       \affaddr{Department of Computer}\\
+       \affaddr{Science}\\
+       \affaddr{The University of }\\
+       \affaddr{Texas at San Antonio}\\
+ %      \affaddr{China, 211171}\\
+%       \email{xujiaxi@njxzc.edu.cn} \\
+       \email{Xiaoyin.Wang@utsa.edu}
+ % use '\and' if you need 'another row' of author names
+ \and
+% 4th. author
+\alignauthor
+Hareton Leung \\
+       \affaddr{Department of computing}\\
+       \affaddr{Hong Kong Polytechnic University}\\
+       \affaddr{Kowloon, Hong Kong}\\
+       \email{hareton.leung@polyu.edu.hk}
+\alignauthor
+Jeff Lei \\
+       \affaddr{Department of Computer}\\
+       \affaddr{Science and Engineering }\\
+       \affaddr{The University of Texas at Arlington}\\
+%       \affaddr{Arlington, Texas}\\
+       \email{ylei@cse.uta.edu}
+%% 6th. author
+%\alignauthor Charles Palmer\\
+%       \affaddr{Palmer Research Laboratories}\\
+%       \affaddr{8600 Datapoint Drive}\\
+%       \affaddr{San Antonio, Texas 78229}\\
+%       \email{cpalmer@prl.com}
+}
+% There's nothing stopping you putting the seventh, eighth, etc.
+% author on the opening page (as the 'third row') but we ask,
+% for aesthetic reasons that you place these 'additional authors'
+% in the \additional authors block, viz.
+%\additionalauthors{Additional authors: John Smith (The Th{\o}rv{\"a}ld Group,
+%email: {\texttt{jsmith@affiliation.org}}) and Julius P.~Kumquat
+%(The Kumquat Consortium, email: {\texttt{jpkumquat@consortium.net}}).}
+%\date{30 July 1999}
+% Just remember to make sure that the TOTAL number of authors
+% is the number that will appear on the first page PLUS the
+% number that will appear in the \additionalauthors section.
+
+\maketitle
+\begin{abstract}
+Combinatorial Testing (CT) is an effective technique for testing the interactions of factors in the Software Under Test(SUT). Most works in CT focus on the method itself, e.g., how to generate test cases, model the inputs, or handle the constraints of the inputs. Few of the works consider the justification of CT, i.e., is detecting and identifying the failure-inducing interactions really useful and helpful to code-level fault diagnosis? In this paper, we novelty studied the relationship between the failure-inducing interactions and code which causes the failure. Specifically, based on symbolic execution, we firstly obtain the guaranteed code of the corresponding failure-inducing interactions, i.e., those program entities which are directly affected by these interactions. And then we will compared these guaranteed code with those real faulty code to see whether there exists any associations between failure-inducing interactions with these real faulty code. Our empirical studies based on 5 real subjects showed that the failure-inducing interactions are strongly correlated with faulty code in the SUT.
+
+\end{abstract}
+
+
+%
+% The code below should be generated by the tool at
+% http://dl.acm.org/ccs.cfm
+% Please copy and paste the code instead of the example below.
+%
+
+\begin{CCSXML}
+<ccs2012>
+<concept>
+<concept_id>10011102.10011103</concept_id>
+<concept_desc>Software defect analysis~Software testing and debugging</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Software defect analysis~Software testing and debugging}
+%\ccsdesc{Reliability Verification~a}
+%\ccsdesc[100]{Networks~Network reliability}
+
+%
+%\category{D.2.5}{Software Engineering}{Testing and debugging}[Debugging aids,testing tools]
+%
+%\terms{Reliability, Verification}
+
+
+%
+% End generated code
+%
+
+%
+%  Use this command to print the description
+%
+\printccsdesc
+
+% We no longer use \terms command
+%\terms{Theory}
+
+\keywords{Software Testing, Combinatorial Testing, Symbolic execution, Failure-inducing interactions, Guaranteed code}
+
+
+\section{Introduction}
+Modern software is becoming more and more complex. To test such software is challenging, as the candidate factors that can influence the system's behaviour, e.g., configuration options, system inputs, message events, are enormous. Even worse, the interactions between these factors can also crash the system, e.g., the incompatibility problems. In consideration of the scale of the industrial software, to test all the possible interactions of all the factors (we call them the interaction space) is not feasible, and even if it is possible, it is not wise to test all the interactions because most of them do not provide any useful information.
+%Further more, it is a standard . airline
+
+Many empirical studies show that, in real software systems, the effective interaction space, i.e., targeting fault detection, makes up only a small proportion of the overall interaction space \cite{kuhn2002investigation,kuhn2004software}. What's more, the number of factors involved in these effective interactions is relatively small, of which 4 to 6 is usually the upper bounds\cite{kuhn2002investigation}. With this observation, applying Combinatorial testing(CT) in practice is appealing, as it is proven to be effective to detect the interaction faults in the system.
+
+CT tests software with a elaborate test suite which checks all the required parameter value combinations, and after detecting some failures by this test suite, it then identify the failure-inducing interactions, or more formally, failure-causing schemas (MFS) in the SUT. Most works in CT focus on the method itself, e.g, to design smaller test suite with the same interaction coverage \cite{cohen1997aetg,cohen2003augmenting,lei2008ipog,jia2015learning}, or to identify the MFS more accurately \cite{martinez2009locating,nie2011minimal,zhang2011characterizing,niu2013identifying}. Few of the works consider the following question:
+
+\emph{Is detecting and identifying the MFS really useful and helpful to code-level fault diagnosis?}
+
+To analyse this question is important and necessary, because it will build the relationship between MFS and faulty code, which is the foundation to apply CT on code-level debugging. In this paper, we try to answer this question by studying the \emph{guaranteed code} of interactions. The \emph{guaranteed code} of a interaction is the program entities (e.g., statements, branches, blocks, etc.) which are directly \emph{affected} by the interaction according to the previous study \cite{reisner2010using}. Obtaining the guaranteed code of an interaction can help us understand how this interaction influence on the behaviour of the program under test. Furthermore, analysing the guaranteed code of the MFS can offer us an insight into the extent to which the MFS is related to the cause of the failure; based on which, we can learn whether detecting and identifying the MFS can facilitate the debugging, as well as bug fixing.
+
+%To compute the MFS of the SUT,
+%
+%With respect to the guaranteed code.
+%
+%To compute the guaranteed code of the interaction, We need to utilize symbolic execution. Specifically, we accumulated added on symbolic, and find those guaranteed code. We define the .
+
+%\footnote{Note that this is the same to the interactions in paper. To let different, we }.
+There are many techniques to compute the MFS in CT. In this paper, we adopts our previous method proposed in \cite{nie2011minimal}, which is one of the most common MFS identification technique in CT. With respect to guaranteed code, we follow the steps which are original proposed in \cite{reisner2010using}, which needs  Specifically, we mark the input parameters as symbolic, indicating that they can take on any value. Then we use symbolic execution tools to calculate possible paths when . But different, we only need to. Not all of it. After these , we only need to evaluate their .
+
+We have design several empirical studies on 5 open-source software subjects. These studies considers several different aspects (e.g., the degree of MFS, the types of faults) of the relationships between MFS and faulty code. Our results suggests that: 1) The MFS does relate to the faulty code to some extent; 2) for different types of faults, the correlation between MFS and faulty code varies;  3) The input model of the program under test significantly impacts on this correlation.
+
+%These faults include injected and real ones. We first model their input and computed the MFS and also the guaranteed code of these MFS. We observe their relationships between these code with those real faulty statement. One observation in our case study shows that .  Besides this, we also compare . The results shows that .
+
+%\textbf{Contributions:}
+
+The remaindering of this paper are organised as follows: Section \ref{sec:pre} gives the preliminaries about Combinatorial testing (especially MFS-related), and basic definitions about Guaranteed code. Section \ref{sec:research} proposes three research questions that needs to be handled in this paper. Section \ref{sec:subjects} introduces the subjects on which our experiments are conducted on. Section \ref{sec:results} shows the results as well as the analysis. Section \ref{sec:related} discusses the related works.  Section \ref{sec:conclusion} concludes this paper.
+
+\section{Preliminary}\label{sec:pre}
+This section presents some definitions and propositions to give a formal model for CT.
+
+\subsection{Failure-inducing interactions in CT}
+
+Assume that the Software Under Test (SUT) is influenced by \emph{n} parameters, and each parameter $p_{i}$ can take the values from the finite set $V_{i}$, $|V_{i}|$ = $a_{i}$ ($i$ = 1,2,..n). The definitions below are originally defined in \cite{nie2011minimal}.
+
+\newdef{definition}{Definition}
+\begin{definition}
+A \emph{test case} of the SUT is a tuple of \emph{n} values, one for each parameter of the SUT. It is denoted as  ($v_{1}$, $v_{2}$,...,$v_{n}$), where $v_{1}\in V_{1}$, $v_{2} \in V_{2}$ ... $v_{n} \in V_{n}$.
+\end{definition}
+%a \emph{n}-tuple
+
+In practice, these parameters in the test case can represent many factors, such as input variables, run-time options, building options or various combination of them. We need to execute the SUT with these test cases to ensure the correctness of the behaviour of the SUT.
+
+%\begin{definition}
+We consider any abnormally executing test case as a \emph{fault}. It can be a thrown exception, compilation error, assertion failure or constraint violation. When faults are triggered by some test cases, it is desired to figure out the cause of these faults.
+%Some subsets of these test cases should be analysed.
+%\end{definition}
+
+
+\begin{definition}
+For the SUT, the \emph{n}-tuple (-,$v_{n_{1}}$,...,$v_{n_{k}}$,...)is called a \emph{k}-degree \emph{schema} ($0 < k \leq n $) when some k parameters have fixed values and other irrelevant parameters are represented as "-".
+
+In effect a test case itself is a k-degree \emph{schema}, when k = n. Furthermore, if a test case contains a \emph{schema}, i.e., every fixed value in the schema is in this test case, we say this test case \emph{contains} the \emph{schema}.
+%, which can be denoted as $k-value\  combination \in T$
+\end{definition}
+Note that the schema is a formal description of the interaction between parameter values we discussed before.
+
+\begin{definition}
+Let $c_{l}$ be a \emph{l}-degree schema, $c_{m}$ be an \emph{m}-degree schema in SUT and $l < m$. If all the fixed parameter values in $c_{l}$ are also in $c_{m}$, then $c_{m}$ \emph{subsumes} $c_{l}$. In this case we can also say that $c_{l}$ is a \emph{sub-schema} of $c_{m}$ and $c_{m}$ is a \emph{super-schema} of $c_{l}$, which can be denoted as $c_{l} \prec  c_{m}$.
+\end{definition}
+
+For example,  the 2-degree schema (-, 4, 4, -) is a sub-schema of the 3-degree schema (-, 4, 4, 5), that is, (-,4,4,-) $\prec$ (-,4,4,5).
+
+\begin{definition}
+If all test cases that contain a schema, say $c$, trigger a particular fault, say $F$, then we call this schema $c$ the \emph{faulty schema} for $F$. Additionally, if none of sub-schema of $c$ is the \emph{faulty schema} for $F$, we then call the schema $c$ the \emph{minimal failure-causing schema (MFS)} \cite{nie2011minimal} for $F$.
+
+%Based on this, if a test case $t$ hit such a failure-inducing combination, say $c(F)$, it should trigger the fault $F$, for which the test case can be put as $t(F)$
+\end{definition}
+
+Note that MFS is identical to the failure-inducing interaction discussed previously. In this paper, the terms \emph{failure-inducing interactions} and \emph{MFS} are used interchangeably. Figuring the MFS out helps to identify the root cause of a failure and thus facilitate the debugging process.
+
+
+\subsection{CT Test Case Generation}
+When applying CT, the most important work is to determine whether the SUT suffers from the interaction faults or not, i.e., to  detect the existence of the MFS. Rather than impractically executing exhaustive test cases, CT commonly design a relatively small set of test cases to cover all the schemas with the degree no more than a prior fixed number, $t$. Such a set of test cases is called the \emph{covering array}.  If some test cases in the covering array failed in execution, then the interaction faults is regard to be detected. Let us formally define the covering array.
+
+\begin{definition} $MCA(N; t, n,$ $(a_{1}, a_{2}, ..., a_{n})$) is a $t$-way \emph{covering array} in the form of $N \times n$ table, where each row represents a \emph{test case} and each column represents a parameter.  For any \emph{t} columns, each possible \emph{t}-degree interaction of the $t$ parameters (schema) must appear at least once. When $ a_{1} = a_{2} = ... = a_{n} = v $, a $t$-way covering array can be denoted as $CA(N; t, n, v)$.
+\end{definition}
+
+\begin{table}[h]
+\caption{A covering array}
+\label{ca_example}
+\center
+\begin{tabular}{l|llll}
+ \hline
+ID &\multicolumn{4}{c}{\bfseries Test case} \\  \hline
+$t_{1}$ &\multicolumn{4}{l}{0  \ \ \ \  0 \ \ \ \  0 \ \ \ \ 0} \\
+$t_{2}$ &\multicolumn{4}{l}{0  \ \ \ \  1 \ \ \ \  1 \ \ \ \ 1} \\
+$t_{3}$ &\multicolumn{4}{l}{1  \ \ \ \  0 \ \ \ \  1 \ \ \ \ 1} \\
+$t_{4}$ &\multicolumn{4}{l}{1  \ \ \ \  1 \ \ \ \  0 \ \ \ \ 1} \\
+$t_{5}$ &\multicolumn{4}{l}{1  \ \ \ \  1 \ \ \ \  1 \ \ \ \ 0} \\
+ \hline
+\end{tabular}
+\end{table}
+
+For example, Table \ref{ca_example} shows a 2-way covering array CA(5; 2, 4, 2) for the SUT with 4 boolean parameters. For any two columns, any 2-degree schema is covered. Covering array has proven to be effective in detecting the failures caused by interactions of parameters of the SUT. Many existing algorithms focus on constructing covering arrays such that the number of test cases, i.e., $N$, can be as small as possible. In general, most of these studies can be classified into three categories according to the construction strategy of the covering array:
+
+1) One test case one time : This strategy repeats generating one test case as one row of the covering array and counting the covered schemas achieved until all schemas are covered \cite{cohen1997aetg,bryce2007density,tung2000automating}.
+
+%  generate a completed test case to cover
+
+2) A  set of test cases one time:  This strategy generates a set of test cases at each iteration. Through mutating the values of some parameters of some test cases in this test set, it focuses on optimising the coverage. If the coverage is finally satisfied, it will reduce the size of the set to see if fewer test cases can still fulfil the coverage. Otherwise, it will increase the size of test set to cover all the schemas\cite{cohen2003augmenting,nurmela2004upper}.
+
+3) IPO-like style:  This strategy differentiates from the previous two strategies in that it does not firstly generate complete test cases \cite{lei2008ipog}. Instead, it first focuses on assigning values to some part of the factors or parameters to cover the schemas that related to these factors, and then fills up the remaining part to form complete test cases.
+
+In this paper, we focus on the first strategy: One test case one time as it immediately get a complete test case such that the testers can execute and diagnose in the early stage. As we will see later, with respect to the MFS identification, this strategy is the most flexible and efficient one comparing with the other two strategies.
+\subsection{MFS}
+
+Definition
+
+Getting approaches
+
+
+The details is as follows:
+
+
+
+
+
+\subsection{Symbolic execution}
+
+\subsection{guaranteed code code}
+
+
+definition guaranteed code
+
+definition minimal guaranteed code
+
+
+
+
+
+For example, from Figure 2(b) we can see that any configuration satisfying  (i.e., a=0, b=1) is guaranteed to cover L2, no matter the choice of and N. We can use Otter's output to compute the guaranteed coverage for a predicate p, which we will write as Cov(p). We first Lnd CovT (p), the coverage guaranteed under p by test case T, for each test case; then, Cov(p) = ST CovT (p). To compute CovT (p), let pTi be the path conditions from T's symbolic evaluation, and let CT (pTi) be the covered lines (or blocks, edges, conditions, etc.) that occur in that path. Then CovT (p) is ConsistentT (p) = fpTi j SAT(pTip)g CovT (p) = T q2ConsistentT (p) CT (q). In other words, first we compute the set of path conditions pTi such that p and pTi are consistent. If this holds for pTi, the items in CT (pTi ) may be covered if p is true. Since our symbolic evaluator explores all possible program paths, the intersection of these sets for all such pTi is the set guaranteed to be covered if p is true.
+
+Going back to Figure 2, here are some predicates and the coverage they guarantee given the test cases input=1 and input=0. We abbreviate K = 1 as K and K = 0 as :K.
+
+In this paper, we use the symbolic execution to . The details is as follwos:
+
+
+
+
+%\section{A case study}
+%This section will provide an example to show how to
+
+
+
+\section{Research question} \label{sec:research}
+
+
+\subsection{correlation between MFS and faulty code}
+
+
+Hence, it motivates our first research question:
+
+\textbf{Q1: Is MFS correlated to the faulty code?}
+
+This question is key to. We let the guaranteed code of MFS.
+
+
+\subsection{The influence of different types of faults}
+
+
+Q2: Different fault type?
+
+Taks as an example.
+
+\subsection{The influence of inputs model}
+
+Q3: Is the building model affected  MFS ?
+
+Taks as an example.
+
+
+These questions are important, as
+
+\section{Subject programs}\label{sec:subjects}
+
+\subsection{Generating faulty programs}
+
+\subsection{symbolic execution of the paths}
+
+
+%\section{Getting MFS and their guaranteed code}
+
+\section{Results}\label{sec:results}
+
+
+
+\subsection{Threats to Validation}
+
+
+\section{Related works}\label{sec:related}
+
+\section{Conclusions and Future works}\label{sec:conclusion}
+
+%\end{document}  % This is where a 'short' article might terminate
+
+%ACKNOWLEDGMENTS are optional
+\section{Acknowledgments}
+
+%
+% The following two commands are all you need in the
+% initial runs of your .tex file to
+% produce the bibliography for the citations in your paper.
+\bibliographystyle{abbrv}
+\bibliography{sigproc}  % sigproc.bib is the name of the Bibliography in this case
+% You must have a proper ".bib" file
+%  and remember to run:
+% latex bibtex latex latex
+% to resolve all references
+%
+% ACM needs 'a single self-contained file'!
+%
+%APPENDICES are optional
+%\balancecolumns
+\appendix
+%Appendix A
+%\section{Headings in Appendices}
+%The rules about hierarchical headings discussed above for
+%the body of the article are different in the appendices.
+%In the \textbf{appendix} environment, the command
+%\textbf{section} is used to
+%indicate the start of each Appendix, with alphabetic order
+%designation (i.e. the first is A, the second B, etc.) and
+%a title (if you include one).  So, if you need
+%hierarchical structure
+%\textit{within} an Appendix, start with \textbf{subsection} as the
+%highest level. Here is an outline of the body of this
+%document in Appendix-appropriate form:
+%\subsection{Introduction}
+%\subsection{The Body of the Paper}
+%\subsubsection{Type Changes and  Special Characters}
+%\subsubsection{Math Equations}
+%\paragraph{Inline (In-text) Equations}
+%\paragraph{Display Equations}
+%\subsubsection{Citations}
+%\subsubsection{Tables}
+%\subsubsection{Figures}
+%\subsubsection{Theorem-like Constructs}
+%\subsubsection*{A Caveat for the \TeX\ Expert}
+%\subsection{Conclusions}
+%\subsection{Acknowledgments}
+%\subsection{Additional Authors}
+%This section is inserted by \LaTeX; you do not insert it.
+%You just add the names and information in the
+%\texttt{{\char'134}additionalauthors} command at the start
+%of the document.
+%\subsection{References}
+%Generated by bibtex from your ~.bib file.  Run latex,
+%then bibtex, then latex twice (to resolve references)
+%to create the ~.bbl file.  Insert that ~.bbl file into
+%the .tex source file and comment out
+%the command \texttt{{\char'134}thebibliography}.
+%% This next section command marks the start of
+%% Appendix B, and does not continue the present hierarchy
+%\section{More Help for the Hardy}
+%The sig-alternate.cls file itself is chock-full of succinct
+%and helpful comments.  If you consider yourself a moderately
+%experienced to expert user of \LaTeX, you may find reading
+%it useful but please remember not to change it.
+%\balancecolumns % GM June 2007
+% That's all folks!
+\end{document}

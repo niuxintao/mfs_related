@@ -1,0 +1,94 @@
+\begin{thebibliography}{10}
+
+\bibitem{bryce2007density}
+R.~C. Bryce and C.~J. Colbourn.
+\newblock The density algorithm for pairwise interaction testing.
+\newblock {\em Software Testing, Verification and Reliability}, 17(3):159--182,
+  2007.
+
+\bibitem{cohen1997aetg}
+D.~M. Cohen, S.~R. Dalal, M.~L. Fredman, and G.~C. Patton.
+\newblock The aetg system: An approach to testing based on combinatorial
+  design.
+\newblock {\em Software Engineering, IEEE Transactions on}, 23(7):437--444,
+  1997.
+
+\bibitem{cohen2003augmenting}
+M.~B. Cohen, C.~J. Colbourn, and A.~C. Ling.
+\newblock Augmenting simulated annealing to build interaction test suites.
+\newblock In {\em Software Reliability Engineering, 2003. ISSRE 2003. 14th
+  International Symposium on}, pages 394--405. IEEE, 2003.
+
+\bibitem{jia2015learning}
+Y.~Jia, M.~B. Cohen, M.~Harman, and J.~Petke.
+\newblock Learning combinatorial interaction test generation strategies using
+  hyperheuristic search.
+\newblock In {\em Proceedings of the 37th International Conference on Software
+  Engineering-Volume 1}, pages 540--550. IEEE Press, 2015.
+
+\bibitem{kuhn2002investigation}
+D.~R. Kuhn and M.~J. Reilly.
+\newblock An investigation of the applicability of design of experiments to
+  software testing.
+\newblock In {\em Software Engineering Workshop, 2002. Proceedings. 27th Annual
+  NASA Goddard/IEEE}, pages 91--95. IEEE, 2002.
+
+\bibitem{kuhn2004software}
+D.~R. Kuhn, D.~R. Wallace, and J.~AM~Gallo.
+\newblock Software fault interactions and implications for software testing.
+\newblock {\em Software Engineering, IEEE Transactions on}, 30(6):418--421,
+  2004.
+
+\bibitem{lei2008ipog}
+Y.~Lei, R.~Kacker, D.~R. Kuhn, V.~Okun, and J.~Lawrence.
+\newblock Ipog/ipog-d: efficient test generation for multi-way combinatorial
+  testing.
+\newblock {\em Software Testing, Verification and Reliability}, 18(3):125--148,
+  2008.
+
+\bibitem{martinez2009locating}
+C.~Mart{\'\i}nez, L.~Moura, D.~Panario, and B.~Stevens.
+\newblock Locating errors using elas, covering arrays, and adaptive testing
+  algorithms.
+\newblock {\em SIAM Journal on Discrete Mathematics}, 23(4):1776--1799, 2009.
+
+\bibitem{nie2011minimal}
+C.~Nie and H.~Leung.
+\newblock The minimal failure-causing schema of combinatorial testing.
+\newblock {\em ACM Transactions on Software Engineering and Methodology
+  (TOSEM)}, 20(4):15, 2011.
+
+\bibitem{niu2013identifying}
+X.~Niu, C.~Nie, Y.~Lei, and A.~T. Chan.
+\newblock Identifying failure-inducing combinations using tuple relationship.
+\newblock In {\em Software Testing, Verification and Validation Workshops
+  (ICSTW), 2013 IEEE Sixth International Conference on}, pages 271--280. IEEE,
+  2013.
+
+\bibitem{nurmela2004upper}
+K.~J. Nurmela.
+\newblock Upper bounds for covering arrays by tabu search.
+\newblock {\em Discrete applied mathematics}, 138(1):143--152, 2004.
+
+\bibitem{reisner2010using}
+E.~Reisner, C.~Song, K.-K. Ma, J.~S. Foster, and A.~Porter.
+\newblock Using symbolic evaluation to understand behavior in configurable
+  software systems.
+\newblock In {\em Proceedings of the 32nd ACM/IEEE International Conference on
+  Software Engineering-Volume 1}, pages 445--454. ACM, 2010.
+
+\bibitem{tung2000automating}
+Y.-W. Tung and W.~S. Aldiwan.
+\newblock Automating test case generation for the new generation mission
+  software system.
+\newblock In {\em Aerospace Conference Proceedings, 2000 IEEE}, volume~1, pages
+  431--437. IEEE, 2000.
+
+\bibitem{zhang2011characterizing}
+Z.~Zhang and J.~Zhang.
+\newblock Characterizing failure-causing parameter interactions by adaptive
+  testing.
+\newblock In {\em Proceedings of the 2011 International Symposium on Software
+  Testing and Analysis}, pages 331--341. ACM, 2011.
+
+\end{thebibliography}
