@@ -253,7 +253,7 @@ To analyse this question is important and necessary, because it will build the r
 %To compute the guaranteed code of the interaction, We need to utilize symbolic execution. Specifically, we accumulated added on symbolic, and find those guaranteed code. We define the .
 
 %\footnote{Note that this is the same to the interactions in paper. To let different, we }.
-There are many techniques to compute the MFS in CT. In this paper, we adopts our previous method proposed in \cite{nie2011minimal}, which is one of the most common MFS identification technique in CT. With respect to guaranteed code, we follow the steps which are original proposed in \cite{reisner2010using}, which needs  Specifically, we mark the input parameters as symbolic, indicating that they can take on any value. Then we use symbolic execution tools to calculate possible paths when . But different, we only need to. Not all of it. After these , we only need to evaluate their .
+There are many techniques to compute the MFS in CT. In this paper, we adopts our previous method proposed in \cite{nie2011minimal}, which is one of the most common MFS identification technique in CT. With respect to guaranteed code, we follow the steps which are original proposed in \cite{reisner2010using}, which firstly utilizes symbolic execution tool to search possible paths for different values assigned to the input parameters, and then calculates the guaranteed code for each possible interaction based on these paths. One difference from study in \cite{reisner2010using} is that we only need to compute the guaranteed code for the MFS we identified in the SUT, instead of all the possible interactions. After obtaining the MFS and corresponding guaranteed codes, we will evaluate the correlation between MFS and faulty code.
 
 We have design several empirical studies on 5 open-source software subjects. These studies considers several different aspects (e.g., the degree of MFS, the types of faults) of the relationships between MFS and faulty code. Our results suggests that: 1) The MFS does relate to the faulty code to some extent; 2) for different types of faults, the correlation between MFS and faulty code varies;  3) The input model of the program under test significantly impacts on this correlation.
 
@@ -264,11 +264,11 @@ We have design several empirical studies on 5 open-source software subjects. The
 The remaindering of this paper are organised as follows: Section \ref{sec:pre} gives the preliminaries about Combinatorial testing (especially MFS-related), and basic definitions about Guaranteed code. Section \ref{sec:research} proposes three research questions that needs to be handled in this paper. Section \ref{sec:subjects} introduces the subjects on which our experiments are conducted on. Section \ref{sec:results} shows the results as well as the analysis. Section \ref{sec:related} discusses the related works.  Section \ref{sec:conclusion} concludes this paper.
 
 \section{Preliminary}\label{sec:pre}
-This section presents some definitions and propositions to give a formal model for CT.
+This section presents some formal definitions about MFS and guaranteed code.
 
-\subsection{Failure-inducing interactions in CT}
+\subsection{Basic definitions about CT}\label{sec:pre:ct}
 
-Assume that the Software Under Test (SUT) is influenced by \emph{n} parameters, and each parameter $p_{i}$ can take the values from the finite set $V_{i}$, $|V_{i}|$ = $a_{i}$ ($i$ = 1,2,..n). The definitions below are originally defined in \cite{nie2011minimal}.
+Assume that the Software Under Test (SUT) is influenced by \emph{n} parameters, and each parameter $p_{i}$ can take the values from the finite set $V_{i}$, $|V_{i}|$ = $a_{i}$ ($i$ = 1,2,..n).
 
 \newdef{definition}{Definition}
 \begin{definition}
@@ -279,24 +279,25 @@ A \emph{test case} of the SUT is a tuple of \emph{n} values, one for each parame
 In practice, these parameters in the test case can represent many factors, such as input variables, run-time options, building options or various combination of them. We need to execute the SUT with these test cases to ensure the correctness of the behaviour of the SUT.
 
 %\begin{definition}
-We consider any abnormally executing test case as a \emph{fault}. It can be a thrown exception, compilation error, assertion failure or constraint violation. When faults are triggered by some test cases, it is desired to figure out the cause of these faults.
+%We consider any abnormally executing test case as a \emph{fault}. It can be a thrown exception, compilation error, assertion failure or constraint violation. When faults are triggered by some test cases, it is desired to figure out which parameter values in these test cases are the failure-inducing ones.
 %Some subsets of these test cases should be analysed.
 %\end{definition}
 
 
 \begin{definition}
-For the SUT, the \emph{n}-tuple (-,$v_{n_{1}}$,...,$v_{n_{k}}$,...)is called a \emph{k}-degree \emph{schema} ($0 < k \leq n $) when some k parameters have fixed values and other irrelevant parameters are represented as "-".
-
-In effect a test case itself is a k-degree \emph{schema}, when k = n. Furthermore, if a test case contains a \emph{schema}, i.e., every fixed value in the schema is in this test case, we say this test case \emph{contains} the \emph{schema}.
-%, which can be denoted as $k-value\  combination \in T$
+For the SUT, the \emph{n}-tuple (-,$v_{x_{1}}$,...,$v_{x_{k}}$,...)is called a \emph{k}-degree \emph{schema} ($0 < k \leq n $) when some k parameters have fixed values and other irrelevant parameters are represented as "-".
 \end{definition}
+
+For example, the tuple (-, 4, 4, -) is a 2-degree schema. In effect a test case itself is a k-degree \emph{schema}, when k = n. Furthermore, if a test case contains a \emph{schema}, i.e., every fixed value in the schema is in this test case, we say this test case \emph{contains} the \emph{schema}.
+%, which can be denoted as $k-value\  combination \in T$
+
 Note that the schema is a formal description of the interaction between parameter values we discussed before.
 
 \begin{definition}
 Let $c_{l}$ be a \emph{l}-degree schema, $c_{m}$ be an \emph{m}-degree schema in SUT and $l < m$. If all the fixed parameter values in $c_{l}$ are also in $c_{m}$, then $c_{m}$ \emph{subsumes} $c_{l}$. In this case we can also say that $c_{l}$ is a \emph{sub-schema} of $c_{m}$ and $c_{m}$ is a \emph{super-schema} of $c_{l}$, which can be denoted as $c_{l} \prec  c_{m}$.
 \end{definition}
 
-For example,  the 2-degree schema (-, 4, 4, -) is a sub-schema of the 3-degree schema (-, 4, 4, 5), that is, (-,4,4,-) $\prec$ (-,4,4,5).
+For example,  the 2-degree schema (-, 4, 4, -) is a sub-schema of the 3-degree schema (-, 4, 4, 5), that is, (-, 4, 4, -) $\prec$ (-, 4, 4, 5).
 
 \begin{definition}
 If all test cases that contain a schema, say $c$, trigger a particular fault, say $F$, then we call this schema $c$ the \emph{faulty schema} for $F$. Additionally, if none of sub-schema of $c$ is the \emph{faulty schema} for $F$, we then call the schema $c$ the \emph{minimal failure-causing schema (MFS)} \cite{nie2011minimal} for $F$.
@@ -304,58 +305,53 @@ If all test cases that contain a schema, say $c$, trigger a particular fault, sa
 %Based on this, if a test case $t$ hit such a failure-inducing combination, say $c(F)$, it should trigger the fault $F$, for which the test case can be put as $t(F)$
 \end{definition}
 
-Note that MFS is identical to the failure-inducing interaction discussed previously. In this paper, the terms \emph{failure-inducing interactions} and \emph{MFS} are used interchangeably. Figuring the MFS out helps to identify the root cause of a failure and thus facilitate the debugging process.
+Note that MFS is identical to the failure-inducing interaction discussed previously. In this paper, the terms \emph{failure-inducing interactions} and \emph{MFS} are used interchangeably. 
+%Figuring the MFS out helps to identify the root cause of a failure and thus facilitate the debugging process.
 
+\subsection{Identification of MFS}\label{sec:pre:mfs}
+When a test case fails during test case, we are still far from figuring out the MFS \cite{colbourn2008locating,martinez2008algorithms,martinez2009locating}, as we do not know exactly which schemas in the failed test cases should be responsible for the failure. For example, if test case (0, 0, 0, 0) failed during testing, there are six 2-degree candidate failure-inducing schemas, which are (0, 0, -, -), (0, -, 0, -), (0, -, -, 0) , (-, 0, 0, -), (-, 0, -, 0), (-, -, 0, 0), respectively. Without
+additional information, it is difficult to figure out the specific schemas in this suspicious set that caused the failure. Considering that the failure can be triggered by schemas with other degrees, e.g., (0, -, -, -) or (0, 0, 0, -), the problem of MFS identification becomes more complicated.
 
-\subsection{CT Test Case Generation}
-When applying CT, the most important work is to determine whether the SUT suffers from the interaction faults or not, i.e., to  detect the existence of the MFS. Rather than impractically executing exhaustive test cases, CT commonly design a relatively small set of test cases to cover all the schemas with the degree no more than a prior fixed number, $t$. Such a set of test cases is called the \emph{covering array}.  If some test cases in the covering array failed in execution, then the interaction faults is regard to be detected. Let us formally define the covering array.
+In fact, for a failing test case ($v_{1},v_{2},...,v_{n}$), there can be at most $2^{n} - 1$ possible schemas for the MFS. Hence, more test cases should be generated to identify the MFS. A typical MFS identification process is shown in Table \ref{ofot-identify}. This example assumes the SUT has 4 parameters, each can take on 2 values, and the test case (1, 1, 1, 1) fails. Then in Table \ref{ofot-identify}, as test case \emph{t} failed, we mutate one factor of the \emph{t} one time to generate new test cases: $t_{1}$ -- $t_{4}$, It turns out that test case $t_{1}$ passed, which indicates that this test case break the MFS in the original test case \emph{t}. So (1, -, -, -) should be a failure-causing factor, and as other mutating process all failed, which means no other failure-inducing factors were broken, therefore, the MFS in \emph{t} is (1, -, 1, -).
 
-\begin{definition} $MCA(N; t, n,$ $(a_{1}, a_{2}, ..., a_{n})$) is a $t$-way \emph{covering array} in the form of $N \times n$ table, where each row represents a \emph{test case} and each column represents a parameter.  For any \emph{t} columns, each possible \emph{t}-degree interaction of the $t$ parameters (schema) must appear at least once. When $ a_{1} = a_{2} = ... = a_{n} = v $, a $t$-way covering array can be denoted as $CA(N; t, n, v)$.
-\end{definition}
-
-\begin{table}[h]
-\caption{A covering array}
-\label{ca_example}
+\begin{table}[ht]
+\caption{OFOT example}
+\label{ofot-identify}
 \center
-\begin{tabular}{l|llll}
+\begin{tabular}{llllll}
  \hline
-ID &\multicolumn{4}{c}{\bfseries Test case} \\  \hline
-$t_{1}$ &\multicolumn{4}{l}{0  \ \ \ \  0 \ \ \ \  0 \ \ \ \ 0} \\
-$t_{2}$ &\multicolumn{4}{l}{0  \ \ \ \  1 \ \ \ \  1 \ \ \ \ 1} \\
-$t_{3}$ &\multicolumn{4}{l}{1  \ \ \ \  0 \ \ \ \  1 \ \ \ \ 1} \\
-$t_{4}$ &\multicolumn{4}{l}{1  \ \ \ \  1 \ \ \ \  0 \ \ \ \ 1} \\
-$t_{5}$ &\multicolumn{4}{l}{1  \ \ \ \  1 \ \ \ \  1 \ \ \ \ 0} \\
+\multicolumn{5}{c}{\bfseries Original test case} & \bfseries Outcome \\  \hline
+ $t$ & \multicolumn{4}{l}{1 \ \ \ \ 1 \ \ \ \  1 \ \ \ \ 1 } & Fail \\
+ \hline
+\multicolumn{5}{c}{\bfseries Additional  test cases} &  \\  \hline
+$t_{1}$ &\multicolumn{4}{l}{0  \ \ \ \  1 \ \ \ \  1 \ \ \ \ 1 }& Pass \\
+$t_{2}$ &\multicolumn{4}{l}{1  \ \ \ \  0 \ \ \ \  1 \ \ \ \ 1 } & Fail \\
+$t_{3}$ &\multicolumn{4}{l}{1  \ \ \ \  1 \ \ \ \  0 \ \ \ \ 1 } & Fail \\
+$t_{4}$ &\multicolumn{4}{l}{1  \ \ \ \  1 \ \ \ \  1 \ \ \ \ 0 } & Fail \\
  \hline
 \end{tabular}
 \end{table}
 
-For example, Table \ref{ca_example} shows a 2-way covering array CA(5; 2, 4, 2) for the SUT with 4 boolean parameters. For any two columns, any 2-degree schema is covered. Covering array has proven to be effective in detecting the failures caused by interactions of parameters of the SUT. Many existing algorithms focus on constructing covering arrays such that the number of test cases, i.e., $N$, can be as small as possible. In general, most of these studies can be classified into three categories according to the construction strategy of the covering array:
-
-1) One test case one time : This strategy repeats generating one test case as one row of the covering array and counting the covered schemas achieved until all schemas are covered \cite{cohen1997aetg,bryce2007density,tung2000automating}.
-
-%  generate a completed test case to cover
-
-2) A  set of test cases one time:  This strategy generates a set of test cases at each iteration. Through mutating the values of some parameters of some test cases in this test set, it focuses on optimising the coverage. If the coverage is finally satisfied, it will reduce the size of the set to see if fewer test cases can still fulfil the coverage. Otherwise, it will increase the size of test set to cover all the schemas\cite{cohen2003augmenting,nurmela2004upper}.
-
-3) IPO-like style:  This strategy differentiates from the previous two strategies in that it does not firstly generate complete test cases \cite{lei2008ipog}. Instead, it first focuses on assigning values to some part of the factors or parameters to cover the schemas that related to these factors, and then fills up the remaining part to form complete test cases.
-
-In this paper, we focus on the first strategy: One test case one time as it immediately get a complete test case such that the testers can execute and diagnose in the early stage. As we will see later, with respect to the MFS identification, this strategy is the most flexible and efficient one comparing with the other two strategies.
-\subsection{MFS}
-
-Definition
-
-Getting approaches
+This identification process mutate one factor of the original test case at a time to generate extra test cases. Then according to the outcome of the test cases execution result, it will identify the MFS of the original failing test cases. It is called the OFOT method \cite{nie2011minimal}, which is a well-known MFS identification method in CT. In this paper, we will focus on this identification method. 
+%It should be noted that the following proposed CT framework can be easily applied to other MFS identification methods.
 
 
-The details is as follows:
+%\subsection{MFS}
+%
+%Definition
+%
+%Getting approaches
+%
+%
+%The details is as follows:
 
 
 
 
 
-\subsection{Symbolic execution}
+\subsection{Symbolic execution}\label{sec:pre:sym}
 
-\subsection{guaranteed code code}
+\subsection{guaranteed code code}\label{sec:pre:guar}
 
 
 definition guaranteed code
@@ -427,12 +423,29 @@ These questions are important, as
 
 \section{Related works}\label{sec:related}
 
+There are many methods aims at identifying MFS in CT, which can be classified into two categories:
+
+
+
+1. MFS in CT
+
+
+All these methods. with respect to the code level which utilizes.
+2. use MFS to isolate faulty code. machunhyan  and leiyu
+
+
+Studies on symbolic execution, has .
+
+4. Use symoblic execution in CT. Charles song 3 pian.
+
+Our work differs from them
+
 \section{Conclusions and Future works}\label{sec:conclusion}
 
 %\end{document}  % This is where a 'short' article might terminate
 
 %ACKNOWLEDGMENTS are optional
-\section{Acknowledgments}
+%\section{Acknowledgments}
 
 %
 % The following two commands are all you need in the

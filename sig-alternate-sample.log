@@ -1,10 +1,10 @@
-This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2014.9.10)  30 NOV 2016 03:12
+This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2014.9.10)  30 NOV 2016 22:09
 entering extended mode
 **sig-alternate-sample.tex
-("C:\Users\xintao\Desktop\mfs related\sig-alternate-sample.tex"
+(C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.tex
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for loaded.
-("C:\Users\xintao\Desktop\mfs related\sig-alternate-05-2015.cls"
+(C:\Users\xintao\Desktop\mfs_related\sig-alternate-05-2015.cls
 (C:\CTEX\MiKTeX\tex\latex\graphics\epsfig.sty
 Package: epsfig 1999/02/16 v1.7a (e)psfig emulation (SPQR)
 
@@ -218,7 +218,7 @@ LaTeX Info: Redefining \cite on input line 1408.
 \Urlmuskip=\muskip11
 Package: url 2004/03/15  ver 3.1  Verb mode for urls, etc.
 )
-("C:\Users\xintao\Desktop\mfs related\acmcopyright.sty"
+(C:\Users\xintao\Desktop\mfs_related\acmcopyright.sty
 Package: acmcopyright 2014/06/29 v1.2 Copyright statemens for ACM classes
 
 (C:\CTEX\MiKTeX\tex\latex\xkeyval\xkeyval.sty
@@ -245,7 +245,7 @@ File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
 )
 Requested font "aer9" at 9.0pt
  -> aer9
-)) ("C:\Users\xintao\Desktop\mfs related\sig-alternate-sample.aux")
+)) (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
 LaTeX Font Info:    ... okay on input line 51.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
@@ -363,15 +363,15 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 ]
 \c@definition=\count111
 
-[2] ("C:\Users\xintao\Desktop\mfs related\sig-alternate-sample.bbl" [3])
-[4
+[2] (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.bbl [3]) [4
 
-] ("C:\Users\xintao\Desktop\mfs related\sig-alternate-sample.aux") ) 
+]
+(C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.aux) ) 
 Here is how much of TeX's memory you used:
- 2295 strings out of 430478
- 25014 string characters out of 3191502
+ 2298 strings out of 430478
+ 25059 string characters out of 3191502
  92385 words of memory out of 3000000
- 5392 multiletter control sequences out of 15000+200000
+ 5395 multiletter control sequences out of 15000+200000
  44606 words of font info for 60 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  39i,10n,34p,1142b,464s stack positions out of 5000i,500n,10000p,200000b,50000s
