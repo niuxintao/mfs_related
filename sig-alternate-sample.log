@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2014.9.10)  30 NOV 2016 22:09
+This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2014.9.10)  15 DEC 2016 15:59
 entering extended mode
 **sig-alternate-sample.tex
 (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.tex
@@ -245,19 +245,31 @@ File: t1aer.fd 1997/11/16 Font definitions for T1/aer.
 )
 Requested font "aer9" at 9.0pt
  -> aer9
-)) (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 51.
-LaTeX Font Info:    ... okay on input line 51.
+)) (C:\CTEX\MiKTeX\tex\latex\fancyvrb\fancyvrb.sty
+Package: fancyvrb 2008/02/07
+
+Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
+<2008/02/07> (tvz)
+\FV@CodeLineNo=\count111
+\FV@InFile=\read1
+\FV@TabBox=\box30
+\c@FancyVerbLine=\count112
+\FV@StepNumber=\count113
+\FV@OutFile=\write4
+)
+(C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 52.
+LaTeX Font Info:    ... okay on input line 52.
 Requested font "cmr6" at 6.0pt
  -> cmr6
 Requested font "cmmi9" at 9.0pt
@@ -274,7 +286,7 @@ Requested font "cmex7" at 6.0pt
  -> cmex7
 Requested font "cmex7" at 5.0pt
  -> cmex7
-LaTeX Font Info:    Try loading font information for U+msa on input line 189.
+LaTeX Font Info:    Try loading font information for U+msa on input line 190.
 
 (C:\CTEX\MiKTeX\tex\latex\amsfonts\umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
@@ -285,7 +297,7 @@ Requested font "msam7" at 6.0pt
  -> msam7
 Requested font "msam5" at 5.0pt
  -> msam5
-LaTeX Font Info:    Try loading font information for U+msb on input line 189.
+LaTeX Font Info:    Try loading font information for U+msb on input line 190.
 
 (C:\CTEX\MiKTeX\tex\latex\amsfonts\umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
@@ -296,7 +308,7 @@ Requested font "msbm7" at 6.0pt
  -> msbm7
 Requested font "msbm5" at 5.0pt
  -> msbm5
-LaTeX Font Info:    Try loading font information for U+lasy on input line 189.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 190.
 
 (C:\CTEX\MiKTeX\tex\latex\base\ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
@@ -308,24 +320,24 @@ Requested font "lasy6" at 6.0pt
 Requested font "lasy5" at 5.0pt
  -> lasy5
 
-Overfull \hbox (17.59798pt too wide) in paragraph at lines 189--189
+Overfull \hbox (17.59798pt too wide) in paragraph at lines 190--190
  []\eaddfnt hareton.leung@polyu.edu.hk| 
  []
 
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 189.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 190.
 (C:\CTEX\MiKTeX\tex\latex\psnfss\t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 )
 Requested font "ptmr8t" at 7.0pt
  -> ptmr8t
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 189.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 190.
 
 
 (C:\CTEX\MiKTeX\tex\latex\psnfss\omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <7> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 189.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 190.
 Requested font "aer8" at 8.0pt
  -> aer8
 Requested font "cmr8" at 8.0pt
@@ -342,14 +354,14 @@ Requested font "msbm10" at 8.0pt
  -> msbm10
 Requested font "lasy8" at 8.0pt
  -> lasy8
-LaTeX Font Info:    Try loading font information for OMS+aer on input line 229.
+LaTeX Font Info:    Try loading font information for OMS+aer on input line 230.
 
 
 (C:\CTEX\MiKTeX\tex\latex\ae\omsaer.fd
 File: omsaer.fd 1999/12/27
 )
 LaTeX Font Info:    Font shape `OMS/aer/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 229.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 230.
 Requested font "aebx9" at 9.0pt
  -> aebx9
 Requested font "aeti9" at 9.0pt
@@ -361,19 +373,46 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 ]
-\c@definition=\count111
+\c@definition=\count114
+LaTeX Font Info:    Try loading font information for T1+aett on input line 322.
 
-[2] (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.bbl [3]) [4
+
+(C:\CTEX\MiKTeX\tex\latex\ae\t1aett.fd
+File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
+)
+Requested font "aett9" at 9.0pt
+ -> aett9
+Requested font "aer5" at 5.0pt
+ -> aer5
+Requested font "aebxti10" at 9.0pt
+ -> aebxti10
+ [2]
+File: foo_tree.eps Graphic file (type eps)
+ <foo_tree.eps>
+Overfull \hbox (5.71754pt too wide) in paragraph at lines 382--383
+[][] 
+ []
+
+
+Overfull \hbox (6.04132pt too wide) in paragraph at lines 417--418
+\T1/aer/m/n/9 by it-s con-sis-ten-t path-s. For-mal-ly, $\OML/cmm/m/it/9 wg\OT1
+/cmr/m/n/9 (\OML/cmm/m/it/9 c\OT1/cmr/m/n/9 )$ \T1/aer/m/n/9 = $[][] \OML/cmm/m
+/it/9 Cov\OT1/cmr/m/n/9 (\OMS/cmsy/m/n/9 P\OT1/cmr/m/n/9 )$\T1/aer/m/n/9 . 
+ []
+
+Requested font "aer6" at 6.0pt
+ -> aer6
+[3] (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.bbl [4]) [5
 
 ]
 (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.aux) ) 
 Here is how much of TeX's memory you used:
- 2298 strings out of 430478
- 25059 string characters out of 3191502
- 92385 words of memory out of 3000000
- 5395 multiletter control sequences out of 15000+200000
- 44606 words of font info for 60 fonts, out of 3000000 for 9000
+ 2706 strings out of 430478
+ 31249 string characters out of 3191502
+ 100463 words of memory out of 3000000
+ 5791 multiletter control sequences out of 15000+200000
+ 49717 words of font info for 64 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  39i,10n,34p,1142b,464s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on sig-alternate-sample.pdf (4 pages).
+Output written on sig-alternate-sample.pdf (5 pages).

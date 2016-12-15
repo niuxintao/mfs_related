@@ -525,3 +525,19 @@ ISSN={0098-5589}
   year={2015},
   organization={IEEE Press}
 }
+@inproceedings{reisner2010using,
+  title={Using symbolic evaluation to understand behavior in configurable software systems},
+  author={Reisner, Elnatan and Song, Charles and Ma, Kin-Keung and Foster, Jeffrey S and Porter, Adam},
+  booktitle={Proceedings of the 32nd ACM/IEEE International Conference on Software Engineering-Volume 1},
+  pages={445--454},
+  year={2010},
+  organization={ACM}
+}
+@inproceedings{ma2013locating,
+  title={Locating Faulty Code Using Failure-Causing Input Combinations in Combinatorial Testing},
+  author={Ma, Chunyan and Zhang, Yifei and Liu, Jie and others},
+  booktitle={Software Engineering (WCSE), 2013 Fourth World Congress on},
+  pages={91--98},
+  year={2013},
+  organization={IEEE}
+}

@@ -47,6 +47,7 @@
 
 \documentclass{sig-alternate-05-2015}
 
+\usepackage{fancyvrb}
 
 \begin{document}
 
@@ -252,10 +253,10 @@ To analyse this question is important and necessary, because it will build the r
 %
 %To compute the guaranteed code of the interaction, We need to utilize symbolic execution. Specifically, we accumulated added on symbolic, and find those guaranteed code. We define the .
 
-%\footnote{Note that this is the same to the interactions in paper. To let different, we }.
+%
 There are many techniques to compute the MFS in CT. In this paper, we adopts our previous method proposed in \cite{nie2011minimal}, which is one of the most common MFS identification technique in CT. With respect to guaranteed code, we follow the steps which are original proposed in \cite{reisner2010using}, which firstly utilizes symbolic execution tool to search possible paths for different values assigned to the input parameters, and then calculates the guaranteed code for each possible interaction based on these paths. One difference from study in \cite{reisner2010using} is that we only need to compute the guaranteed code for the MFS we identified in the SUT, instead of all the possible interactions. After obtaining the MFS and corresponding guaranteed codes, we will evaluate the correlation between MFS and faulty code.
 
-We have design several empirical studies on 5 open-source software subjects. These studies considers several different aspects (e.g., the degree of MFS, the types of faults) of the relationships between MFS and faulty code. Our results suggests that: 1) The MFS does relate to the faulty code to some extent; 2) for different types of faults, the correlation between MFS and faulty code varies;  3) The input model of the program under test significantly impacts on this correlation.
+We have design several empirical studies on 5 open-source software subjects. These studies considers several different aspects (e.g., the degree of MFS, the types of faults) of the relationships between MFS and faulty code. Our results suggests that: 1) The MFS does relate to the faulty code to some extent; 2) For different types of faults, the correlation between MFS and faulty code varies;  3) The input model of the program under test significantly impacts on this correlation.
 
 %These faults include injected and real ones. We first model their input and computed the MFS and also the guaranteed code of these MFS. We observe their relationships between these code with those real faulty statement. One observation in our case study shows that .  Besides this, we also compare . The results shows that .
 
@@ -268,7 +269,7 @@ This section presents some formal definitions about MFS and guaranteed code.
 
 \subsection{Basic definitions about CT}\label{sec:pre:ct}
 
-Assume that the Software Under Test (SUT) is influenced by \emph{n} parameters, and each parameter $p_{i}$ can take the values from the finite set $V_{i}$, $|V_{i}|$ = $a_{i}$ ($i$ = 1,2,..n).
+Assume that the Software Under Test (SUT) is influenced by \emph{n} parameters, and each parameter $p_{i}$ can take the values from the finite set $V_{i}$, $|V_{i}|$ = $a_{i}$ ($i$ = 1,2,..n). We will give some basic definitions which are related to failure-inducing interactions in CT.
 
 \newdef{definition}{Definition}
 \begin{definition}
@@ -305,14 +306,50 @@ If all test cases that contain a schema, say $c$, trigger a particular fault, sa
 %Based on this, if a test case $t$ hit such a failure-inducing combination, say $c(F)$, it should trigger the fault $F$, for which the test case can be put as $t(F)$
 \end{definition}
 
-Note that MFS is identical to the failure-inducing interaction discussed previously. In this paper, the terms \emph{failure-inducing interactions} and \emph{MFS} are used interchangeably. 
+Note that MFS is identical to the failure-inducing interaction discussed previously. In this paper, the terms \emph{failure-inducing interactions} and \emph{MFS} are used interchangeably.
 %Figuring the MFS out helps to identify the root cause of a failure and thus facilitate the debugging process.
 
 \subsection{Identification of MFS}\label{sec:pre:mfs}
 When a test case fails during test case, we are still far from figuring out the MFS \cite{colbourn2008locating,martinez2008algorithms,martinez2009locating}, as we do not know exactly which schemas in the failed test cases should be responsible for the failure. For example, if test case (0, 0, 0, 0) failed during testing, there are six 2-degree candidate failure-inducing schemas, which are (0, 0, -, -), (0, -, 0, -), (0, -, -, 0) , (-, 0, 0, -), (-, 0, -, 0), (-, -, 0, 0), respectively. Without
 additional information, it is difficult to figure out the specific schemas in this suspicious set that caused the failure. Considering that the failure can be triggered by schemas with other degrees, e.g., (0, -, -, -) or (0, 0, 0, -), the problem of MFS identification becomes more complicated.
 
-In fact, for a failing test case ($v_{1},v_{2},...,v_{n}$), there can be at most $2^{n} - 1$ possible schemas for the MFS. Hence, more test cases should be generated to identify the MFS. A typical MFS identification process is shown in Table \ref{ofot-identify}. This example assumes the SUT has 4 parameters, each can take on 2 values, and the test case (1, 1, 1, 1) fails. Then in Table \ref{ofot-identify}, as test case \emph{t} failed, we mutate one factor of the \emph{t} one time to generate new test cases: $t_{1}$ -- $t_{4}$, It turns out that test case $t_{1}$ passed, which indicates that this test case break the MFS in the original test case \emph{t}. So (1, -, -, -) should be a failure-causing factor. Similarly, we can also conclude that (-, -, 1, -) is another failure-inducing factor because of the pass of $t_{3}$. Considering that all the other test cases failed, which means no other failure-inducing factors were broken, therefore, the MFS in \emph{t} is (1, -, 1, -).
+In fact, for a failing test case ($v_{1},v_{2},...,v_{n}$), there can be at most $2^{n} - 1$ possible schemas for the MFS. Hence, more test cases should be generated to identify the MFS. Next, we will show how MFS identification processes with an example.
+
+Consider an program like Fig \ref{toy-program}, which contains four integer parameters: a, b, c, and d. With respect to applying combinatorial testing, we need to first build a input model for this program. For simplicity, let a, b, c and d can take on the following values:  $v_{a} = \{ 1, 2\}$, $v_{b} = \{ 0, 1\}$, $v_{c} = \{ 1, 2\}$, and $v_{d} = \{ 0, 1\}$, respectively. Assume that through testing of this program, we find a test case, e.g., (a = 1, b = 0, c = 1, d = 1), will trigger an arithmetic exception. Then we will describe how CT identify the MFS in this test case.
+
+%taking square root of a negative number
+\begin{figure}
+\begin{Verbatim}[numbers=left,xleftmargin=5mm]
+public float foo(int a, int b, int c, int d){
+  int x, y, z;
+  x = 4;
+  if(a < 2){
+    y = 3;
+    if(c < 2){
+            z =  Math.sqrt(y - x);
+            return z / y;
+    }
+    else
+        return x + y;
+  }
+  else{
+    y = 2;
+    if(b < 1){
+        if(d < 1)
+            return y / (x + y);
+        else
+            return x / (x + y);
+    }
+    else
+        return y * x;
+  }
+}
+\end{Verbatim}
+\caption{A simple program \emph{foo} with four input parameters}
+\label{toy-program}
+\end{figure}
+
+A typical MFS identification process is shown in Table \ref{ofot-identify}. In this table, test case $t$ represents the failing test case we aforementioned. To identify the MFS, we mutate one factor of \emph{t} one time to generate new test cases: $t_{1}$ -- $t_{4}$.  It turns out that test case $t_{1}$ passed, which indicates that this test case break the MFS in the original test case \emph{t}. So (1, -, -, -) should be a failure-causing factor. Similarly, we can also conclude that (-, -, 1, -) is another failure-inducing factor because of the pass of $t_{3}$. Considering that all the other test cases failed, which means no other failure-inducing factors were broken, therefore, the MFS in \emph{t} is (1, -, 1, -).
 
 \begin{table}[ht]
 \caption{OFOT example}
@@ -321,52 +358,103 @@ In fact, for a failing test case ($v_{1},v_{2},...,v_{n}$), there can be at most
 \begin{tabular}{llllll}
  \hline
 \multicolumn{5}{c}{\bfseries Original test case} & \bfseries Outcome \\  \hline
- $t$ & \multicolumn{4}{l}{1 \ \ \ \ 1 \ \ \ \  1 \ \ \ \ 1 } & Fail \\
+ $t$ & \multicolumn{4}{l}{1 \ \ \ \ 0 \ \ \ \  1 \ \ \ \ 1 } & Fail \\
  \hline
 \multicolumn{5}{c}{\bfseries Additional  test cases} &  \\  \hline
-$t_{1}$ &\multicolumn{4}{l}{0  \ \ \ \  1 \ \ \ \  1 \ \ \ \ 1 }& Pass \\
-$t_{2}$ &\multicolumn{4}{l}{1  \ \ \ \  0 \ \ \ \  1 \ \ \ \ 1 } & Fail \\
-$t_{3}$ &\multicolumn{4}{l}{1  \ \ \ \  1 \ \ \ \  0 \ \ \ \ 1 } & Pass \\
-$t_{4}$ &\multicolumn{4}{l}{1  \ \ \ \  1 \ \ \ \  1 \ \ \ \ 0 } & Fail \\
+$t_{1}$ &\multicolumn{4}{l}{2  \ \ \ \  0 \ \ \ \  1 \ \ \ \ 1 }& Pass \\
+$t_{2}$ &\multicolumn{4}{l}{1  \ \ \ \  1 \ \ \ \  1 \ \ \ \ 1 } & Fail \\
+$t_{3}$ &\multicolumn{4}{l}{1  \ \ \ \  0 \ \ \ \  2 \ \ \ \ 1 } & Pass \\
+$t_{4}$ &\multicolumn{4}{l}{1  \ \ \ \  0 \ \ \ \  1 \ \ \ \ 0 } & Fail \\
  \hline
 \end{tabular}
 \end{table}
 
-This identification process mutate one factor of the original test case at a time to generate extra test cases. Then according to the outcome of the test cases execution result, it will identify the MFS of the original failing test cases. It is called the OFOT method \cite{nie2011minimal}, which is a well-known MFS identification method in CT. In this paper, we will focus on this identification method. 
+This identification process mutate one factor of the original test case at a time to generate extra test cases. Then according to the outcome of the test cases execution result, it will identify the MFS of the original failing test cases. It is called the OFOT method \cite{nie2011minimal}, which is a well-known MFS identification method in CT. In this paper, we will focus on this identification method.
 %It should be noted that the following proposed CT framework can be easily applied to other MFS identification methods.
 
 
-%\subsection{MFS}
+\subsection{Basic definitions about guaranteed code}\label{sec:pre:guar}
+Although MFS are the failure-inducing parts of the failing test input for the SUT, however, we still cannot directly utilize it for fault localization, because they do not provide any code-level information. For this, we need to build the relationship between input schemas and program entities.
+
+Let $\mathcal{P}$ be a path in the SUT. Then let $Cov(\mathcal{P})$ = $< s_{1}, s_{2}, s_{3},... s_{n} >$ be the program entities that covered by path $\mathcal{P}$. A program entity can be a statement, block, edges, etc. In this paper, we mainly focus on statements; note that other types of structure coverage can also be applied \cite{song2012itree}. Let $Pcon(\mathcal{P})$ = $<p_{1}, p_{2}, p_{3}, ... p_{k}>$ be the path conditions that are encountered by path $\mathcal{P}$.  As an example, consider the program list in Fig \ref{toy-program}. It is easy to find that it has five possible paths, which forms the execution tree in Fig \ref{foo-tree}.
+
+\begin{figure}
+ \includegraphics[width=3.4in]{foo_tree.eps}
+\caption{The execution tree of program \emph{foo}}
+\label{foo-tree}
+\end{figure}
+
+In this tree, a rhombus node represents a path condition, and a rectangle represents the statement. Note that those consecutive statements are included in one rectangle. From this figure, we can list the paths, their covered entities, and their path conditions, which are explicitly shown in Table \ref{cov-con-foo}.
+
+\begin{table}[ht]
+\caption{Paths, covered entities, and conditions of \emph{foo}}
+\label{cov-con-foo}
+\center
+\begin{tabular}{lll}
+ \hline
+\bfseries ID & \bfseries Covered Entities & \bfseries Path Conditions \\  \hline
+ $1$ & S2, S3, S5, S7, S8& $a < 2$,  $c < 2$\\
+ $2$ & S2, S3, S5, S11 & $a < 2$,  $\neg c < 2$\\
+ $3$ & S2, S3, S14, S17& $\neg a < 2$,  $b < 1$, $d < 1$\\
+ $4$ & S2, S3, S14, S19& $\neg a < 2$,  $b < 1$, $\neg d < 1$\\
+ $5$ & S2, S3, S14, S22& $\neg a < 2$,  $\neg b < 1$\\
+ \hline
+\end{tabular}
+\end{table}
+
+
+Next we will give some important definitions that are related to the guaranteed code. Firstly, let
+
+\begin{definition}
+For a schema $c$, and a path $\mathcal{P}$, if all the path conditions in this path can be satisfied when this schema is contained in the input, i.e., $ (\bigwedge_{p_{i} \in Pcon(\mathcal{P})} p_{i}) \bigwedge c  = true$, we call $\mathcal{P}$ the \emph{Consistent path} of schema $c$.
+\end{definition}
+
+In fact, \emph{consistent path} of one schema is a path can be reached when given one input which contains this schema. For example,
+
+Based on this definition, we use the notation $CsP(c)$ to represent the set of all the consistent paths of schema $c$, i.e., $CsP(c)$ = $\{ \mathcal{P}_{i}  |  (\bigwedge_{p_{i} \in Pcon(\mathcal{P}_{i})} p_{i}) \bigwedge c  = true \}$. Then we will give the formal definition of weak guaranteed of one schema.
+
+\begin{definition}
+For a schema $c$, the weak guaranteed code of $c$, i.e., $wg(c)$, is the intersection of program entities covered by its consistent paths. Formally, $wg(c)$ = $\bigcap_{\mathcal{P} \in CsP(c)} Cov(\mathcal{P})$.
+
+\end{definition}
+
+Essentially, the weak guaranteed code\footnote{The definition of weak guaranteed code is similar to the \emph{guarantee coverage} defined in \cite{reisner2010using}. The difference is that in this paper we do not distinguish the input and value symbolic; instead, they are handled in an unified way.} of one schema, is the maximal common code that is expected to be executed by any path which consists with this schema. In other word, this schema guarantees some code to be executed.
+
+%\footnote{Weak guaranteed is ,
+%Strong guaranteed is Note that this is the same to the interactions in paper. To let different, we }.
+
+%Note that the definitions is one different from original defined, . which we do not consider input, instead, they are also modeled as symbolic. Based on This, all the input can be handled unified as the same way as those symbolic values.
+
+As an example, 
+
+Although the weak guaranteed code always follows with the corresponding schema, it does not necessarily indicates that the schema directly controls the weak guaranteed code. This is because there may exists some other schemas that control some part of this weak guaranteed code, but these schemas may always appears with the corresponding schema. Obviously, these schemas are the sub-schemas of this schema. For example, in Fig, .
+
+Hence, to understand which code are under the direct control of some schemas, we need to remove the influence from their subschemas.
+%Considering this, it may in fact the behaviour under the sub-schema . For example, in Fig.  Hence, to totally reflect the influence behaviour of sub-schemas, we need to remove the impact from the sub-schemas.
+
+\begin{definition}
+For a schema $c$, the strong guaranteed code of $c$, i.e., $sg(c)$, is the weak guaranteed code of $c$ with removing those weak guaranteed code of its subschemas. Formally, $sg(c)$ = $wg(c) \backslash \{\bigcup_{c' \prec c} wg(c') \}$.
+
+\end{definition}
+
+Strong guaranteed code are the program entities that under the direct control of the corresponding schema, and hence it reflects how the schema influence on the behaviour of program. As an example, .
+
+
+In this paper, we focus on the guaranteed code of MFS, instead of all the other schemas in the test case. With respect to this example, it is easily find that the weak guaranteed code and strong guaranteed code is,  respectively. They are very correlated to the real faulty code, especially for the strong guaranteed code, .  However, in the real situation, it may . As we want to know whether to detect and identify the MFS is really helpful in the code-based diagnosis, we need to do more empirical studies to find the result.
+
+
+%\subsection{The method to get guaranteed code}\label{sec:pre:getguar}
 %
-%Definition
+%We need to first utilize the symbolic executions.
 %
-%Getting approaches
+%Then for the MFS we need to compute the consisient, we need a smt solver to solve this problem.
+%definition guaranteed code
 %
+%definition minimal guaranteed code
+%%
+
 %
-%The details is as follows:
-
-
-
-
-
-\subsection{Symbolic execution}\label{sec:pre:sym}
-
-\subsection{guaranteed code code}\label{sec:pre:guar}
-
-
-definition guaranteed code
-
-definition minimal guaranteed code
-
-
-
-
-
-For example, from Figure 2(b) we can see that any configuration satisfying  (i.e., a=0, b=1) is guaranteed to cover L2, no matter the choice of and N. We can use Otter's output to compute the guaranteed coverage for a predicate p, which we will write as Cov(p). We first Lnd CovT (p), the coverage guaranteed under p by test case T, for each test case; then, Cov(p) = ST CovT (p). To compute CovT (p), let pTi be the path conditions from T's symbolic evaluation, and let CT (pTi) be the covered lines (or blocks, edges, conditions, etc.) that occur in that path. Then CovT (p) is ConsistentT (p) = fpTi j SAT(pTip)g CovT (p) = T q2ConsistentT (p) CT (q). In other words, first we compute the set of path conditions pTi such that p and pTi are consistent. If this holds for pTi, the items in CT (pTi ) may be covered if p is true. Since our symbolic evaluator explores all possible program paths, the intersection of these sets for all such pTi is the set guaranteed to be covered if p is true.
-
-Going back to Figure 2, here are some predicates and the coverage they guarantee given the test cases input=1 and input=0. We abbreviate K = 1 as K and K = 0 as :K.
-
-In this paper, we use the symbolic execution to . The details is as follwos:
+%In this paper, we use the symbolic execution to . The details is as follwos:
 
 
 
@@ -376,10 +464,11 @@ In this paper, we use the symbolic execution to . The details is as follwos:
 
 
 
-\section{Research question} \label{sec:research}
+\section{Research questions} \label{sec:research}
+To comprehensive study the correlativeness between the MFS and real
 
 
-\subsection{correlation between MFS and faulty code}
+\subsection{The correlation between MFS and faulty code}
 
 
 Hence, it motivates our first research question:
@@ -409,7 +498,7 @@ These questions are important, as
 
 \subsection{Generating faulty programs}
 
-\subsection{symbolic execution of the paths}
+\subsection{Symbolic execution of the paths}
 
 
 %\section{Getting MFS and their guaranteed code}
@@ -431,12 +520,12 @@ There are many methods aims at identifying MFS in CT, which can be classified in
 
 
 All these methods. with respect to the code level which utilizes.
-2. use MFS to isolate faulty code. machunhyan  and leiyu
+2. use MFS to isolate faulty code. machunhyan \cite{ma2013locating}  and leiyu \cite{ghandehari2013fault}
 
 
 Studies on symbolic execution, has .
 
-4. Use symoblic execution in CT. Charles song 3 pian.
+4. Use symoblic execution in CT. Charles song \cite{reisner2010using} first. Then extend to itree \cite{song2012itree}, then extends to multiple leaves with \cite{song2014itree}.
 
 Our work differs from them
 

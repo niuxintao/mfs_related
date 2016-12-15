@@ -18,6 +18,12 @@ C.~J. Colbourn and D.~W. McClary.
 \newblock Locating and detecting arrays for interaction faults.
 \newblock {\em Journal of combinatorial optimization}, 15(1):17--48, 2008.
 
+\bibitem{ghandehari2013fault}
+L.~S. Ghandehari, Y.~Lei, D.~Kung, R.~Kacker, and R.~Kuhn.
+\newblock Fault localization based on failure-inducing combinations.
+\newblock In {\em Software Reliability Engineering (ISSRE), 2013 IEEE 24th
+  International Symposium on}, pages 168--177. IEEE, 2013.
+
 \bibitem{jia2015learning}
 Y.~Jia, M.~B. Cohen, M.~Harman, and J.~Petke.
 \newblock Learning combinatorial interaction test generation strategies using
@@ -44,6 +50,13 @@ Y.~Lei, R.~Kacker, D.~R. Kuhn, V.~Okun, and J.~Lawrence.
   testing.
 \newblock {\em Software Testing, Verification and Reliability}, 18(3):125--148,
   2008.
+
+\bibitem{ma2013locating}
+C.~Ma, Y.~Zhang, J.~Liu, et~al.
+\newblock Locating faulty code using failure-causing input combinations in
+  combinatorial testing.
+\newblock In {\em Software Engineering (WCSE), 2013 Fourth World Congress on},
+  pages 91--98. IEEE, 2013.
 
 \bibitem{martinez2008algorithms}
 C.~Mart{\'\i}nez, L.~Moura, D.~Panario, and B.~Stevens.
@@ -76,6 +89,20 @@ E.~Reisner, C.~Song, K.-K. Ma, J.~S. Foster, and A.~Porter.
   software systems.
 \newblock In {\em Proceedings of the 32nd ACM/IEEE International Conference on
   Software Engineering-Volume 1}, pages 445--454. ACM, 2010.
+
+\bibitem{song2012itree}
+C.~Song, A.~Porter, and J.~S. Foster.
+\newblock itree: Efficiently discovering high-coverage configurations using
+  interaction trees.
+\newblock In {\em Proceedings of the 2012 International Conference on Software
+  Engineering}, pages 903--913. IEEE Press, 2012.
+
+\bibitem{song2014itree}
+C.~Song, A.~Porter, and J.~S. Foster.
+\newblock itree: efficiently discovering high-coverage configurations using
+  interaction trees.
+\newblock {\em IEEE Transactions on Software Engineering}, 40(3):251--265,
+  2014.
 
 \bibitem{zhang2011characterizing}
 Z.~Zhang and J.~Zhang.
