@@ -376,7 +376,7 @@ This identification process mutate one factor of the original test case at a tim
 \subsection{Basic definitions about guaranteed code}\label{sec:pre:guar}
 Although MFS are the failure-inducing parts of the failing test input for the SUT, however, we still cannot directly utilize it for fault localization, because they do not provide any code-level information. For this, we need to build the relationship between input schemas and program entities.
 
-Let $\mathcal{P}$ be a path in the SUT. Then let $Cov(\mathcal{P})$ = $< s_{1}, s_{2}, s_{3},... s_{n} >$ be the program entities that covered by path $\mathcal{P}$. A program entity can be a statement, block, edges, etc. In this paper, we mainly focus on statements; note that other types of structure coverage can also be applied \cite{song2012itree}. Let $Pcon(\mathcal{P})$ = $<p_{1}, p_{2}, p_{3}, ... p_{k}>$ be the path conditions that are encountered by path $\mathcal{P}$.  As an example, consider the program list in Fig \ref{toy-program}. It is easy to find that it has five possible paths, which forms the execution tree in Fig \ref{foo-tree}.
+Let $\mathcal{P}$ be a path in the SUT. Then let $Cov(\mathcal{P})$ = $< s_{1}, s_{2}, s_{3},... s_{n} >$ be the program entities that covered by path $\mathcal{P}$. A program entity can be a statement, block, edges, etc. In this paper, we mainly focus on statements; note that other types of structure coverage can also be applied \cite{song2012itree}. Let $Pcon(\mathcal{P})$ = $<pc_{1}, pc_{2}, pc_{3}, ... pc_{k}>$ be the path conditions that are encountered by path $\mathcal{P}$.  As an example, consider the program list in Fig \ref{toy-program}. It is easy to find that it has five possible paths, which forms the execution tree in Fig \ref{foo-tree}.
 
 \begin{figure}
  \includegraphics[width=3.4in]{foo_tree.eps}
@@ -403,20 +403,40 @@ In this tree, a rhombus node represents a path condition, and a rectangle repres
 \end{table}
 
 
-Next we will give some important definitions that are related to the guaranteed code. Firstly, let
+Next we will give some important definitions that are related to the guaranteed code. 
+%For simplicity, we next use notation $c^\sharp$ indicates a logic expression meaning that the parameter values are equal to those in schema $c$.
 
 \begin{definition}
-For a schema $c$, and a path $\mathcal{P}$, if all the path conditions in this path can be satisfied when this schema is contained in the input, i.e., $ (\bigwedge_{p_{i} \in Pcon(\mathcal{P})} p_{i}) \bigwedge c  = true$, we call $\mathcal{P}$ the \emph{Consistent path} of schema $c$.
+For a schema $c$, and a path $\mathcal{P}$, if all the path conditions in this path can be satisfied when given an input that contains this schema, we call $\mathcal{P}$ the \emph{Consistent path} of schema $c$, which can be denoted as $SAT(Pcon(\mathcal{P}) \bigwedge c)$.
 \end{definition}
 
-In fact, \emph{consistent path} of one schema is a path can be reached when given one input which contains this schema. For example,
+In fact, to judge whether a path is the \emph{consistent path} of one schema, is to find whether exist an input that contains this schema and follows all the path conditions of this path. Taking the program \emph{foo} for example, Path 1 is the consistent path of schema (1, -, -, -), because $( a < 2 $ $\wedge $ $c < 2 $ $\wedge $ $a = 1 )$  $= true $ can be solved, e.g., input (1, 1, 1, 1) is such a result.
 
-Based on this definition, we use the notation $CsP(c)$ to represent the set of all the consistent paths of schema $c$, i.e., $CsP(c)$ = $\{ \mathcal{P}_{i}  |  (\bigwedge_{p_{i} \in Pcon(\mathcal{P}_{i})} p_{i}) \bigwedge c  = true \}$. Then we will give the formal definition of weak guaranteed of one schema.
+Based on this definition, we use the notation $c^{\sharp}$ to represent the set of all the consistent paths of schema $c$. Then we will give the formal definition of weak guaranteed of one schema.
 
 \begin{definition}
-For a schema $c$, the weak guaranteed code of $c$, i.e., $wg(c)$, is the intersection of program entities covered by its consistent paths. Formally, $wg(c)$ = $\bigcap_{\mathcal{P} \in CsP(c)} Cov(\mathcal{P})$.
+For a schema $c$, the weak guaranteed code of $c$, i.e., $wg(c)$, is the intersection of program entities covered by its consistent paths. Formally, $wg(c)$ = $\bigcap_{\mathcal{P} \in c^{\sharp}} Cov(\mathcal{P})$.
 
 \end{definition}
+
+As an example, we list some schemas, and their corresponding consistent paths and weak guaranteed code in Table \ref{weg-foo}.
+
+
+\begin{table}[ht]
+\caption{weak guaranteed code of some schemas of \emph{foo}}
+\label{weg-foo}
+\center
+\begin{tabular}{lll}
+ \hline
+\bfseries ID & \bfseries Covered Entities & \bfseries Path Conditions \\  \hline
+ $1$ & S2, S3, S5, S7, S8& $a < 2$,  $c < 2$\\
+ $2$ & S2, S3, S5, S11 & $a < 2$,  $\neg c < 2$\\
+ $3$ & S2, S3, S14, S17& $\neg a < 2$,  $b < 1$, $d < 1$\\
+ $4$ & S2, S3, S14, S19& $\neg a < 2$,  $b < 1$, $\neg d < 1$\\
+ $5$ & S2, S3, S14, S22& $\neg a < 2$,  $\neg b < 1$\\
+ \hline
+\end{tabular}
+\end{table}
 
 Essentially, the weak guaranteed code\footnote{The definition of weak guaranteed code is similar to the \emph{guarantee coverage} defined in \cite{reisner2010using}. The difference is that in this paper we do not distinguish the input and value symbolic; instead, they are handled in an unified way.} of one schema, is the maximal common code that is expected to be executed by any path which consists with this schema. In other word, this schema guarantees some code to be executed.
 
@@ -425,7 +445,7 @@ Essentially, the weak guaranteed code\footnote{The definition of weak guaranteed
 
 %Note that the definitions is one different from original defined, . which we do not consider input, instead, they are also modeled as symbolic. Based on This, all the input can be handled unified as the same way as those symbolic values.
 
-As an example, 
+
 
 Although the weak guaranteed code always follows with the corresponding schema, it does not necessarily indicates that the schema directly controls the weak guaranteed code. This is because there may exists some other schemas that control some part of this weak guaranteed code, but these schemas may always appears with the corresponding schema. Obviously, these schemas are the sub-schemas of this schema. For example, in Fig, .
 

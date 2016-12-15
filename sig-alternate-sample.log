@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2014.9.10)  15 DEC 2016 15:59
+This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2014.9.10)  15 DEC 2016 16:53
 entering extended mode
 **sig-alternate-sample.tex
 (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.tex
@@ -393,24 +393,19 @@ Overfull \hbox (5.71754pt too wide) in paragraph at lines 382--383
 [][] 
  []
 
-
-Overfull \hbox (6.04132pt too wide) in paragraph at lines 417--418
-\T1/aer/m/n/9 by it-s con-sis-ten-t path-s. For-mal-ly, $\OML/cmm/m/it/9 wg\OT1
-/cmr/m/n/9 (\OML/cmm/m/it/9 c\OT1/cmr/m/n/9 )$ \T1/aer/m/n/9 = $[][] \OML/cmm/m
-/it/9 Cov\OT1/cmr/m/n/9 (\OMS/cmsy/m/n/9 P\OT1/cmr/m/n/9 )$\T1/aer/m/n/9 . 
- []
-
+[3]
 Requested font "aer6" at 6.0pt
  -> aer6
-[3] (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.bbl [4]) [5
+ (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.bbl [4])
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-]
+ [5]
 (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.aux) ) 
 Here is how much of TeX's memory you used:
- 2706 strings out of 430478
- 31249 string characters out of 3191502
+ 2704 strings out of 430478
+ 31216 string characters out of 3191502
  100463 words of memory out of 3000000
- 5791 multiletter control sequences out of 15000+200000
+ 5789 multiletter control sequences out of 15000+200000
  49717 words of font info for 64 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  39i,10n,34p,1142b,464s stack positions out of 5000i,500n,10000p,200000b,50000s
