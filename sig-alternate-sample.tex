@@ -403,7 +403,7 @@ In this tree, a rhombus node represents a path condition, and a rectangle repres
 \end{table}
 
 
-Next we will give some important definitions that are related to the guaranteed code. 
+Next we will give some important definitions that are related to the guaranteed code.
 %For simplicity, we next use notation $c^\sharp$ indicates a logic expression meaning that the parameter values are equal to those in schema $c$.
 
 \begin{definition}
@@ -428,12 +428,12 @@ As an example, we list some schemas, and their corresponding consistent paths an
 \center
 \begin{tabular}{lll}
  \hline
-\bfseries ID & \bfseries Covered Entities & \bfseries Path Conditions \\  \hline
- $1$ & S2, S3, S5, S7, S8& $a < 2$,  $c < 2$\\
- $2$ & S2, S3, S5, S11 & $a < 2$,  $\neg c < 2$\\
- $3$ & S2, S3, S14, S17& $\neg a < 2$,  $b < 1$, $d < 1$\\
- $4$ & S2, S3, S14, S19& $\neg a < 2$,  $b < 1$, $\neg d < 1$\\
- $5$ & S2, S3, S14, S22& $\neg a < 2$,  $\neg b < 1$\\
+\bfseries Schema & \bfseries $c^{\sharp}$ & \bfseries $wg(c^{\sharp})$\\  \hline
+ $(1, -, -, -)$ & S2, S3, S5, S7, S8& $a < 2$,  $c < 2$\\
+ $(1, -, 1, -)$ & S2, S3, S5, S11 & $a < 2$,  $\neg c < 2$\\
+ $(2, 1, -, -)$ & S2, S3, S14, S17& $\neg a < 2$,  $b < 1$, $d < 1$\\
+ $(2, 1, -, 1)$ & S2, S3, S14, S19& $\neg a < 2$,  $b < 1$, $\neg d < 1$\\
+ $(2, 1, 1, 1)$ & S2, S3, S14, S22& $\neg a < 2$,  $\neg b < 1$\\
  \hline
 \end{tabular}
 \end{table}
