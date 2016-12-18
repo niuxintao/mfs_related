@@ -264,8 +264,8 @@ We have design several empirical studies on 5 open-source software subjects. The
 
 The remaindering of this paper are organised as follows: Section \ref{sec:pre} gives the preliminaries about Combinatorial testing (especially MFS-related), and basic definitions about Guaranteed code. Section \ref{sec:research} proposes three research questions that needs to be handled in this paper. Section \ref{sec:subjects} introduces the subjects on which our experiments are conducted on. Section \ref{sec:results} shows the results as well as the analysis. Section \ref{sec:related} discusses the related works.  Section \ref{sec:conclusion} concludes this paper.
 
-\section{Preliminary}\label{sec:pre}
-This section presents some formal definitions about MFS and guaranteed code.
+\section{Preliminary and Formal Model}\label{sec:pre}
+This section presents some formal descriptions about MFS and guaranteed code.
 
 \subsection{Basic definitions about CT}\label{sec:pre:ct}
 
@@ -373,7 +373,7 @@ This identification process mutate one factor of the original test case at a tim
 %It should be noted that the following proposed CT framework can be easily applied to other MFS identification methods.
 
 
-\subsection{Basic definitions about guaranteed code}\label{sec:pre:guar}
+\subsection{Formal description about guaranteed code}\label{sec:pre:guar}
 Although MFS are the failure-inducing parts of the failing test input for the SUT, however, we still cannot directly utilize it for fault localization, because they do not provide any code-level information. For this, we need to build the relationship between input schemas and program entities.
 
 Let $\mathcal{P}$ be a path in the SUT. Then let $Cov(\mathcal{P})$ = $< s_{1}, s_{2}, s_{3},... s_{n} >$ be the program entities that covered by path $\mathcal{P}$. A program entity can be a statement, block, edges, etc. In this paper, we mainly focus on statements; note that other types of structure coverage can also be applied \cite{song2012itree}. Let $Pcon(\mathcal{P})$ = $<pc_{1}, pc_{2}, pc_{3}, ... pc_{k}>$ be the path conditions that are encountered by path $\mathcal{P}$.  As an example, consider the program list in Fig \ref{toy-program}. It is easy to find that it has five possible paths, which forms the execution tree in Fig \ref{foo-tree}.
@@ -394,10 +394,10 @@ In this tree, a rhombus node represents a path condition, and a rectangle repres
  \hline
 \bfseries ID & \bfseries Covered Entities & \bfseries Path Conditions \\  \hline
  $1$ & S2, S3, S5, S7, S8& $a < 2$,  $c < 2$\\
- $2$ & S2, S3, S5, S11 & $a < 2$,  $\neg c < 2$\\
- $3$ & S2, S3, S14, S17& $\neg a < 2$,  $b < 1$, $d < 1$\\
- $4$ & S2, S3, S14, S19& $\neg a < 2$,  $b < 1$, $\neg d < 1$\\
- $5$ & S2, S3, S14, S22& $\neg a < 2$,  $\neg b < 1$\\
+ $2$ & S2, S3, S5, S11 & $a < 2$,  $\neg (c < 2)$\\
+ $3$ & S2, S3, S14, S17& $\neg (a < 2)$,  $b < 1$, $d < 1$\\
+ $4$ & S2, S3, S14, S19& $\neg (a < 2)$,  $b < 1$, $\neg (d < 1)$\\
+ $5$ & S2, S3, S14, S22& $\neg (a < 2)$,  $\neg (b < 1)$\\
  \hline
 \end{tabular}
 \end{table}
@@ -419,26 +419,31 @@ For a schema $c$, the weak guaranteed code of $c$, i.e., $wg(c)$, is the interse
 
 \end{definition}
 
-As an example, we list some schemas, and their corresponding consistent paths and weak guaranteed code in Table \ref{weg-foo}.
+To better illustrate the weak guaranteed code of schemas, we list some schemas in the program \emph{foo}, their consistent paths and weak guaranteed code in Table \ref{weg-foo}. For example, for schema (1, -, -, -), its consistent paths are Path 1 and Path 2, because we can find inputs that contain this schema and satisfy all the path conditions of them. For example, (1, 1, 1, 1) can go through Path 1 and (1, 1, 2, 1) can go through Path 2. These two inputs both contain the schema of (1, -, -, -). Hence, the weak guaranteed code of $(1, -, -, -)$ are the intersection of the entities covered by these two paths, i.e., S2, S3, and S5.
 
+Note that there is one special schema (-, -, -, -), listed in this Table, it is the sub-schemas of all the other schemas of program \emph{foo}. What's more, it is consistent with all the paths of program \emph{foo}, and hence its weak guaranteed code are S2 and S3, which are the common code of all the paths.
 
 \begin{table}[ht]
-\caption{weak guaranteed code of some schemas of \emph{foo}}
+\caption{Weak guaranteed code of some schemas of \emph{foo}}
 \label{weg-foo}
 \center
 \begin{tabular}{lll}
  \hline
 \bfseries Schema & \bfseries $c^{\sharp}$ & \bfseries $wg(c^{\sharp})$\\  \hline
- $(1, -, -, -)$ & S2, S3, S5, S7, S8& $a < 2$,  $c < 2$\\
- $(1, -, 1, -)$ & S2, S3, S5, S11 & $a < 2$,  $\neg c < 2$\\
- $(2, 1, -, -)$ & S2, S3, S14, S17& $\neg a < 2$,  $b < 1$, $d < 1$\\
- $(2, 1, -, 1)$ & S2, S3, S14, S19& $\neg a < 2$,  $b < 1$, $\neg d < 1$\\
- $(2, 1, 1, 1)$ & S2, S3, S14, S22& $\neg a < 2$,  $\neg b < 1$\\
+ $(1, -, -, -)$ & Path 1, 2& S2, S3, S5 \\
+ $(1, -, 1, -)$ & Path 1 & S2, S3, S5, S7, S8\\
+ $(1, -, 2, -)$ & Path 2 & S2, S3, S5, S11\\
+ $(2, -, -, -)$ & Path 3, 4, 5& S2, S3, S14\\
+ $(2, 0, -, -)$ & Path 3, 4& S2, S3, S14\\
+ $(2, 0, -, 1)$ & Path 4& S2, S3, S14, S19\\
+ $(2, 1, -, -)$ & Path 5& S2, S3, S14, S22\\
+ $(-, -, 1, -)$ & Path 1, 3, 4, 5 & S2, S3 \\
+ $(-, -, -, -)$ & Path 1, 2, 3, 4, 5 & S2, S3 \\
  \hline
 \end{tabular}
 \end{table}
 
-Essentially, the weak guaranteed code\footnote{The definition of weak guaranteed code is similar to the \emph{guarantee coverage} defined in \cite{reisner2010using}. The difference is that in this paper we do not distinguish the input and value symbolic; instead, they are handled in an unified way.} of one schema, is the maximal common code that is expected to be executed by any path which consists with this schema. In other word, this schema guarantees some code to be executed.
+Above all, we can observe that, the weak guaranteed code\footnote{The definition of weak guaranteed code is similar to the \emph{guarantee coverage} defined in \cite{reisner2010using}. The difference is that in this paper we do not distinguish the input and value symbolic; instead, they are handled in an unified way.} of one schema, essentially, is the maximal common code that is expected to be executed by any path which consists with this schema. In other word, this schema guarantees some code to be executed.
 
 %\footnote{Weak guaranteed is ,
 %Strong guaranteed is Note that this is the same to the interactions in paper. To let different, we }.
@@ -447,9 +452,17 @@ Essentially, the weak guaranteed code\footnote{The definition of weak guaranteed
 
 
 
-Although the weak guaranteed code always follows with the corresponding schema, it does not necessarily indicates that the schema directly controls the weak guaranteed code. This is because there may exists some other schemas that control some part of this weak guaranteed code, but these schemas may always appears with the corresponding schema. Obviously, these schemas are the sub-schemas of this schema. For example, in Fig, .
+Although the weak guaranteed code always follows with the corresponding schema, it does not necessarily indicates that the schema directly controls the weak guaranteed code. This is because, for one schema, there may exists some other schemas that may always appears with this schema. Hence, it may result in that some code are the weak guaranteed code of one schema, but these code may be actually controlled by other schemas. It is easy to learn that these ``accompanying'' schemas are the sub-schemas of one schema.
 
-Hence, to understand which code are under the direct control of some schemas, we need to remove the influence from their subschemas.
+For example, with respect to program \emph{foo}, schema (1, -, 1, -) always appears with schema (1, -, -, -), hence, the weak  guaranteed code of schema (1, -, 1, -), i.e., (S2, S3, S5, S7, S8) must always contain the weak guaranteed code of schema (1, -, -, -), i.e., (S2, S3, S5).
+More formally, we can conclude the relationship of the weak guaranteed code between subsuming schemas as the following proposition.
+
+\newtheorem{proposition}{Proposition}
+\begin{proposition}
+Given schemas $s_{1}$, $s_{2}$, where $s_{1} \prec s_{2}$, then $wg(s_{1}) \subseteqq wg(s_{}2)$.
+\end{proposition}
+
+It is easy to prove this proposition and we will omit it. Based on this proposition, to understand which code are under the direct control of some schemas, we need to remove the influence from their subschemas.
 %Considering this, it may in fact the behaviour under the sub-schema . For example, in Fig.  Hence, to totally reflect the influence behaviour of sub-schemas, we need to remove the impact from the sub-schemas.
 
 \begin{definition}
@@ -457,10 +470,30 @@ For a schema $c$, the strong guaranteed code of $c$, i.e., $sg(c)$, is the weak 
 
 \end{definition}
 
-Strong guaranteed code are the program entities that under the direct control of the corresponding schema, and hence it reflects how the schema influence on the behaviour of program. As an example, .
+Strong guaranteed code are the program entities that under the direct control of the corresponding schema, and hence it reflects how the schema influence on the behaviour of program. As an example, considering the schemas which we show their weak guaranteed code in Table \ref{weg-foo}. We list the weak guaranteed code of all their subschemas, and the strong guaranteed code of themselves in Table \ref{strong-foo}. For example, for schema (1, -, 1, -), its weak guaranteed code are (S2, S3, S5, S7, S8), while the weak guaranteed code of all its subschemas are: (S2, S3, S5), (S2, S3), (S2, S3) for schemas (1, -, -, -), (-, -, 1, -) and (-, -, -, -), respectively. Hence, the union of the weak guaranteed code of its subschemas are (S2, S3, S5), and the strong guaranteed code of (1, -, 1, -) are (S7, S8).
+
+\begin{table}[ht]
+\caption{Strong guaranteed code of some schemas of \emph{foo}}
+\label{strong-foo}
+\center
+\begin{tabular}{lll}
+ \hline
+\bfseries Schema & \bfseries $wg\ of\ subschemas$ & \bfseries $sg(c^{\sharp})$\\  \hline
+ $(1, -, -, -)$ & S2, S3 & S5 \\
+ $(1, -, 1, -)$ & S2, S3, S5 & S7, S8\\
+ $(1, -, 2, -)$ & S2, S3, S5 & S11\\
+ $(2, -, -, -)$ & S2, S3 &  S14\\
+ $(2, 0, -, -)$ & S2, S3, S14 &  - \\
+ $(2, 0, -, 1)$ & S2, S3, S14 & S19\\
+ $(2, 1, -, -)$ & S2, S3, S14 & S22\\
+ $(-, -, 1, -)$ & S2, S3 & - \\
+ $(-, -, -, -)$ & - & S2, S3 \\
+ \hline
+\end{tabular}
+\end{table}
 
 
-In this paper, we focus on the guaranteed code of MFS, instead of all the other schemas in the test case. With respect to this example, it is easily find that the weak guaranteed code and strong guaranteed code is,  respectively. They are very correlated to the real faulty code, especially for the strong guaranteed code, .  However, in the real situation, it may . As we want to know whether to detect and identify the MFS is really helpful in the code-based diagnosis, we need to do more empirical studies to find the result.
+In this paper, we focus on the guaranteed code of MFS, instead of all the other schemas in the test case. With respect to the example in Fig \ref{toy-program}, it is easily to find that the weak guaranteed code and strong guaranteed code of the MFS (1, -, 1, -) are, (S2, S3, S5, S7, S8), and (S7, S8),  respectively. They are correlated to the faulty code, i.e., S7, where an exception of taking square root of a negative number will be triggered. This example, especially for the strong guaranteed code, implies that MFS is closely related to the faulty code.  However, in the real situation, we do not know whether the conclusion can still hold. As we want to know whether to detect and identify the MFS is really helpful in the code-based diagnosis, hence, we need to do more empirical studies to verify the conclusion.
 
 
 %\subsection{The method to get guaranteed code}\label{sec:pre:getguar}
@@ -485,8 +518,7 @@ In this paper, we focus on the guaranteed code of MFS, instead of all the other 
 
 
 \section{Research questions} \label{sec:research}
-To comprehensive study the correlativeness between the MFS and real
-
+To comprehensive study the correlativeness between the MFS and faulty code, we propose three research questions in the following. 
 
 \subsection{The correlation between MFS and faulty code}
 
@@ -495,6 +527,7 @@ Hence, it motivates our first research question:
 
 \textbf{Q1: Is MFS correlated to the faulty code?}
 
+It is the key .
 This question is key to. We let the guaranteed code of MFS.
 
 

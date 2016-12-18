@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2014.9.10)  15 DEC 2016 19:35
+This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2014.9.10)  18 DEC 2016 21:11
 entering extended mode
 **sig-alternate-sample.tex
 (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.tex
@@ -387,8 +387,12 @@ Requested font "aer5" at 5.0pt
 Requested font "aebxti10" at 9.0pt
  -> aebxti10
  [2]
+Overfull \hbox (1.81006pt too wide) in paragraph at lines 376--376
+[]\secfnt Formal de-scrip-tion about guar-an-teed code 
+ []
+
 File: foo_tree.eps Graphic file (type eps)
- <foo_tree.eps>
+<foo_tree.eps>
 Overfull \hbox (5.71754pt too wide) in paragraph at lines 382--383
 [][] 
  []
@@ -396,17 +400,17 @@ Overfull \hbox (5.71754pt too wide) in paragraph at lines 382--383
 [3]
 Requested font "aer6" at 6.0pt
  -> aer6
- (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.bbl [4])
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [5]
+\c@proposition=\count115
+Requested font "aecsc10" at 9.0pt
+ -> aecsc10
+ [4] (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.bbl) [5]
 (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.aux) ) 
 Here is how much of TeX's memory you used:
- 2704 strings out of 430478
- 31216 string characters out of 3191502
+ 2713 strings out of 430478
+ 31327 string characters out of 3191502
  100463 words of memory out of 3000000
- 5789 multiletter control sequences out of 15000+200000
- 49717 words of font info for 64 fonts, out of 3000000 for 9000
+ 5797 multiletter control sequences out of 15000+200000
+ 51377 words of font info for 65 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  39i,10n,34p,1142b,464s stack positions out of 5000i,500n,10000p,200000b,50000s
 
