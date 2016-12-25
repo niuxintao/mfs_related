@@ -47,6 +47,7 @@
 
 \documentclass{sig-alternate-05-2015}
 
+\usepackage{fancyvrb}
 
 \begin{document}
 
@@ -188,7 +189,7 @@ Jeff Lei \\
 
 \maketitle
 \begin{abstract}
-Combinatorial Testing (CT) is an effective technique for testing the interactions of factors in the Software Under Test(SUT). Most works in CT focus on the method itself, e.g., how to generate test cases, model the inputs, or handle the constraints of the inputs. Few of the works consider the justification of CT, i.e., is detecting and identifying the failure-inducing interactions really useful and helpful to code-level fault diagnosis? In this paper, we novelty studied the relationship between the failure-inducing interactions and code which causes the failure. Specifically, based on symbolic execution, we firstly obtain the guaranteed code of the corresponding failure-inducing interactions, i.e., those program entities which are directly affected by these interactions. And then we will compared these guaranteed code with those real faulty code to see whether there exists any associations between failure-inducing interactions with these real faulty code. Our empirical studies based on 30 real subjects showed that the failure-inducing interactions are strongly correlated with faulty code in the SUT.
+Combinatorial Testing (CT) is an effective technique for testing the interactions of factors in the Software Under Test(SUT). Most works in CT focus on the method itself, e.g., how to generate test cases, model the inputs, or handle the constraints of the inputs. Few of the works consider the justification of CT, i.e., is detecting and identifying the failure-inducing interactions really useful and helpful to code-level fault diagnosis? In this paper, we novelty studied the relationship between the failure-inducing interactions and code which causes the failure. Specifically, based on symbolic execution, we firstly obtain the guaranteed code of the corresponding failure-inducing interactions, i.e., those program entities which are directly affected by these interactions. And then we will compared these guaranteed code with those real faulty code to see whether there exists any associations between failure-inducing interactions with these real faulty code. Our empirical studies based on 5 real subjects showed that the failure-inducing interactions are strongly correlated with faulty code in the SUT.
 
 \end{abstract}
 
@@ -244,58 +245,31 @@ CT tests software with a elaborate test suite which checks all the required para
 
 \emph{Is detecting and identifying the MFS really useful and helpful to code-level fault diagnosis?}
 
-To analyse this question is important and necessary, because it will build the relationship between MFS and faulty code, which is the foundation to apply CT on code-level debugging. In this paper, we try to answer this question by studying the \emph{guaranteed code} of interactions. The \emph{guaranteed code} of a interaction is the program entities (e.g., statements, branches, blocks, etc.) which are directly \emph{affected} by the interaction according to the previous study \cite{reisner2010using}. Obtaining the gurantted code of an ineraction can help us to understand how it can influnce the behaviour of the program under test. More important, to analyse. 
-These code, shows, the direct control of these interactions; hence, it indicates that .
+To analyse this question is important and necessary, because it will build the relationship between MFS and faulty code, which is the foundation to apply CT on code-level debugging. In this paper, we try to answer this question by studying the \emph{guaranteed code} of interactions. The \emph{guaranteed code} of a interaction is the program entities (e.g., statements, branches, blocks, etc.) which are directly \emph{affected} by the interaction according to the previous study \cite{reisner2010using}. Obtaining the guaranteed code of an interaction can help us understand how this interaction influence on the behaviour of the program under test. Furthermore, analysing the guaranteed code of the MFS can offer us an insight into the extent to which the MFS is related to the cause of the failure; based on which, we can learn whether detecting and identifying the MFS can facilitate the debugging, as well as bug fixing.
 
-Note that we only record
-Note that the interaction only the code which is through coverage., a program entity is guaranteed to be covered with any test case contains this interaction.
-
-To compute the gurantted code. We need to utilize symbolic execution. Specifically, we accumualted added on symbolic, and find those guratted code. We define the .
-
-\footnote{Note that this is the same to the interactions in paper. To let different, we }.
-
-
-We have design sevearal emprical studies on nearly 50 open-source java subjects. These faults include injected and real ones. We first model their input and computed the MFS and also the guarrnteed code of these MFS. We observe their relationships between these code with those real faulty statment. One observeation in our case study shows that .  Besides this, we also compare . The results shows that .
-
-
-
-%Given a test suite and a coverage criterion, we say that a predicate p over the (initial settings of the) configuration options guarantees coverage of program entity X if there exists some test case in the test suite such any configuration satisfying p is guaranteed to cover X.
-
-%detect and identify MFS. For example, some works focus on how to generate as small size as possible test suite, others to as accurately the MFS. Few of them consider the justification behind it.
-
-
-%The basic justification of focus on the MFS is that it can facilitate the debugging efforts by reducing the code scope that needed to inspected \cite{nie2011minimal,ghandehari2012identifying}.
-
-%is important in CT as it cla facilitate the debugging efforts by reducing the code scope that needed to inspected\cite{ghandehari2012identifying}.
+%To compute the MFS of the SUT,
 %
-
-%In CT, each test case is a set of assignments of all the factors in the test model. Thus, when such a test case is executed, all the interactions contained in the test case are deemed to be checked. The main target of this stage is to design a relatively small set of test cases to achieve some specific coverage. The third testing stage in this cycle is the fault localization, which is responsible for identifying the failure-inducing interactions. To characterize the failure-inducing interactions of corresponding factors and values is important for future bug fixing, as it will reduce the scope of suspicious code to be inspected.
+%With respect to the guaranteed code.
 %
-%Many works about
+%To compute the guaranteed code of the interaction, We need to utilize symbolic execution. Specifically, we accumulated added on symbolic, and find those guaranteed code. We define the .
 
-%Once failures are detected, it is desired to isolate the failure-inducing interactions in these failing test cases. This task is important in CT as it can facilitate the debugging efforts by reducing the code scope that needed to inspected\cite{ghandehari2012identifying}. Many algorithms have been proposed to identify the failure-inducing combinations in SUT, which include approaches such as building classification tree model \cite{yilmaz2006covering}, exploiting the methodology of minimal failure-causing schema \cite{nie2011minimal}, ranking suspicious combinations based on some rules\cite{ghandehari2012identifying}, using graphic-based deduction \cite{martinez2008algorithms} and so on. These approaches can be partitioned into two categories \cite{colbourn2008locating}: \emph{adaptive}--test cases are chosen based on the outcomes of the executed tests \cite{nie2011minimal,ghandehari2012identifying,niu2013identifying,zhang2011characterizing,shakya2012isolating,wang2010adaptive,li2012improved}or \emph{nonadaptive}--test cases are chosen independently and can be executed parallel \cite{yilmaz2006covering,colbourn2008locating,martinez2008algorithms,martinez2009locating,fouche2009incremental}.
+%
+There are many techniques to compute the MFS in CT. In this paper, we adopts our previous method proposed in \cite{nie2011minimal}, which is one of the most common MFS identification technique in CT. With respect to guaranteed code, we follow the steps which are original proposed in \cite{reisner2010using}, which firstly utilizes symbolic execution tool to search possible paths for different values assigned to the input parameters, and then calculates the guaranteed code for each possible interaction based on these paths. One difference from study in \cite{reisner2010using} is that we only need to compute the guaranteed code for the MFS we identified in the SUT, instead of all the possible interactions. After obtaining the MFS and corresponding guaranteed codes, we will evaluate the correlation between MFS and faulty code.
 
+We have design several empirical studies on 5 open-source software subjects. These studies considers several different aspects (e.g., the degree of MFS, the types of faults) of the relationships between MFS and faulty code. Our results suggests that: 1) The MFS does relate to the faulty code to some extent; 2) For different types of faults, the correlation between MFS and faulty code varies;  3) The input model of the program under test significantly impacts on this correlation.
 
-%Guaranteed code
+%These faults include injected and real ones. We first model their input and computed the MFS and also the guaranteed code of these MFS. We observe their relationships between these code with those real faulty statement. One observation in our case study shows that .  Besides this, we also compare . The results shows that .
 
+%\textbf{Contributions:}
 
-Empirical studies
+The remaindering of this paper are organised as follows: Section \ref{sec:pre} gives the preliminaries about Combinatorial testing (especially MFS-related), and basic definitions about Guaranteed code. Section \ref{sec:research} proposes three research questions that needs to be handled in this paper. Section \ref{sec:subjects} introduces the subjects on which our experiments are conducted on. Section \ref{sec:results} shows the results as well as the analysis. Section \ref{sec:related} discusses the related works.  Section \ref{sec:conclusion} concludes this paper.
 
-\textbf{Contributions:}
+\section{Preliminary and Formal Model}\label{sec:pre}
+This section presents some formal descriptions about MFS and guaranteed code.
 
-1.
+\subsection{Basic definitions about CT}\label{sec:pre:ct}
 
-2.
-
-3.
-
-
-\section{Preliminary}
-This section presents some definitions and propositions to give a formal model for CT.
-
-\subsection{Failure-inducing interactions in CT}
-
-Assume that the Software Under Test (SUT) is influenced by \emph{n} parameters, and each parameter $p_{i}$ can take the values from the finite set $V_{i}$, $|V_{i}|$ = $a_{i}$ ($i$ = 1,2,..n). The definitions below are originally defined in \cite{nie2011minimal}.
+Assume that the Software Under Test (SUT) is influenced by \emph{n} parameters, and each parameter $p_{i}$ can take the values from the finite set $V_{i}$, $|V_{i}|$ = $a_{i}$ ($i$ = 1,2,..n). We will give some basic definitions which are related to failure-inducing interactions in CT.
 
 \newdef{definition}{Definition}
 \begin{definition}
@@ -306,24 +280,25 @@ A \emph{test case} of the SUT is a tuple of \emph{n} values, one for each parame
 In practice, these parameters in the test case can represent many factors, such as input variables, run-time options, building options or various combination of them. We need to execute the SUT with these test cases to ensure the correctness of the behaviour of the SUT.
 
 %\begin{definition}
-We consider any abnormally executing test case as a \emph{fault}. It can be a thrown exception, compilation error, assertion failure or constraint violation. When faults are triggered by some test cases, it is desired to figure out the cause of these faults.
+%We consider any abnormally executing test case as a \emph{fault}. It can be a thrown exception, compilation error, assertion failure or constraint violation. When faults are triggered by some test cases, it is desired to figure out which parameter values in these test cases are the failure-inducing ones.
 %Some subsets of these test cases should be analysed.
 %\end{definition}
 
 
 \begin{definition}
-For the SUT, the \emph{n}-tuple (-,$v_{n_{1}}$,...,$v_{n_{k}}$,...)is called a \emph{k}-degree \emph{schema} ($0 < k \leq n $) when some k parameters have fixed values and other irrelevant parameters are represented as "-".
-
-In effect a test case itself is a k-degree \emph{schema}, when k = n. Furthermore, if a test case contains a \emph{schema}, i.e., every fixed value in the schema is in this test case, we say this test case \emph{contains} the \emph{schema}.
-%, which can be denoted as $k-value\  combination \in T$
+For the SUT, the \emph{n}-tuple (-,$v_{x_{1}}$,...,$v_{x_{k}}$,...)is called a \emph{k}-degree \emph{schema} ($0 < k \leq n $) when some k parameters have fixed values and other irrelevant parameters are represented as "-".
 \end{definition}
+
+For example, the tuple (-, 4, 4, -) is a 2-degree schema. In effect a test case itself is a k-degree \emph{schema}, when k = n. Furthermore, if a test case contains a \emph{schema}, i.e., every fixed value in the schema is in this test case, we say this test case \emph{contains} the \emph{schema}.
+%, which can be denoted as $k-value\  combination \in T$
+
 Note that the schema is a formal description of the interaction between parameter values we discussed before.
 
 \begin{definition}
 Let $c_{l}$ be a \emph{l}-degree schema, $c_{m}$ be an \emph{m}-degree schema in SUT and $l < m$. If all the fixed parameter values in $c_{l}$ are also in $c_{m}$, then $c_{m}$ \emph{subsumes} $c_{l}$. In this case we can also say that $c_{l}$ is a \emph{sub-schema} of $c_{m}$ and $c_{m}$ is a \emph{super-schema} of $c_{l}$, which can be denoted as $c_{l} \prec  c_{m}$.
 \end{definition}
 
-For example,  the 2-degree schema (-, 4, 4, -) is a sub-schema of the 3-degree schema (-, 4, 4, 5), that is, (-,4,4,-) $\prec$ (-,4,4,5).
+For example,  the 2-degree schema (-, 4, 4, -) is a sub-schema of the 3-degree schema (-, 4, 4, 5), that is, (-, 4, 4, -) $\prec$ (-, 4, 4, 5).
 
 \begin{definition}
 If all test cases that contain a schema, say $c$, trigger a particular fault, say $F$, then we call this schema $c$ the \emph{faulty schema} for $F$. Additionally, if none of sub-schema of $c$ is the \emph{faulty schema} for $F$, we then call the schema $c$ the \emph{minimal failure-causing schema (MFS)} \cite{nie2011minimal} for $F$.
@@ -331,131 +306,302 @@ If all test cases that contain a schema, say $c$, trigger a particular fault, sa
 %Based on this, if a test case $t$ hit such a failure-inducing combination, say $c(F)$, it should trigger the fault $F$, for which the test case can be put as $t(F)$
 \end{definition}
 
-Note that MFS is identical to the failure-inducing interaction discussed previously. In this paper, the terms \emph{failure-inducing interactions} and \emph{MFS} are used interchangeably. Figuring the MFS out helps to identify the root cause of a failure and thus facilitate the debugging process.
+Note that MFS is identical to the failure-inducing interaction discussed previously. In this paper, the terms \emph{failure-inducing interactions} and \emph{MFS} are used interchangeably.
+%Figuring the MFS out helps to identify the root cause of a failure and thus facilitate the debugging process.
 
+\subsection{Identification of MFS}\label{sec:pre:mfs}
+When a test case fails during test case, we are still far from figuring out the MFS \cite{colbourn2008locating,martinez2008algorithms,martinez2009locating}, as we do not know exactly which schemas in the failed test cases should be responsible for the failure. For example, if test case (0, 0, 0, 0) failed during testing, there are six 2-degree candidate failure-inducing schemas, which are (0, 0, -, -), (0, -, 0, -), (0, -, -, 0) , (-, 0, 0, -), (-, 0, -, 0), (-, -, 0, 0), respectively. Without
+additional information, it is difficult to figure out the specific schemas in this suspicious set that caused the failure. Considering that the failure can be triggered by schemas with other degrees, e.g., (0, -, -, -) or (0, 0, 0, -), the problem of MFS identification becomes more complicated.
 
-\subsection{CT Test Case Generation}\label{sec:back:gen}
-When applying CT, the most important work is to determine whether the SUT suffers from the interaction faults or not, i.e., to  detect the existence of the MFS. Rather than impractically executing exhaustive test cases, CT commonly design a relatively small set of test cases to cover all the schemas with the degree no more than a prior fixed number, $t$. Such a set of test cases is called the \emph{covering array}.  If some test cases in the covering array failed in execution, then the interaction faults is regard to be detected. Let us formally define the covering array.
+In fact, for a failing test case ($v_{1},v_{2},...,v_{n}$), there can be at most $2^{n} - 1$ possible schemas for the MFS. Hence, more test cases should be generated to identify the MFS. Next, we will show how MFS identification processes with an example.
 
-\begin{definition} $MCA(N; t, n,$ $(a_{1}, a_{2}, ..., a_{n})$) is a $t$-way \emph{covering array} in the form of $N \times n$ table, where each row represents a \emph{test case} and each column represents a parameter.  For any \emph{t} columns, each possible \emph{t}-degree interaction of the $t$ parameters (schema) must appear at least once. When $ a_{1} = a_{2} = ... = a_{n} = v $, a $t$-way covering array can be denoted as $CA(N; t, n, v)$.
-\end{definition}
+Consider an program like Fig \ref{toy-program}, which contains four integer parameters: a, b, c, and d. With respect to applying combinatorial testing, we need to first build a input model for this program. For simplicity, let a, b, c and d can take on the following values:  $v_{a} = \{ 1, 2\}$, $v_{b} = \{ 0, 1\}$, $v_{c} = \{ 1, 2\}$, and $v_{d} = \{ 0, 1\}$, respectively. Assume that through testing of this program, we find a test case, e.g., (a = 1, b = 0, c = 1, d = 1), will trigger an arithmetic exception. Then we will describe how CT identify the MFS in this test case.
 
-\begin{table}[h]
-\caption{A covering array}
-\label{ca_example}
+%taking square root of a negative number
+\begin{figure}
+\begin{Verbatim}[numbers=left,xleftmargin=5mm]
+public float foo(int a, int b, int c, int d){
+  int x, y, z;
+  x = 4;
+  if(a < 2){
+    y = 3;
+    if(c < 2){
+            z =  Math.sqrt(y - x);
+            return z / y;
+    }
+    else
+        return x + y;
+  }
+  else{
+    y = 2;
+    if(b < 1){
+        if(d < 1)
+            return y / (x + y);
+        else
+            return x / (x + y);
+    }
+    else
+        return y * x;
+  }
+}
+\end{Verbatim}
+\caption{A simple program \emph{foo} with four input parameters}
+\label{toy-program}
+\end{figure}
+
+A typical MFS identification process is shown in Table \ref{ofot-identify}. In this table, test case $t$ represents the failing test case we aforementioned. To identify the MFS, we mutate one factor of \emph{t} one time to generate new test cases: $t_{1}$ -- $t_{4}$.  It turns out that test case $t_{1}$ passed, which indicates that this test case break the MFS in the original test case \emph{t}. So (1, -, -, -) should be a failure-causing factor. Similarly, we can also conclude that (-, -, 1, -) is another failure-inducing factor because of the pass of $t_{3}$. Considering that all the other test cases failed, which means no other failure-inducing factors were broken, therefore, the MFS in \emph{t} is (1, -, 1, -).
+
+\begin{table}[ht]
+\caption{OFOT example}
+\label{ofot-identify}
 \center
-\begin{tabular}{l|llll}
+\begin{tabular}{llllll}
  \hline
-ID &\multicolumn{4}{c}{\bfseries Test case} \\  \hline
-$t_{1}$ &\multicolumn{4}{l}{0  \ \ \ \  0 \ \ \ \  0 \ \ \ \ 0} \\
-$t_{2}$ &\multicolumn{4}{l}{0  \ \ \ \  1 \ \ \ \  1 \ \ \ \ 1} \\
-$t_{3}$ &\multicolumn{4}{l}{1  \ \ \ \  0 \ \ \ \  1 \ \ \ \ 1} \\
-$t_{4}$ &\multicolumn{4}{l}{1  \ \ \ \  1 \ \ \ \  0 \ \ \ \ 1} \\
-$t_{5}$ &\multicolumn{4}{l}{1  \ \ \ \  1 \ \ \ \  1 \ \ \ \ 0} \\
+\multicolumn{5}{c}{\bfseries Original test case} & \bfseries Outcome \\  \hline
+ $t$ & \multicolumn{4}{l}{1 \ \ \ \ 0 \ \ \ \  1 \ \ \ \ 1 } & Fail \\
+ \hline
+\multicolumn{5}{c}{\bfseries Additional  test cases} &  \\  \hline
+$t_{1}$ &\multicolumn{4}{l}{2  \ \ \ \  0 \ \ \ \  1 \ \ \ \ 1 }& Pass \\
+$t_{2}$ &\multicolumn{4}{l}{1  \ \ \ \  1 \ \ \ \  1 \ \ \ \ 1 } & Fail \\
+$t_{3}$ &\multicolumn{4}{l}{1  \ \ \ \  0 \ \ \ \  2 \ \ \ \ 1 } & Pass \\
+$t_{4}$ &\multicolumn{4}{l}{1  \ \ \ \  0 \ \ \ \  1 \ \ \ \ 0 } & Fail \\
  \hline
 \end{tabular}
 \end{table}
 
-For example, Table \ref{ca_example} shows a 2-way covering array CA(5; 2, 4, 2) for the SUT with 4 boolean parameters. For any two columns, any 2-degree schema is covered. Covering array has proven to be effective in detecting the failures caused by interactions of parameters of the SUT. Many existing algorithms focus on constructing covering arrays such that the number of test cases, i.e., $N$, can be as small as possible. In general, most of these studies can be classified into three categories according to the construction strategy of the covering array:
-
-1) One test case one time : This strategy repeats generating one test case as one row of the covering array and counting the covered schemas achieved until all schemas are covered \cite{cohen1997aetg,bryce2007density,tung2000automating}.
-
-%  generate a completed test case to cover
-
-2) A  set of test cases one time:  This strategy generates a set of test cases at each iteration. Through mutating the values of some parameters of some test cases in this test set, it focuses on optimising the coverage. If the coverage is finally satisfied, it will reduce the size of the set to see if fewer test cases can still fulfil the coverage. Otherwise, it will increase the size of test set to cover all the schemas\cite{cohen2003augmenting,nurmela2004upper}.
-
-3) IPO-like style:  This strategy differentiates from the previous two strategies in that it does not firstly generate complete test cases \cite{lei2008ipog}. Instead, it first focuses on assigning values to some part of the factors or parameters to cover the schemas that related to these factors, and then fills up the remaining part to form complete test cases.
-
-In this paper, we focus on the first strategy: One test case one time as it immediately get a complete test case such that the testers can execute and diagnose in the early stage. As we will see later, with respect to the MFS identification, this strategy is the most flexible and efficient one comparing with the other two strategies.
-\subsection{MFS}
-
-Definition
-
-Getting approaches
+This identification process mutate one factor of the original test case at a time to generate extra test cases. Then according to the outcome of the test cases execution result, it will identify the MFS of the original failing test cases. It is called the OFOT method \cite{nie2011minimal}, which is a well-known MFS identification method in CT. In this paper, we will focus on this identification method.
+%It should be noted that the following proposed CT framework can be easily applied to other MFS identification methods.
 
 
-The details is as follows:
+\subsection{Formal description about guaranteed code}\label{sec:pre:guar}
+Although MFS are the failure-inducing parts of the failing test input for the SUT, however, we still cannot directly utilize it for fault localization, because they do not provide any code-level information. For this, we need to build the relationship between input schemas and program entities.
+
+Let $\mathcal{P}$ be a path in the SUT. Then let $Cov(\mathcal{P})$ = $< s_{1}, s_{2}, s_{3},... s_{n} >$ be the program entities that covered by path $\mathcal{P}$. A program entity can be a statement, block, edges, etc. In this paper, we mainly focus on statements; note that other types of structure coverage can also be applied \cite{song2012itree}. Let $Pcon(\mathcal{P})$ = $<pc_{1}, pc_{2}, pc_{3}, ... pc_{k}>$ be the path conditions that are encountered by path $\mathcal{P}$.  As an example, consider the program list in Fig \ref{toy-program}. It is easy to find that it has five possible paths, which forms the execution tree in Fig \ref{foo-tree}.
+
+\begin{figure}
+ \includegraphics[width=3.4in]{foo_tree.eps}
+\caption{The execution tree of program \emph{foo}}
+\label{foo-tree}
+\end{figure}
+
+In this tree, a rhombus node represents a path condition, and a rectangle represents the statement. Note that those consecutive statements are included in one rectangle. From this figure, we can list the paths, their covered entities, and their path conditions, which are explicitly shown in Table \ref{cov-con-foo}.
+
+\begin{table}[ht]
+\caption{Paths, covered entities, and conditions of \emph{foo}}
+\label{cov-con-foo}
+\center
+\begin{tabular}{lll}
+ \hline
+\bfseries ID & \bfseries Covered Entities & \bfseries Path Conditions \\  \hline
+ $1$ & S2, S3, S5, S7, S8& $a < 2$,  $c < 2$\\
+ $2$ & S2, S3, S5, S11 & $a < 2$,  $\neg (c < 2)$\\
+ $3$ & S2, S3, S14, S17& $\neg (a < 2)$,  $b < 1$, $d < 1$\\
+ $4$ & S2, S3, S14, S19& $\neg (a < 2)$,  $b < 1$, $\neg (d < 1)$\\
+ $5$ & S2, S3, S14, S22& $\neg (a < 2)$,  $\neg (b < 1)$\\
+ \hline
+\end{tabular}
+\end{table}
+
+
+Next we will give some important definitions that are related to the guaranteed code.
+%For simplicity, we next use notation $c^\sharp$ indicates a logic expression meaning that the parameter values are equal to those in schema $c$.
+
+\begin{definition}
+For a schema $c$, and a path $\mathcal{P}$, if all the path conditions in this path can be satisfied when given an input that contains this schema, we call $\mathcal{P}$ the \emph{Consistent path} of schema $c$, which can be denoted as $SAT(Pcon(\mathcal{P}) \bigwedge c)$.
+\end{definition}
+
+In fact, to judge whether a path is the \emph{consistent path} of one schema, is to find whether exist an input that contains this schema and follows all the path conditions of this path. Taking the program \emph{foo} for example, Path 1 is the consistent path of schema (1, -, -, -), because $( a < 2 $ $\wedge $ $c < 2 $ $\wedge $ $a = 1 )$  $= true $ can be solved, e.g., input (1, 1, 1, 1) is such a result.
+
+Based on this definition, we use the notation $c^{\sharp}$ to represent the set of all the consistent paths of schema $c$. Then we will give the formal definition of weak guaranteed of one schema.
+
+\begin{definition}
+For a schema $c$, the weak guaranteed code of $c$, i.e., $wg(c)$, is the intersection of program entities covered by its consistent paths. Formally, $wg(c)$ = $\bigcap_{\mathcal{P} \in c^{\sharp}} Cov(\mathcal{P})$.
+
+\end{definition}
+
+To better illustrate the weak guaranteed code of schemas, we list some schemas in the program \emph{foo}, their consistent paths and weak guaranteed code in Table \ref{weg-foo}. For example, for schema (1, -, -, -), its consistent paths are Path 1 and Path 2, because we can find inputs that contain this schema and satisfy all the path conditions of them. For example, (1, 1, 1, 1) can go through Path 1 and (1, 1, 2, 1) can go through Path 2. These two inputs both contain the schema of (1, -, -, -). Hence, the weak guaranteed code of $(1, -, -, -)$ are the intersection of the entities covered by these two paths, i.e., S2, S3, and S5.
+
+Note that there is one special schema (-, -, -, -), listed in this Table, it is the sub-schemas of all the other schemas of program \emph{foo}. What's more, it is consistent with all the paths of program \emph{foo}, and hence its weak guaranteed code are S2 and S3, which are the common code of all the paths.
+
+\begin{table}[ht]
+\caption{Weak guaranteed code of some schemas of \emph{foo}}
+\label{weg-foo}
+\center
+\begin{tabular}{lll}
+ \hline
+\bfseries Schema & \bfseries $c^{\sharp}$ & \bfseries $wg(c)$\\  \hline
+ $(1, -, -, -)$ & Path 1, 2& S2, S3, S5 \\
+ $(1, -, 1, -)$ & Path 1 & S2, S3, S5, S7, S8\\
+ $(1, -, 2, -)$ & Path 2 & S2, S3, S5, S11\\
+ $(2, -, -, -)$ & Path 3, 4, 5& S2, S3, S14\\
+ $(2, 0, -, -)$ & Path 3, 4& S2, S3, S14\\
+ $(2, 0, -, 1)$ & Path 4& S2, S3, S14, S19\\
+ $(2, 1, -, -)$ & Path 5& S2, S3, S14, S22\\
+ $(-, -, 1, -)$ & Path 1, 3, 4, 5 & S2, S3 \\
+ $(-, -, -, -)$ & Path 1, 2, 3, 4, 5 & S2, S3 \\
+ \hline
+\end{tabular}
+\end{table}
+
+Above all, we can observe that, the weak guaranteed code\footnote{The definition of weak guaranteed code is similar to the \emph{guarantee coverage} defined in \cite{reisner2010using}. The difference is that in this paper we do not distinguish the input and value symbolic; instead, they are handled in an unified way.} of one schema, essentially, is the maximal common code that is expected to be executed by any path which consists with this schema. In other word, this schema guarantees some code to be executed.
+
+%\footnote{Weak guaranteed is ,
+%Strong guaranteed is Note that this is the same to the interactions in paper. To let different, we }.
+
+%Note that the definitions is one different from original defined, . which we do not consider input, instead, they are also modeled as symbolic. Based on This, all the input can be handled unified as the same way as those symbolic values.
+
+
+
+Although the weak guaranteed code always follows with the corresponding schema, it does not necessarily indicates that the schema directly controls the weak guaranteed code. This is because, for one schema, there may exists some other schemas that may always appears with this schema. Hence, it may result in that some code are the weak guaranteed code of one schema, but these code may be actually controlled by other schemas. It is easy to learn that these ``accompanying'' schemas are the sub-schemas of one schema.
+
+For example, with respect to program \emph{foo}, schema (1, -, 1, -) always appears with schema (1, -, -, -), hence, the weak  guaranteed code of schema (1, -, 1, -), i.e., (S2, S3, S5, S7, S8) must always contain the weak guaranteed code of schema (1, -, -, -), i.e., (S2, S3, S5).
+More formally, we can conclude the relationship of the weak guaranteed code between subsuming schemas as the following proposition.
+
+\newtheorem{proposition}{Proposition}
+\begin{proposition}
+Given schemas $s_{1}$, $s_{2}$, where $s_{1} \prec s_{2}$, then $wg(s_{1}) \subseteqq wg(s_{}2)$.
+\end{proposition}
+
+It is easy to prove this proposition and we will omit it. Based on this proposition, to understand which code are under the direct control of some schemas, we need to remove the influence from their subschemas.
+%Considering this, it may in fact the behaviour under the sub-schema . For example, in Fig.  Hence, to totally reflect the influence behaviour of sub-schemas, we need to remove the impact from the sub-schemas.
+
+\begin{definition}
+For a schema $c$, the strong guaranteed code of $c$, i.e., $sg(c)$, is the weak guaranteed code of $c$ with removing those weak guaranteed code of its subschemas. Formally, $sg(c)$ = $wg(c) \backslash \{\bigcup_{c' \prec c} wg(c') \}$.
+
+\end{definition}
+
+Strong guaranteed code are the program entities that under the direct control of the corresponding schema, and hence it reflects how the schema influence on the behaviour of program. As an example, considering the schemas which we show their weak guaranteed code in Table \ref{weg-foo}. We list the weak guaranteed code of all their subschemas, and the strong guaranteed code of themselves in Table \ref{strong-foo}. For example, for schema (1, -, 1, -), its weak guaranteed code are (S2, S3, S5, S7, S8), while the weak guaranteed code of all its subschemas are: (S2, S3, S5), (S2, S3), (S2, S3) for schemas (1, -, -, -), (-, -, 1, -) and (-, -, -, -), respectively. Hence, the union of the weak guaranteed code of its subschemas are (S2, S3, S5), and the strong guaranteed code of (1, -, 1, -) are (S7, S8).
+
+\begin{table}[ht]
+\caption{Strong guaranteed code of some schemas of \emph{foo}}
+\label{strong-foo}
+\center
+\begin{tabular}{lll}
+ \hline
+\bfseries Schema & \bfseries $wg\ of\ subschemas$ & \bfseries $sg(c)$\\  \hline
+ $(1, -, -, -)$ & S2, S3 & S5 \\
+ $(1, -, 1, -)$ & S2, S3, S5 & S7, S8\\
+ $(1, -, 2, -)$ & S2, S3, S5 & S11\\
+ $(2, -, -, -)$ & S2, S3 &  S14\\
+ $(2, 0, -, -)$ & S2, S3, S14 &  - \\
+ $(2, 0, -, 1)$ & S2, S3, S14 & S19\\
+ $(2, 1, -, -)$ & S2, S3, S14 & S22\\
+ $(-, -, 1, -)$ & S2, S3 & - \\
+ $(-, -, -, -)$ & - & S2, S3 \\
+ \hline
+\end{tabular}
+\end{table}
+
+
+In this paper, we focus on the guaranteed code of MFS, instead of all the other schemas in the test case. With respect to the example in Fig \ref{toy-program}, it is easily to find that the weak guaranteed code and strong guaranteed code of the MFS (1, -, 1, -) are, (S2, S3, S5, S7, S8), and (S7, S8),  respectively. They are correlated to the faulty code, i.e., S7, where an exception of taking square root of a negative number will be triggered. This example, especially for the strong guaranteed code, implies that MFS is closely related to the faulty code.  However, in the real situation, we do not know whether the conclusion can still hold. As we want to know whether to detect and identify the MFS is really helpful in the code-based diagnosis, hence, we need to do more empirical studies to verify the conclusion.
+
+
+%\subsection{The method to get guaranteed code}\label{sec:pre:getguar}
+%
+%We need to first utilize the symbolic executions.
+%
+%Then for the MFS we need to compute the consisient, we need a smt solver to solve this problem.
+%definition guaranteed code
+%
+%definition minimal guaranteed code
+%%
+
+%
+%In this paper, we use the symbolic execution to . The details is as follwos:
 
 
 
 
-
-\subsection{Symbolic execution}
-
-\subsection{guaranteed code code}
-
-
-definition guaranteed code
-
-definition minimal guaranteed code
+%\section{A case study}
+%This section will provide an example to show how to
 
 
 
+\section{Research questions} \label{sec:research}
+To comprehensive study the correlativeness between the MFS and faulty code, we propose three research questions in the following.
 
+\subsection{The correlation between MFS and faulty code}
+As discussed before, it is important to study the relationship between MFS and faulty code. Although the simple example in Section \ref{sec:pre:guar} shows there exists a strong correlation between the guaranteed code , it is necessary to verify it on more real program subjects. Hence, it motivates our first research question, which is also the key reteach question, that is :
 
-For example, from Figure 2(b) we can see that any configuration satisfying  (i.e., a=0, b=1) is guaranteed to cover L2, no matter the choice of and N. We can use Otter's output to compute the guaranteed coverage for a predicate p, which we will write as Cov(p). We first Lnd CovT (p), the coverage guaranteed under p by test case T, for each test case; then, Cov(p) = ST CovT (p). To compute CovT (p), let pTi be the path conditions from T's symbolic evaluation, and let CT (pTi) be the covered lines (or blocks, edges, conditions, etc.) that occur in that path. Then CovT (p) is ConsistentT (p) = fpTi j SAT(pTip)g CovT (p) = T q2ConsistentT (p) CT (q). In other words, first we compute the set of path conditions pTi such that p and pTi are consistent. If this holds for pTi, the items in CT (pTi ) may be covered if p is true. Since our symbolic evaluator explores all possible program paths, the intersection of these sets for all such pTi is the set guaranteed to be covered if p is true.
+\textbf{Q1: Is the guaranteed code of the MFS correlated to the faulty code in real program subjects?}
 
-Going back to Figure 2, here are some predicates and the coverage they guarantee given the test cases input=1 and input=0. We abbreviate K = 1 as K and K = 0 as :K.
+To answer this question, we need to conduct studies on a batch of program subjects. In these studies, the MFS, their weak and strong guaranteed code, and the fault code should be investigated and analyzed. Another point that needs to note is how we evaluate the correlation between the guaranteed code and faulty code. Inspired by the ranking formula that is used in fault localization \cite{naish2011model,abreu2007accuracy}, in this paper, we adopts the following  formula to compute the relevance between two codes, i.e.,
+ \begin{equation}\begin{aligned}\label{eq:metric}
+ Correlation (A, B)= \frac{Common(A, B)}{Common(A, B) + Different(A, B)} .\end{aligned} \end{equation}
 
-In this paper, we use the symbolic execution to . The details is as follwos:
+Here, $Common(A, B)$ means the number of common statements between two code blocks A and B, and $Differen$ $t (A, B)$ means the number of different statements contained in them. Based on this formula, more number of common code indicates a closer correlation, while more number of different code, on the contrary, indicates a more distinct or irrelative relationship.
 
-
-
-
-\section{A case study}
-This section will provide an example to show how to
-
-\section{Research question}
-
-
-\subsection{correlation between MFS and faulty code}
-
-
-Hence, it motivates our first research question:
-
-\textbf{Q1: Is MFS correlated to the faulty code?}
-
-This question is key to. We let the guaranteed code of MFS.
-
+% the number of blocks that we still need to inspect until we hit the faulty code. Considering we only offer one possible statement, other statements are all depend on their execution sequence. If there is many, we only obtain the sentect that hit the failure, and its distance.
 
 \subsection{The influence of different types of faults}
 
+There are many types of faults. For example, missing code.  Different Pattern, they harm the program in different ways, it is obviously  It is easy to want to know whether different type is
 
-Q2: Different fault type?
+Hence, instead of using single type of failure, we need to survey different types of failure, which motivates the second
 
-Taks as an example.
+\textbf{Q2: Different fault type?}
 
-\subsection{The influence of inputs model}
+In code commission types. in s, they . With respect to this question, we n
 
-Q3: Is the building model affected  MFS ?
+Take as an example.
+
+ \subsection{The influence of inputs model}
+The last one arises from CT. This question is correlated to the CT. In fact, different building model making differnet MFS. and differnet MFS may have different guaranteed code.
+
+\textbf{Q3: Is the building model affected  MFS ?}
 
 Taks as an example.
 
 
 These questions are important, as
 
-\section{Subject programs}
+\section{Subject programs}\label{sec:subjects}
 
 \subsection{Generating faulty programs}
 
-\subsection{symbolic execution of the paths}
+\subsection{Symbolic execution of the paths}
 
 
 %\section{Getting MFS and their guaranteed code}
 
-\section{Results}
+\section{Results}\label{sec:results}
+
+\subsection{General Correlation}
+
+\subsection{Fault types}
+
+\subsection{Model }
+
+
+\subsection{Threats to Validation}
+
+
+\section{Related works}\label{sec:related}
+
+There are many methods aims at identifying MFS in CT, which can be classified into two categories:
+
+1. MFS in CT
 
 
 
-\section{Threats to Validation}
+
+All these methods. with respect to the code level which utilizes.
+2. use MFS to isolate faulty code. machunhyan \cite{ma2013locating}  and leiyu \cite{ghandehari2013fault}
 
 
-\section{Conclusions and Future works}
+Studies on symbolic execution, has .
+
+4. Use symoblic execution in CT. Charles song \cite{reisner2010using} first. Then extend to itree \cite{song2012itree}, then extends to multiple leaves with \cite{song2014itree}.
+
+Our work differs from them
+
+\section{Conclusions and Future works}\label{sec:conclusion}
 
 %\end{document}  % This is where a 'short' article might terminate
 
 %ACKNOWLEDGMENTS are optional
 \section{Acknowledgments}
+This work was supported by the National Natural Science Foundation of China (No. 61272079), the Research Fund for the Doctoral Program of Higher Education of China (No.20130091110032), the Science Fund for Creative Research Groups of the National Natural Science Foundation of China(No. 61321491), the Major Program of National Natural Science Foundation of China (No. 91318301), and National Science Foundation Award CCF-1464425.
 
 %
 % The following two commands are all you need in the

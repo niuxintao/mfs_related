@@ -1,5 +1,18 @@
 \begin{thebibliography}{10}
 
+\bibitem{abreu2007accuracy}
+R.~Abreu, P.~Zoeteweij, and A.~J. Van~Gemund.
+\newblock On the accuracy of spectrum-based fault localization.
+\newblock In {\em Testing: Academic and Industrial Conference Practice and
+  Research Techniques-MUTATION, 2007. TAICPART-MUTATION 2007}, pages 89--98.
+  IEEE, 2007.
+
+\bibitem{chillarege1996orthogonal}
+R.~Chillarege.
+\newblock Orthogonal defect classification.
+\newblock {\em Handbook of Software Reliability Engineering}, pages 359--399,
+  1996.
+
 \bibitem{cohen1997aetg}
 D.~M. Cohen, S.~R. Dalal, M.~L. Fredman, and G.~C. Patton.
 \newblock The aetg system: An approach to testing based on combinatorial
@@ -17,6 +30,13 @@ M.~B. Cohen, C.~J. Colbourn, and A.~C. Ling.
 C.~J. Colbourn and D.~W. McClary.
 \newblock Locating and detecting arrays for interaction faults.
 \newblock {\em Journal of combinatorial optimization}, 15(1):17--48, 2008.
+
+\bibitem{duraes2006emulation}
+J.~A. Duraes and H.~S. Madeira.
+\newblock Emulation of software faults: A field data study and a practical
+  approach.
+\newblock {\em IEEE Transactions on Software Engineering}, 32(11):849--867,
+  2006.
 
 \bibitem{ghandehari2013fault}
 L.~S. Ghandehari, Y.~Lei, D.~Kung, R.~Kacker, and R.~Kuhn.
@@ -69,6 +89,12 @@ C.~Mart{\'\i}nez, L.~Moura, D.~Panario, and B.~Stevens.
 \newblock Locating errors using elas, covering arrays, and adaptive testing
   algorithms.
 \newblock {\em SIAM Journal on Discrete Mathematics}, 23(4):1776--1799, 2009.
+
+\bibitem{naish2011model}
+L.~Naish, H.~J. Lee, and K.~Ramamohanarao.
+\newblock A model for spectra-based software diagnosis.
+\newblock {\em ACM Transactions on software engineering and methodology
+  (TOSEM)}, 20(3):11, 2011.
 
 \bibitem{nie2011minimal}
 C.~Nie and H.~Leung.

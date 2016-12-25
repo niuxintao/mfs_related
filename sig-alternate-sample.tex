@@ -429,7 +429,7 @@ Note that there is one special schema (-, -, -, -), listed in this Table, it is 
 \center
 \begin{tabular}{lll}
  \hline
-\bfseries Schema & \bfseries $c^{\sharp}$ & \bfseries $wg(c^{\sharp})$\\  \hline
+\bfseries Schema & \bfseries $c^{\sharp}$ & \bfseries $wg(c)$\\  \hline
  $(1, -, -, -)$ & Path 1, 2& S2, S3, S5 \\
  $(1, -, 1, -)$ & Path 1 & S2, S3, S5, S7, S8\\
  $(1, -, 2, -)$ & Path 2 & S2, S3, S5, S11\\
@@ -478,7 +478,7 @@ Strong guaranteed code are the program entities that under the direct control of
 \center
 \begin{tabular}{lll}
  \hline
-\bfseries Schema & \bfseries $wg\ of\ subschemas$ & \bfseries $sg(c^{\sharp})$\\  \hline
+\bfseries Schema & \bfseries $wg\ of\ subschemas$ & \bfseries $sg(c)$\\  \hline
  $(1, -, -, -)$ & S2, S3 & S5 \\
  $(1, -, 1, -)$ & S2, S3, S5 & S7, S8\\
  $(1, -, 2, -)$ & S2, S3, S5 & S11\\
@@ -521,31 +521,42 @@ In this paper, we focus on the guaranteed code of MFS, instead of all the other 
 To comprehensive study the correlativeness between the MFS and faulty code, we propose three research questions in the following.
 
 \subsection{The correlation between MFS and faulty code}
+As discussed before, it is important to study the relationship between MFS and faulty code. Although the simple example in Section \ref{sec:pre:guar} shows there exists a strong correlation between the guaranteed code , it is necessary to verify it on more real program subjects. Hence, it motivates our first research question, which is also the key reteach question, that is :
 
+\textbf{Q1: Is the guaranteed code of the MFS correlated to the faulty code in real program subjects?}
 
-Hence, it motivates our first research question:
+To answer this question, we need to conduct studies on a batch of program subjects. In these studies, the MFS, their weak and strong guaranteed code, and the fault code should be investigated and analyzed. Another point that needs to note is how we evaluate the correlation between the guaranteed code and faulty code. Inspired by the ranking formula that is used in fault localization \cite{naish2011model,abreu2007accuracy}, in this paper, we adopts the following  formula to compute the relevance between two codes, i.e.,
+ \begin{equation}\begin{aligned}\label{eq:metric}
+ Correlation (A, B)= \frac{Common(A, B)}{Common(A, B) + Different(A, B)} .\end{aligned} \end{equation}
 
-\textbf{Q1: Is MFS correlated to the faulty code?}
+Here, $Common(A, B)$ means the number of common statements between two code blocks A and B, and $Differen$ $t (A, B)$ means the number of different statements contained in them. Based on this formula, more number of common code indicates a closer correlation, while more number of different code, on the contrary, indicates a more distinct or irrelative relationship.
 
-It is the key .
-This question is key to. We let the guaranteed code of MFS.
-More specifically, we want to know whether the weak guarantered code and strong guaranted code are corrlated to the faulyt code.
-
+% the number of blocks that we still need to inspect until we hit the faulty code. Considering we only offer one possible statement, other statements are all depend on their execution sequence. If there is many, we only obtain the sentect that hit the failure, and its distance.
 
 \subsection{The influence of different types of faults}
 
-There are many types of faults. For example, missing code.  It is easy to want to know wheter different type is 
+According to the nature of the defect, e.g., missing construct, or wrong construct, faults can be categorized into many types. The influence of different type of fault varies widely; as a consequence, the MFS and corresponding guaranteed code of different type of fault may also varies. Hence, focusing on single type of fault may significantly impact on the generality of our study about the correlation between MFS and faulty code, which motivates the second research question:
 
-Q2: Different fault type?
+\textbf{Q2: To which extent does different type of fault influence on the correlation between MFS and faulty code ?}
 
-Taks as an example.
+To answer this question, we need first give the The characterization and classification of software faults. According to the study \cite{duraes2006emulation}, we decide conduct experiment on the fault types in Table , These faults are classified according to the method \cite{chillarege1996orthogonal}
+
+which are .
+
+In this table, . . T
+
+
+Given the classification, we next need to and then categorized these faults into these types, and observe whether there is difference between them, and if there is, we need to give the specific difference.
+
 
 \subsection{The influence of inputs model}
-This question is correalted to the CT. In fact, different building model making differnet MFS. and differnet MFS may have differnet guarrteed code. 
+The last one arises from CT. This question is correlated to the CT. In fact, different building model making differnet MFS. and differnet MFS may have different guaranteed code.
 
-Q3: Is the building model affected  MFS ?
+\textbf{Q3: Is the building model affected  MFS ?}
 
 Taks as an example.
+
+To answer question, for each program, we design 3 different inputs model, with the input granularity from low to high. To oberve their reuslts.
 
 
 These questions are important, as
@@ -561,6 +572,11 @@ These questions are important, as
 
 \section{Results}\label{sec:results}
 
+\subsection{General Correlation}
+
+\subsection{Fault types}
+
+\subsection{Model }
 
 
 \subsection{Threats to Validation}
@@ -570,9 +586,9 @@ These questions are important, as
 
 There are many methods aims at identifying MFS in CT, which can be classified into two categories:
 
-
-
 1. MFS in CT
+
+
 
 
 All these methods. with respect to the code level which utilizes.
@@ -590,7 +606,8 @@ Our work differs from them
 %\end{document}  % This is where a 'short' article might terminate
 
 %ACKNOWLEDGMENTS are optional
-%\section{Acknowledgments}
+\section{Acknowledgments}
+This work was supported by the National Natural Science Foundation of China (No. 61272079), the Research Fund for the Doctoral Program of Higher Education of China (No.20130091110032), the Science Fund for Creative Research Groups of the National Natural Science Foundation of China(No. 61321491), the Major Program of National Natural Science Foundation of China (No. 91318301), and National Science Foundation Award CCF-1464425.
 
 %
 % The following two commands are all you need in the
