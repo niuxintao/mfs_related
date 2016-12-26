@@ -560,19 +560,23 @@ To answer this question, we need first give the the characterization and classif
   \label{tab_fault typles}%
 \end{table*}%
 
-Based on the categories given in Table \ref{tab_fault typles}, we next study these faults and their corresponding MFS to observe whether there exists any distinction difference among different types.
+Based on the categories given in Table \ref{tab_fault typles}, we next study these faults and their corresponding MFS to observe whether there exists any distinction among different types.
 
 
 \subsection{The influence of inputs model}
-The last one research question is raised from CT itself. It is known that inputs modeling, as the key part of CT \cite{nie2011survey}, significantly influence on the result of  . This question is correlated to the CT. In fact, different building model making different MFS. and different MFS may have different guaranteed code. Take the example in Section \ref{sec:pre}, if we , we even cannot get the correct MFS. Hence, the third research question is:
+The last one research question is raised from CT itself. It is known that inputs modeling, as the key part of CT \cite{nie2011survey}, significantly influence on the result of CT. For example, Take the example in Section \ref{sec:pre}, if we use the different model, we even cannot get the correct MFS. The changes of MFS propagates to the guaranteed code, which eventually impacts on correlation between the MFS and the faulty code .  Still for the example, if we change, then,
  
-\textbf{Q3: Is the building model affected  MFS ?}
+ This question is correlated to the CT. In fact, different building model making different MFS. and different MFS may have different guaranteed code.  
+ 
+Considering this, the third research question is:
+
+\textbf{Q3: How does the inputs model of CT affect the correlation between MFS and faulty code?}
 
 
 To answer question, for each program, we design 3 different inputs model, with the input granularity from low to high. To oberve their reuslts.
 
 
-These questions are important, as
+%These questions are important, as
 
 \section{Subject programs}\label{sec:subjects}
 
@@ -594,6 +598,12 @@ These questions are important, as
 
 \subsection{Threats to Validation}
 
+
+1. programs should be extended to more
+
+2. faults should be extended to more real, not those injected.
+
+3. faults type should be increased.
 
 \section{Related works}\label{sec:related}
 

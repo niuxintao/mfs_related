@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2014.9.10)  26 DEC 2016 17:27
+This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2014.9.10)  26 DEC 2016 17:47
 entering extended mode
 **sig-alternate-sample.tex
 (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.tex
@@ -406,8 +406,10 @@ Requested font "aecsc10" at 9.0pt
  [4] (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.bbl [5]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-) [6]
-(C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.aux) ) 
+ [6])
+[7
+
+] (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.aux) ) 
 Here is how much of TeX's memory you used:
  2720 strings out of 430478
  31453 string characters out of 3191502
@@ -417,4 +419,4 @@ Here is how much of TeX's memory you used:
  14 hyphenation exceptions out of 8191
  39i,10n,34p,1142b,464s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on sig-alternate-sample.pdf (6 pages).
+Output written on sig-alternate-sample.pdf (7 pages).
