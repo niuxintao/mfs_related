@@ -102,6 +102,11 @@ C.~Nie and H.~Leung.
 \newblock {\em ACM Transactions on Software Engineering and Methodology
   (TOSEM)}, 20(4):15, 2011.
 
+\bibitem{nie2011survey}
+C.~Nie and H.~Leung.
+\newblock A survey of combinatorial testing.
+\newblock {\em ACM Computing Surveys (CSUR)}, 43(2):11, 2011.
+
 \bibitem{niu2013identifying}
 X.~Niu, C.~Nie, Y.~Lei, and A.~T. Chan.
 \newblock Identifying failure-inducing combinations using tuple relationship.
