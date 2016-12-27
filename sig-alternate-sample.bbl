@@ -44,6 +44,13 @@ L.~S. Ghandehari, Y.~Lei, D.~Kung, R.~Kacker, and R.~Kuhn.
 \newblock In {\em Software Reliability Engineering (ISSRE), 2013 IEEE 24th
   International Symposium on}, pages 168--177. IEEE, 2013.
 
+\bibitem{ghandehari2012identifying}
+L.~S.~G. Ghandehari, Y.~Lei, T.~Xie, R.~Kuhn, and R.~Kacker.
+\newblock Identifying failure-inducing combinations in a combinatorial test
+  set.
+\newblock In {\em Software Testing, Verification and Validation (ICST), 2012
+  IEEE Fifth International Conference on}, pages 370--379. IEEE, 2012.
+
 \bibitem{jia2015learning}
 Y.~Jia, M.~B. Cohen, M.~Harman, and J.~Petke.
 \newblock Learning combinatorial interaction test generation strategies using
@@ -70,6 +77,12 @@ Y.~Lei, R.~Kacker, D.~R. Kuhn, V.~Okun, and J.~Lawrence.
   testing.
 \newblock {\em Software Testing, Verification and Reliability}, 18(3):125--148,
   2008.
+
+\bibitem{li2012improved}
+J.~Li, C.~Nie, and Y.~Lei.
+\newblock Improved delta debugging based on combinatorial testing.
+\newblock In {\em Quality Software (QSIC), 2012 12th International Conference
+  on}, pages 102--105. IEEE, 2012.
 
 \bibitem{ma2013locating}
 C.~Ma, Y.~Zhang, J.~Liu, et~al.
@@ -121,6 +134,19 @@ E.~Reisner, C.~Song, K.-K. Ma, J.~S. Foster, and A.~Porter.
 \newblock In {\em Proceedings of the 32nd ACM/IEEE International Conference on
   Software Engineering-Volume 1}, pages 445--454. ACM, 2010.
 
+\bibitem{shakya2012isolating}
+K.~Shakya, T.~Xie, N.~Li, Y.~Lei, R.~Kacker, and R.~Kuhn.
+\newblock Isolating failure-inducing combinations in combinatorial testing
+  using test augmentation and classification.
+\newblock In {\em Software Testing, Verification and Validation (ICST), 2012
+  IEEE Fifth International Conference on}, pages 620--623. IEEE, 2012.
+
+\bibitem{shi2005software}
+L.~Shi, C.~Nie, and B.~Xu.
+\newblock A software debugging method based on pairwise testing.
+\newblock In {\em Computational Science--ICCS 2005}, pages 1088--1091.
+  Springer, 2005.
+
 \bibitem{song2012itree}
 C.~Song, A.~Porter, and J.~S. Foster.
 \newblock itree: Efficiently discovering high-coverage configurations using
@@ -134,6 +160,25 @@ C.~Song, A.~Porter, and J.~S. Foster.
   interaction trees.
 \newblock {\em IEEE Transactions on Software Engineering}, 40(3):251--265,
   2014.
+
+\bibitem{wang2010adaptive}
+Z.~Wang, B.~Xu, L.~Chen, and L.~Xu.
+\newblock Adaptive interaction fault location based on combinatorial testing.
+\newblock In {\em Quality Software (QSIC), 2010 10th International Conference
+  on}, pages 495--502. IEEE, 2010.
+
+\bibitem{yilmaz2006covering}
+C.~Yilmaz, M.~B. Cohen, and A.~A. Porter.
+\newblock Covering arrays for efficient fault characterization in complex
+  configuration spaces.
+\newblock {\em Software Engineering, IEEE Transactions on}, 32(1):20--34, 2006.
+
+\bibitem{zhang2012faulty}
+J.~Zhang, F.~Ma, and Z.~Zhang.
+\newblock Faulty interaction identification via constraint solving and
+  optimization.
+\newblock In {\em Theory and Applications of Satisfiability Testing--SAT 2012},
+  pages 186--199. Springer, 2012.
 
 \bibitem{zhang2011characterizing}
 Z.~Zhang and J.~Zhang.

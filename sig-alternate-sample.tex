@@ -232,7 +232,7 @@ Combinatorial Testing (CT) is an effective technique for testing the interaction
 % We no longer use \terms command
 %\terms{Theory}
 
-\keywords{Software Testing, Combinatorial Testing, Symbolic execution, Failure-inducing interactions, Guaranteed code}
+\keywords{Software Testing, Combinatorial Testing, Fault localization, Failure-inducing interactions, Guaranteed code}
 
 
 \section{Introduction}
@@ -564,15 +564,14 @@ Based on the categories given in Table \ref{tab_fault typles}, we next study the
 
 
 \subsection{The influence of inputs model}
-The last research question is raised from CT itself. It is known that inputs modeling, as the key part of CT \cite{nie2011survey}, significantly influence on the result of CT. For example, if we use the following inputs modeling : $v_{a} = \{ 0, 1 \}$, $v_{b} = \{ 0, 1\}$, $v_{c} = \{ 1, 2\}$, and $v_{d} = \{ 0, 1\}$, respectively, for the program \emph{foo} in Fig \ref{toy-program} instead of what is originally used in Section \ref{sec:pre}. Then it is easy to compute that MFS of \emph{foo} is (-, -, 1, -), which is different from the original MFS (1, -, 1, -). We can learn the new MFS is irrelevant to the parameter $a$; this is because according to the execution tree in Fig \ref{foo-tree}, no matter what $a$ is assigned to ($0$ or $1$), it can only follow $Path 1$ or $Path 2$, and hence cannot execute other paths. As a result, the fault is only depended on what $c$ is assigned to. The changes of MFS also impacts on the guaranteed code. From Table \ref{weg-foo} and \ref{strong-foo}, the weak guaranteed code of (-, -, 1, -) is $S2$ and $S3$, while there is no strong guaranteed code. This results shows that the correlation between MFS and the real faulty code ($S7$) is  very trivial, which is diametrically opposed to the conclusion which is based on the original inputs modeling.
-  
+The last research question is raised from CT itself. It is known that inputs modeling, as the key part of CT \cite{nie2011survey}, significantly influence on the result of CT. For example, if we use the following inputs modeling : $v_{a} = \{ 0, 1 \}$, $v_{b} = \{ 0, 1\}$, $v_{c} = \{ 1, 2\}$, and $v_{d} = \{ 0, 1\}$, respectively, for the program \emph{foo} in Fig \ref{toy-program} instead of what is originally used in Section \ref{sec:pre}. Then it is easy to compute that MFS of \emph{foo} is (-, -, 1, -), which is different from the original MFS (1, -, 1, -). We can learn the new MFS is irrelevant to the parameter $a$; this is because according to the execution tree in Fig \ref{foo-tree}, no matter what $a$ is assigned to ($0$ or $1$), it can only follow $Path 1$ or $Path 2$, and hence cannot execute other paths. As a result, the fault is only depended on what $c$ is assigned to. The changes of MFS also impacts on the guaranteed code. From Table \ref{weg-foo} and \ref{strong-foo}, the weak guaranteed code of (-, -, 1, -) is $S2$ and $S3$, while there is no strong guaranteed code. This results shows that the correlation between MFS and the real faulty code ($S7$) is  very trivial, which is different from the conclusion which is based on the original inputs modeling.
+
 Considering this, the third research question is:
 
 \textbf{Q3: How does the inputs model of CT affect the correlation between MFS and faulty code?}
 
 
-To answer question, for each program, we design 3 different inputs model, with the input granularity from low to high. To oberve their reuslts.
-
+To answer question, for each program subject in our empirical studies, we design 3 different inputs model (they vary in the the number of parameters and the number of values for each parameter). Then we will obtain their MFS, guaranteed code, and the correlation between MFS and faulty code, respectively. At last, we will evaluate whether there exist any difference among these results.
 
 %These questions are important, as
 
@@ -605,20 +604,40 @@ To answer question, for each program, we design 3 different inputs model, with t
 
 \section{Related works}\label{sec:related}
 
-There are many methods aims at identifying MFS in CT, which can be classified into two categories:
+There are several works that are related to our study, and they can be categorised into two types:
 
-1. MFS in CT
+The first type of methods studies the MFS in CT. prior work \cite{nie2011minimal} specifically studied the properties of the failure-inducing interactions in SUT, based on which additional test cases were generated to identify them. Other approaches to identify the failure-inducing interactions in SUT include building a tree model \cite{yilmaz2006covering}, adaptively generating additional test cases according to the outcome of the last test case \cite{zhang2011characterizing}, ranking suspicious interactions based on some rules \cite{ghandehari2012identifying}, and using graphic-based deduction \cite{martinez2008algorithms}, among others. These approaches can be partitioned into two categories \cite{colbourn2008locating} according to how the additional test cases are generated: \emph{adaptive}--additional test cases are chosen based on the outcomes of the executed tests \cite{shi2005software,nie2011minimal,ghandehari2012identifying,niu2013identifying,zhang2011characterizing,shakya2012isolating,wang2010adaptive,li2012improved}or \emph{nonadaptive}--additional test cases are chosen independently and can be executed in parallel \cite{yilmaz2006covering,colbourn2008locating,martinez2008algorithms,martinez2009locating,zhang2012faulty}.
 
-
-
-
-All these methods. with respect to the code level which utilizes.
+Besides these work, All these methods. with respect to the code level which utilizes.
 2. use MFS to isolate faulty code. machunhyan \cite{ma2013locating}  and leiyu \cite{ghandehari2013fault}
 
+%Combinatorial testing has been widely applied in industry \cite{kuhn2010practical}. Fault localization is an important part of CT studies. \cite{nie2011survey}, as it can facilitate debugging efforts by reducing the scope of code that is needed for inspection \cite{ghandehari2012identifying}.
+%
+%Shi and Nie \cite{shi2005software} presented an approach for failure revealing and failure diagnosis in CT , which first tests the SUT with a covering array, then reduces the value schemas contained in the failing test case by eliminating those appearing in the
+%passing test cases.
+%
+%Nie's approach in \cite {nie2011minimal} first separates the faulty-possible tuples and healthy-possible tuples into two sets. Subsequently, by changing one parameter value at a time of the original test case, this approach generates extra test cases. After executing the configurations, the approach converges by reducing the number of tuples in the faulty-possible sets. Wang then \cite{wang2010adaptive} extended this approach by adaptively mutates multiple parameter values instead of only one factor at a time.
+%
+%Delta debugging \cite{zeller2002simplifying} proposed by Zeller is an adaptive divide-and-conquer approach to locate interaction fault. It is very efficient and has been applied to real-life software environment. Zhang et al. \cite{zhang2011characterizing} also proposed a similar approach that can identify the failure-inducing combinations that have no overlapped part efficiently.  JieLi proposed a similar approach \cite{li2012improved}.
+%
+%%Charles \cite{colbourn2008locating} proposed,
+%
+% Charles \cite{colbourn2008locating} proposed the notion of ($d$,$t$)-detecting array, which corresponds to test cases that permit the determination of MFS in the SUT, if the number of MFS $d$ and degree of MFS $t$ are known in prior.  C. Martiez \cite{martinez2008algorithms} also proposed a non-adaptive method. Their approach extends the covering array to the locating array to detect and locate interaction faults. They \cite{martinez2009locating} then extend this non-adaptive method to any degree with the theory of hyber-graphic.  C. Martiez \cite{martinez2008algorithms,martinez2009locating}proposed two adaptive algorithms. The first one needs safe value as their assumption and the second one remove this assumption when the number of values of each parameter is equal to 2. Their algorithms focus on identifying the faulty tuples that have no more than 2 parameters.
+%
+%Ghandehari.etc \cite{ghandehari2012identifying} defines the suspiciousness of tuple and suspiciousness of the environment of a tuple. Based on this, they rank the possible tuples and generate the test cases. Although their approach imposes minimal assumption, it does not ensure that the tuples ranked in the top are the faulty tuples. They further utilized the test cases generated from the inducing interaction to locate the fault \cite{ghandehari2013fault}.
+%
+%Yilmaz \cite{yilmaz2006covering} proposed a machine learning method to identify inducing combinations from a combinatorial testing set. They construct a classified tree to analyze the covering arrays and detect potential faulty combinations. They \cite{yilmaz2006covering} additionally extend their work on variable covering array. Beside this, Fouch{\'e} \cite{fouche2009incremental} and Shakya \cite{shakya2012isolating} made some improvements in identifying failure-inducing combinations based on Yilmaz' work.
+%
+%Zhang \cite{zhang2012faulty} proposed an approach that are directly based on covering
+%array. This approach translates MFS identification to a constraints satisfaction and optimal problem.
 
-Studies on symbolic execution, has .
+%Studies on symbolic execution, has .
 
-4. Use symoblic execution in CT. Charles song \cite{reisner2010using} first. Then extend to itree \cite{song2012itree}, then extends to multiple leaves with \cite{song2014itree}.
+%The second type of work focus on the code-level diagnosis in software, i.e., the fault localization techniques. Many methods
+
+The second type of work lies on the guaranteed code.
+
+Charles song \cite{reisner2010using} first. Then extend to iTree \cite{song2012itree}, then extends to multiple leaves with \cite{song2014itree}.
 
 Our work differs from them
 
@@ -645,7 +664,7 @@ This work was supported by the National Natural Science Foundation of China (No.
 %
 %APPENDICES are optional
 %\balancecolumns
-\appendix
+%\appendix
 %Appendix A
 %\section{Headings in Appendices}
 %The rules about hierarchical headings discussed above for
