@@ -564,10 +564,8 @@ Based on the categories given in Table \ref{tab_fault typles}, we next study the
 
 
 \subsection{The influence of inputs model}
-The last one research question is raised from CT itself. It is known that inputs modeling, as the key part of CT \cite{nie2011survey}, significantly influence on the result of CT. For example, Take the example in Section \ref{sec:pre}, if we use the different model, we even cannot get the correct MFS. The changes of MFS propagates to the guaranteed code, which eventually impacts on correlation between the MFS and the faulty code .  Still for the example, if we change, then,
- 
- This question is correlated to the CT. In fact, different building model making different MFS. and different MFS may have different guaranteed code.  
- 
+The last research question is raised from CT itself. It is known that inputs modeling, as the key part of CT \cite{nie2011survey}, significantly influence on the result of CT. For example, if we use the following inputs modeling : $v_{a} = \{ 0, 1 \}$, $v_{b} = \{ 0, 1\}$, $v_{c} = \{ 1, 2\}$, and $v_{d} = \{ 0, 1\}$, respectively, for the program \emph{foo} in Fig \ref{toy-program} instead of what is originally used in Section \ref{sec:pre}. Then it is easy to compute that MFS of \emph{foo} is (-, -, 1, -), which is different from the original MFS (1, -, 1, -). We can learn the new MFS is irrelevant to the parameter $a$; this is because according to the execution tree in Fig \ref{foo-tree}, no matter what $a$ is assigned to ($0$ or $1$), it can only follow $Path 1$ or $Path 2$, and hence cannot execute other paths. As a result, the fault is only depended on what $c$ is assigned to. The changes of MFS also impacts on the guaranteed code. From Table \ref{weg-foo} and \ref{strong-foo}, the weak guaranteed code of (-, -, 1, -) is $S2$ and $S3$, while there is no strong guaranteed code. This results shows that the correlation between MFS and the real faulty code ($S7$) is  very trivial, which is diametrically opposed to the conclusion which is based on the original inputs modeling.
+  
 Considering this, the third research question is:
 
 \textbf{Q3: How does the inputs model of CT affect the correlation between MFS and faulty code?}
