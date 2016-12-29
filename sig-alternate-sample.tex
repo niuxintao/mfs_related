@@ -595,12 +595,13 @@ To answer question, for each program subject in our empirical studies, we design
 
 \subsection{Threats to Validation}
 
+There are several threats to validity in our empirical studies. 
 
-1. We need to conduct experiments on more program subjects to let our conclusion more generally.
+First, our experiments are based on only 5 open-source software. More subject programs are desired to make the results more general. 
 
-2. The faults should be extended to more real faults, not only with those injected ones.
+Second, the faults should be extended to more real faults, not only with those injected ones.
 
-3. We should increase the types of faults. For example, it is appealing to study the multiple faults, faults that relate to more than one statements.
+At last, we should increase the types of faults. For example, it is appealing to study the multiple faults, faults that relate to more than one statements.
 
 \section{Related works}\label{sec:related}
 
@@ -643,10 +644,11 @@ Elnatan \cite{reisner2010using} firstly used symbolic evaluation to analyse the 
 Our work differs from them in 1) we only focus on the guaranteed code of the MFS instead of all the possible interactions in the SUT. 2) we mainly studied the guaranteed code for fault localization instead of test case generation and program statements coverage.
 
 \section{Conclusions and Future works}\label{sec:conclusion}
+Combinatorial testing has been proven to be effective at detecting and identifying the failure-inducing interactions, i.e., MFS in the SUT. Most of their work focus on how to generate test cases and how to effectively identify the MFS. Few of them consider the relationship between MFS and code-level problem. In this paper, we studied the correlation between MFS and faulty code. Specifically, we obtain the weak and strong guaranteed code of MFS, and then compare them with faulty code to observe their relationship. Our empirical studies suggest that it do exists correlation between MFS and faulty code, but the extent to which of this relation depends on the faulty types and inputs modeling.
 
 %\end{document}  % This is where a 'short' article might terminate
 
-As a further work, we plan to use the conclusion in this paper to utilize MFS for code-level fault diagnosis. It is also appealing to study whether code-level fault diagnosis can help optimal the inputs modeling of CT, according to the our 3rd empirical study. Besides them, we would like to conduct studies on more software programs with more types of faults to increase the generality of our work.
+As a further work, we plan to use the conclusion in this paper to utilize MFS for code-level fault diagnosis. It is also appealing to study whether code-level fault diagnosis can optimal the inputs modeling of CT, according to the our 3rd empirical study. Besides them, we would like to conduct studies on more software programs with more types of faults to increase the generality of our work.
 
 %ACKNOWLEDGMENTS are optional
 \section{Acknowledgments}
