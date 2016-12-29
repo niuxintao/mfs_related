@@ -640,13 +640,13 @@ The second type of work  relates to the guaranteed code.
 
 Elnatan \cite{reisner2010using} firstly used symbolic evaluation to analyse the configuration options in the program. In that work, they proposes the notion of guaranteed coverage, from which they find that the effective configuration space is relatively small when compared to the all the possible combinations of options. What's more, most coverage was accounted for by lower-strength interactions (2-way or 3-way), across all of line, basic block, edge, and conditions, but higher-strength interactions are needed for maximum coverage.  Based on this work, Charles \cite{song2012itree} proposed a test cases generation method, called iTree, which combines covering array and machine learning techniques to discover as more new coverage interactions as possible. Their experiments shows that their method is more effective than traditional CT and random methods at generating test cases with more coverage of program statements. They further refined their method iTree \cite{song2014itree} by re-constructing the composite interactions.
 
-Our work differs from them in 1) we only focus on the guaranteed code of the MFS instead of all the possible interactions in the SUT. 2) our work mainly  .
+Our work differs from them in 1) we only focus on the guaranteed code of the MFS instead of all the possible interactions in the SUT. 2) we mainly studied the guaranteed code for fault localization instead of test case generation and program statements coverage.
 
 \section{Conclusions and Future works}\label{sec:conclusion}
 
 %\end{document}  % This is where a 'short' article might terminate
 
-As a further work, we plan to use the conclusion to utilize MFS into code-level fault diagnosis. It is also appealing to observe whether the code-level can help Combinatorial testing inputs modeling, as we learn from this paper. Besides this, we 
+As a further work, we plan to use the conclusion in this paper to utilize MFS for code-level fault diagnosis. It is also appealing to study whether code-level fault diagnosis can help optimal the inputs modeling of CT, according to the our 3rd empirical study. Besides them, we would like to conduct studies on more software programs with more types of faults to increase the generality of our work.
 
 %ACKNOWLEDGMENTS are optional
 \section{Acknowledgments}
