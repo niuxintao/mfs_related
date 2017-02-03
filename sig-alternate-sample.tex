@@ -48,6 +48,7 @@
 \documentclass{sig-alternate-05-2015}
 
 \usepackage{fancyvrb}
+\usepackage{multirow}
 
 \begin{document}
 
@@ -130,19 +131,28 @@ SIG-ALTERNATE.CLS. Supported by ACM.}}
 %
 % 1st. author
 \alignauthor
-Xintao Niu\\
+Xintao Niu, Changhai Nie\\
        \affaddr{State Key Laboratory for Novel Software Technology}\\
        \affaddr{Nanjing University}\\
        \affaddr{China, 210023}\\
-       \email{niuxintao@gmail.com}
+%       \affaddr{niuxintao@gmail.com}
+%       \affaddr{changhainie@gmail.com}
 % 2nd. author
-\alignauthor
-Changhai Nie\\
-       \affaddr{State Key Laboratory for Novel Software Technology}\\
-       \affaddr{Nanjing University}\\
-       \affaddr{China, 210023}\\
-       \email{changhainie@nju.edu.cn}
+%\alignauthor
+%
+%       \affaddr{State Key Laboratory for Novel Software Technology}\\
+%       \affaddr{Nanjing University}\\
+%       \affaddr{China, 210023}\\
+%       \email{changhainie@nju.edu.cn}
 % 3rd. author
+\alignauthor
+Laleh Sh. Ghandehari, Jeff Lei \\
+       \affaddr{Department of Computer}\\
+       \affaddr{Science and Engineering }\\
+       \affaddr{The University of Texas at Arlington}\\
+%       \affaddr{Arlington, Texas}\\
+%       \email{laleh.shikhgholamhosseing@mavs.uta.edu}
+%       \email{ylei@cse.uta.edu}
 \alignauthor
 Xiaoyin Wang \\
        \affaddr{Department of Computer}\\
@@ -151,23 +161,16 @@ Xiaoyin Wang \\
        \affaddr{Texas at San Antonio}\\
  %      \affaddr{China, 211171}\\
 %       \email{xujiaxi@njxzc.edu.cn} \\
-       \email{Xiaoyin.Wang@utsa.edu}
+%       \email{Xiaoyin.Wang@utsa.edu}
  % use '\and' if you need 'another row' of author names
- \and
+% \and
 % 4th. author
-\alignauthor
-Hareton Leung \\
-       \affaddr{Department of computing}\\
-       \affaddr{Hong Kong Polytechnic University}\\
-       \affaddr{Kowloon, Hong Kong}\\
-       \email{hareton.leung@polyu.edu.hk}
-\alignauthor
-Jeff Lei \\
-       \affaddr{Department of Computer}\\
-       \affaddr{Science and Engineering }\\
-       \affaddr{The University of Texas at Arlington}\\
-%       \affaddr{Arlington, Texas}\\
-       \email{ylei@cse.uta.edu}
+%\alignauthor
+%Hareton Leung \\
+%       \affaddr{Department of computing}\\
+%       \affaddr{Hong Kong Polytechnic University}\\
+%       \affaddr{Kowloon, Hong Kong}\\
+%       \email{hareton.leung@polyu.edu.hk}
 %% 6th. author
 %\alignauthor Charles Palmer\\
 %       \affaddr{Palmer Research Laboratories}\\
@@ -576,11 +579,77 @@ To answer question, for each program subject in our empirical studies, we design
 %These questions are important, as
 
 \section{Subject programs}\label{sec:subjects}
+We have prepared 8 program subjects for our experiment, of which 7 subjects programs belong to the Siemens set \cite{hutchins1994experiments}, and the remaining subject is GNU Grep\footnote{https://www.gnu.org/software/grep/}. We obtain these subjects, as well as their program specifications, from the Software Infrastructure Repository (SIR) \cite{do2005supporting}. These subjects have been wildly used in the studies of fault detection and localization \cite{zeller2002isolating,jones2005empirical,renieres2003fault,ghandehari2013fault}.  Table \ref{subjects_Chaar} shows the specific program subjects, number of lines of code, the brief introduction, and the number faulty versions for each subject.
 
-\subsection{Generating faulty programs}
+%. Note that althouth , but they contain many.
+%The Siemens programs perform a variety of tasks: tcas is an aircraft collision avoidance system, schedule2 and schedule are priority schedulers, totinfo computes statistics given input data, printtokens and printtokens2 are lexical analyzers, and replace performs pattern matching and substitution.
 
-\subsection{Symbolic execution of the paths}
+\begin{table*}[!ht]
+  \centering
+  \caption{Characteristics of subject programs}
+    \begin{tabular}{|c|c|c|c|}  \hline
+    Subject & Loc & Description & \# of faulty versions \\ \hline
+    printtokens & 472 & lexical analyzers   &  7 \\
+    printtokens2 & 399 & -   &  10 \\
+    replace & 512 & performs pattern matching and substitution   &  32 \\
+    schedule & 292 & priority schedulers   &  9 \\
+    schedule2 & 301 & -   &  10 \\
+    tcas &  141 & aircraft collision avoidance system   &  41 \\
+    totinfo & 440  & computes statistics given input data   &  23 \\
+    grep & 10068  & searching for lines matching a regular expression.   &  5 \\  \hline
+    \end{tabular}%
+  \label{subjects_Chaar}%
+\end{table*}%
 
+
+\subsection{Fault characteristics}
+For each program subject in our experiment, there are several faulty versions come with the correct version. These faults vary in different types and locations.  With respect to the research question 2, we need to classify these faults into 3 main types and each of them has 3-sub types. For this, we checked the source file for each version of the specific programs, compared them with the correct version, and then classified the faults according to the aforementioned types. Table \ref{subject fault} shows the fault type distribution for each subject.
+%Using mutation to inject faults into.
+\begin{table*}[!ht]
+  \centering
+  \caption{Fault type distribution of subject programs}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}  \hline
+    \multirow{2}{*}{Subjects} & \multicolumn{3}{c|}{Assignment} & \multicolumn{3}{c|}{Checking} & \multicolumn{3}{c|}{Interface} \\ \cline{2-10}
+     & missing &  wrong   &  extraneous & missing &  wrong   &  extraneous & missing &  wrong   &  extraneous \\ \hline
+    printtokens &  &     &  &  &     &  &  &     &    \\
+    printtokens2 &  &    &  &  &     &  &  &     &   \\
+    replace &  &    &  &  &     &  &  &     &   \\
+    schedule &  &      &  &  &     &  &  &     &   \\
+    schedule2 &  &      & &  &     &  &  &     &    \\
+    tcas &  &    & &  &     &  &  &     &   \\
+    totinfo &  &    &  &  &     &  &  &     &   \\
+    grep &  &    & &  &     &  &  &     &   \\  \hline
+    \end{tabular}%
+  \label{subject fault}%
+\end{table*}%
+
+Based on this table, we can learn that.
+
+\subsection{Input modeling}
+
+To test each subject program, we need to model their inputs space firstly. Specifically, We initially followed the instructions described in \cite{ghandehari2013applying} to build the corresponding model for each subject, which include defining the key parameters and the values of each parameter for the programs, obtaining the possible constraints amon these parameters. For example, for the program \emph{replace} in the Siemens suite, we may consider there parameters: pattern, substitute and input text. Each of them have different type of value, e.g., the pattern may be a common character, digit, or line matching signal, etc. Besides this initial model, we built 2 more inputs modeling based on the initial one (With removing some parameters or values), such that we can observe and compare the results with different modeling.  Table \ref{subjects_inputs} listed these models (where \emph{Model1} is the initial model obtaining from \cite{ghandehari2013applying}) and the number of constraints of each subject.  The model is presented in the abbreviated form $\#values^{\#number\ of\ parameters} \times ...$.
+
+%The detailed model is also available for review in. The model column in the table shows the number of parameters and their domain size. We represent it by where d indicates that there are k number of parameters with domain size as d. Note that, which is the total number of parameters
+\begin{table*}[!ht]
+  \centering
+  \caption{Inputs modeling of subject programs}
+    \begin{tabular}{|c|c|c|c|c|}  \hline
+    Subject & Model1 & Model2 & Model3 & Constraints \\ \hline
+    printtokens & $2^{1} \times 3^{1} \times 4 ^{4} \times 5 ^{1} \times 10 ^{1} \times 13 ^{2} $&     &  &  8 \\
+    printtokens2 & $2^{1} \times 3^{1} \times 4 ^{4} \times 5 ^{1} \times 10 ^{1} \times 13 ^{2} $ &    &  & 8 \\
+    replace & $2^{4} \times 4^{16}$ &  &  &  36\\
+    schedule &  $2^{1} \times 3 ^{8} \times 8 ^{2}$&  &  & 0\\
+    schedule2 & $2^{1} \times 3 ^{8} \times 8 ^{2}$ &   &  & 0 \\
+    tcas & $2 ^{7} \times 3^{2} \times 4 ^{1} \times 10 ^{2}$  &   &  & 0\\
+    totinfo & $3 ^{3} \times 5 ^{2} \times 6^{1}$   &   &  & 0 \\
+    grep & $2 ^{7} \times 4 ^{1} \times  6 ^{5} \times 9 ^{1} \times 13 ^{1}$  &   &   &  2 \\  \hline
+    \end{tabular}%
+  \label{subjects_inputs}%
+\end{table*}%
+
+%\subsection{Obtaining traces}
+%
+%Run all the possible test cases, and obtain their traces. Such that we can compute the guaranteed code of each MFS.
 
 %\section{Getting MFS and their guaranteed code}
 
@@ -590,18 +659,39 @@ To answer question, for each program subject in our empirical studies, we design
 
 \subsection{Fault types}
 
+We can firstly learn that the correlativeness has no means to do with odc class. only with types.
+
+the faulty code is, wrong the code, extra the code, missing two codes nearest it.
+
+
+The conclusion is, that the wrong code and extra code are more close, because those which control this is more close to introducing faulty.
+
+While the missing is very. This is because some code may be .
+
 \subsection{Inputs modeling }
 
 
+Different modeling,
+
+the coverage (line coverage, condition coverage), correlated to the faulty code with guaranteed code distance.
+
+(Note that in some pictures, the condition coverage cannot be 100 percent because some exception will not be triggered in the current inputs, e.g., the input memory exception handle module will not be triggered)
+
+Above all, the answer to the question 3 is :
+
+\textbf{The more the coverage the inputs modeling supports, the more accurate the MFS is correlated to the faulty code.}
+
+%注意这个结果只是一个经验性地结果，其实对于错误，很难确定其真正地type， 比如说，如果一个assign 被用到后面地check呢？， 这就导致其实assign check地很
+
 \subsection{Threats to Validation}
 
-There are several threats to validity in our empirical studies. 
+There are several threats to validity in our empirical studies.
 
-First, our experiments are based on only 5 open-source software. More subject programs are desired to make the results more general. 
+First, our experiments are based on only 8 open-source software. More subject programs are desired to make the results more general.
 
 Second, the faults should be extended to more real faults, not only with those injected ones.
 
-At last, we should increase the types of faults. For example, it is appealing to study the multiple faults, faults that relate to more than one statements.
+At last, we should increase the types of faults. For example, it is appealing to study the multiple faults in one program, or faults that are related to more than one statements.
 
 \section{Related works}\label{sec:related}
 

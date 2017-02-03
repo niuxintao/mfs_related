@@ -31,6 +31,12 @@ C.~J. Colbourn and D.~W. McClary.
 \newblock Locating and detecting arrays for interaction faults.
 \newblock {\em Journal of combinatorial optimization}, 15(1):17--48, 2008.
 
+\bibitem{do2005supporting}
+H.~Do, S.~Elbaum, and G.~Rothermel.
+\newblock Supporting controlled experimentation with testing techniques: An
+  infrastructure and its potential impact.
+\newblock {\em Empirical Software Engineering}, 10(4):405--435, 2005.
+
 \bibitem{duraes2006emulation}
 J.~A. Duraes and H.~S. Madeira.
 \newblock Emulation of software faults: A field data study and a practical
@@ -44,6 +50,13 @@ L.~S. Ghandehari, Y.~Lei, D.~Kung, R.~Kacker, and R.~Kuhn.
 \newblock In {\em Software Reliability Engineering (ISSRE), 2013 IEEE 24th
   International Symposium on}, pages 168--177. IEEE, 2013.
 
+\bibitem{ghandehari2013applying}
+L.~S.~G. Ghandehari, M.~N. Bourazjany, Y.~Lei, R.~N. Kacker, and D.~R. Kuhn.
+\newblock Applying combinatorial testing to the siemens suite.
+\newblock In {\em Software Testing, Verification and Validation Workshops
+  (ICSTW), 2013 IEEE Sixth International Conference on}, pages 362--371. IEEE,
+  2013.
+
 \bibitem{ghandehari2012identifying}
 L.~S.~G. Ghandehari, Y.~Lei, T.~Xie, R.~Kuhn, and R.~Kacker.
 \newblock Identifying failure-inducing combinations in a combinatorial test
@@ -51,12 +64,26 @@ L.~S.~G. Ghandehari, Y.~Lei, T.~Xie, R.~Kuhn, and R.~Kacker.
 \newblock In {\em Software Testing, Verification and Validation (ICST), 2012
   IEEE Fifth International Conference on}, pages 370--379. IEEE, 2012.
 
+\bibitem{hutchins1994experiments}
+M.~Hutchins, H.~Foster, T.~Goradia, and T.~Ostrand.
+\newblock Experiments on the effectiveness of dataflow-and control-flow-based
+  test adequacy criteria.
+\newblock In {\em Software Engineering, 1994. Proceedings. ICSE-16., 16th
+  International Conference on}, pages 191--200. IEEE, 1994.
+
 \bibitem{jia2015learning}
 Y.~Jia, M.~B. Cohen, M.~Harman, and J.~Petke.
 \newblock Learning combinatorial interaction test generation strategies using
   hyperheuristic search.
 \newblock In {\em Proceedings of the 37th International Conference on Software
   Engineering-Volume 1}, pages 540--550. IEEE Press, 2015.
+
+\bibitem{jones2005empirical}
+J.~A. Jones and M.~J. Harrold.
+\newblock Empirical evaluation of the tarantula automatic fault-localization
+  technique.
+\newblock In {\em Proceedings of the 20th IEEE/ACM international Conference on
+  Automated software engineering}, pages 273--282. ACM, 2005.
 
 \bibitem{kuhn2002investigation}
 D.~R. Kuhn and M.~J. Reilly.
@@ -134,6 +161,12 @@ E.~Reisner, C.~Song, K.-K. Ma, J.~S. Foster, and A.~Porter.
 \newblock In {\em Proceedings of the 32nd ACM/IEEE International Conference on
   Software Engineering-Volume 1}, pages 445--454. ACM, 2010.
 
+\bibitem{renieres2003fault}
+M.~Renieres and S.~P. Reiss.
+\newblock Fault localization with nearest neighbor queries.
+\newblock In {\em Automated Software Engineering, 2003. Proceedings. 18th IEEE
+  International Conference on}, pages 30--39. IEEE, 2003.
+
 \bibitem{shakya2012isolating}
 K.~Shakya, T.~Xie, N.~Li, Y.~Lei, R.~Kacker, and R.~Kuhn.
 \newblock Isolating failure-inducing combinations in combinatorial testing
@@ -172,6 +205,12 @@ C.~Yilmaz, M.~B. Cohen, and A.~A. Porter.
 \newblock Covering arrays for efficient fault characterization in complex
   configuration spaces.
 \newblock {\em Software Engineering, IEEE Transactions on}, 32(1):20--34, 2006.
+
+\bibitem{zeller2002isolating}
+A.~Zeller.
+\newblock Isolating cause-effect chains from computer programs.
+\newblock In {\em Proceedings of the 10th ACM SIGSOFT symposium on Foundations
+  of software engineering}, pages 1--10. ACM, 2002.
 
 \bibitem{zhang2012faulty}
 J.~Zhang, F.~Ma, and Z.~Zhang.

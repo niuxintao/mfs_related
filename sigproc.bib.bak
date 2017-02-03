@@ -579,3 +579,36 @@ ISSN={0098-5589}
   year={2006},
   publisher={IEEE}
 }
+@article{chillarege1996orthogonal,
+  title={Orthogonal defect classification},
+  author={Chillarege, Ram},
+  journal={Handbook of Software Reliability Engineering},
+  pages={359--399},
+  year={1996}
+}
+@inproceedings{hutchins1994experiments,
+  title={Experiments on the effectiveness of dataflow-and control-flow-based test adequacy criteria},
+  author={Hutchins, Monica and Foster, Herb and Goradia, Tarak and Ostrand, Thomas},
+  booktitle={Software Engineering, 1994. Proceedings. ICSE-16., 16th International Conference on},
+  pages={191--200},
+  year={1994},
+  organization={IEEE}
+}
+@article{do2005supporting,
+  title={Supporting controlled experimentation with testing techniques: An infrastructure and its potential impact},
+  author={Do, Hyunsook and Elbaum, Sebastian and Rothermel, Gregg},
+  journal={Empirical Software Engineering},
+  volume={10},
+  number={4},
+  pages={405--435},
+  year={2005},
+  publisher={Springer}
+}
+@inproceedings{jones2005empirical,
+  title={Empirical evaluation of the tarantula automatic fault-localization technique},
+  author={Jones, James A and Harrold, Mary Jean},
+  booktitle={Proceedings of the 20th IEEE/ACM international Conference on Automated software engineering},
+  pages={273--282},
+  year={2005},
+  organization={ACM}
+}
