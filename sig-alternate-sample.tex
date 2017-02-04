@@ -681,7 +681,10 @@ Above all, the answer to the question 3 is :
 
 \textbf{The more the coverage the inputs modeling supports, the more accurate the MFS is correlated to the faulty code.}
 
-%注意这个结果只是一个经验性地结果，其实对于错误，很难确定其真正地type， 比如说，如果一个assign 被用到后面地check呢？， 这就导致其实assign check地很
+%注意这个结果只是一个经验性地结果，其实对于错误，很难确定其真正地type， 比如说，如果一个assign 被用到后面地check 呢？， 这就导致其实assign check 地很
+%与其这样分，我们发现很多分类不合理
+
+%宏会影响错误，因为它是直接编译地
 
 \subsection{Threats to Validation}
 
@@ -691,7 +694,8 @@ First, our experiments are based on only 8 open-source software. More subject pr
 
 Second, the faults should be extended to more real faults, not only with those injected ones.
 
-At last, we should increase the types of faults. For example, it is appealing to study the multiple faults in one program, or faults that are related to more than one statements.
+At last, we should balance the number of different types of faults. Specifically, the checking, interface types should be increased, as well as the missing and extraneous code.
+%For example, it is appealing to study the multiple faults in one program, or faults that are related to more than one statements.
 
 \section{Related works}\label{sec:related}
 
