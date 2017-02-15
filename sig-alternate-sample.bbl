@@ -130,6 +130,13 @@ C.~Mart{\'\i}nez, L.~Moura, D.~Panario, and B.~Stevens.
   algorithms.
 \newblock {\em SIAM Journal on Discrete Mathematics}, 23(4):1776--1799, 2009.
 
+\bibitem{masri2014prevalence}
+W.~Masri and R.~A. Assi.
+\newblock Prevalence of coincidental correctness and mitigation of its impact
+  on fault localization.
+\newblock {\em ACM transactions on software engineering and methodology
+  (TOSEM)}, 23(1):8, 2014.
+
 \bibitem{naish2011model}
 L.~Naish, H.~J. Lee, and K.~Ramamohanarao.
 \newblock A model for spectra-based software diagnosis.

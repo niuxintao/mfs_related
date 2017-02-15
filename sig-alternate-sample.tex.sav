@@ -48,6 +48,7 @@
 \documentclass{sig-alternate-05-2015}
 
 \usepackage{fancyvrb}
+\usepackage{multirow}
 
 \begin{document}
 
@@ -135,14 +136,37 @@ Xintao Niu\\
        \affaddr{Nanjing University}\\
        \affaddr{China, 210023}\\
        \email{niuxintao@gmail.com}
+%       \affaddr{changhainie@gmail.com}
 % 2nd. author
+%\alignauthor
+%
+%       \affaddr{State Key Laboratory for Novel Software Technology}\\
+%       \affaddr{Nanjing University}\\
+%       \affaddr{China, 210023}\\
+%       \email{changhainie@nju.edu.cn}
+% 3rd. author
+\alignauthor
+Laleh Sh. Ghandehari \\
+       \affaddr{Department of Computer}\\
+       \affaddr{Science and Engineering }\\
+       \affaddr{The University of Texas at Arlington}\\
+%       \affaddr{Arlington, Texas}\\
+       \email{laleh.shikhgholamhosseing@mavs.uta.edu}
+%       \email{ylei@cse.uta.edu}
+ \and
 \alignauthor
 Changhai Nie\\
        \affaddr{State Key Laboratory for Novel Software Technology}\\
        \affaddr{Nanjing University}\\
        \affaddr{China, 210023}\\
-       \email{changhainie@nju.edu.cn}
-% 3rd. author
+       \email{changhainie@gmail.com}
+\alignauthor
+Jeff Lei \\
+       \affaddr{Department of Computer}\\
+       \affaddr{Science and Engineering }\\
+       \affaddr{The University of Texas at Arlington}\\
+%       \affaddr{Arlington, Texas}\\
+       \email{ylei@cse.uta.edu}
 \alignauthor
 Xiaoyin Wang \\
        \affaddr{Department of Computer}\\
@@ -153,21 +177,14 @@ Xiaoyin Wang \\
 %       \email{xujiaxi@njxzc.edu.cn} \\
        \email{Xiaoyin.Wang@utsa.edu}
  % use '\and' if you need 'another row' of author names
- \and
+% \and
 % 4th. author
-\alignauthor
-Hareton Leung \\
-       \affaddr{Department of computing}\\
-       \affaddr{Hong Kong Polytechnic University}\\
-       \affaddr{Kowloon, Hong Kong}\\
-       \email{hareton.leung@polyu.edu.hk}
-\alignauthor
-Jeff Lei \\
-       \affaddr{Department of Computer}\\
-       \affaddr{Science and Engineering }\\
-       \affaddr{The University of Texas at Arlington}\\
-%       \affaddr{Arlington, Texas}\\
-       \email{ylei@cse.uta.edu}
+%\alignauthor
+%Hareton Leung \\
+%       \affaddr{Department of computing}\\
+%       \affaddr{Hong Kong Polytechnic University}\\
+%       \affaddr{Kowloon, Hong Kong}\\
+%       \email{hareton.leung@polyu.edu.hk}
 %% 6th. author
 %\alignauthor Charles Palmer\\
 %       \affaddr{Palmer Research Laboratories}\\
@@ -189,7 +206,7 @@ Jeff Lei \\
 
 \maketitle
 \begin{abstract}
-Combinatorial Testing (CT) is an effective technique for testing the interactions of factors in the Software Under Test(SUT). Most works in CT focus on the method itself, e.g., how to generate test cases, model the inputs, or handle the constraints of the inputs. Few of the works consider the justification of CT, i.e., is detecting and identifying the failure-inducing interactions really useful and helpful to code-level fault diagnosis? In this paper, we novelty studied the relationship between the failure-inducing interactions and code which causes the failure. Specifically, based on symbolic execution, we firstly obtain the guaranteed code of the corresponding failure-inducing interactions, i.e., those program entities which are directly affected by these interactions. And then we will compared these guaranteed code with those real faulty code to see whether there exists any associations between failure-inducing interactions with these real faulty code. Our empirical studies based on 5 real subjects showed that the failure-inducing interactions are strongly correlated with faulty code in the SUT.
+Combinatorial Testing (CT) is an effective technique for testing the interactions of factors in the Software Under Test(SUT). Most works in CT focus on the method itself, e.g., how to generate test cases, model the inputs, or handle the constraints of the inputs. Few of the works consider the justification of CT, i.e., is detecting and identifying the failure-inducing interactions really useful and helpful to code-level fault diagnosis? In this paper, we novelty studied the relationship between the failure-inducing interactions and code which causes the failure. Specifically, we firstly obtain the guaranteed code of the corresponding failure-inducing interactions, i.e., those program entities which are directly affected by these interactions. And then we will compared these guaranteed code with those real faulty code to see whether there exists any associations between failure-inducing interactions with these real faulty code. Our empirical studies based on some real subjects showed that the failure-inducing interactions are correlated with faulty code in the SUT to some extent, but their correlation are affected by many factors.
 
 \end{abstract}
 
@@ -232,7 +249,7 @@ Combinatorial Testing (CT) is an effective technique for testing the interaction
 % We no longer use \terms command
 %\terms{Theory}
 
-\keywords{Software Testing, Combinatorial Testing, Symbolic execution, Failure-inducing interactions, Guaranteed code}
+\keywords{Software Testing, Combinatorial Testing, Fault localization, Failure-inducing interactions, Guaranteed code}
 
 
 \section{Introduction}
@@ -535,69 +552,217 @@ Here, $Common(A, B)$ means the number of common statements between two code bloc
 
 \subsection{The influence of different types of faults}
 
-There are many types of faults. For example, missing code.  Different Pattern, they harm the program in different ways, it is obviously  It is easy to want to know whether different type is
+According to the nature of the defect, e.g., missing construct, or wrong construct, faults can be categorized into many types. The influence of different type of fault varies widely; as a consequence, the MFS and corresponding guaranteed code of different type of fault may also varies. Hence, focusing on single type of fault may significantly impact on the generality of our study about the correlation between MFS and faulty code, which motivates the second research question:
 
-Hence, instead of using single type of failure, we need to survey different types of failure, which motivates the second
+\textbf{Q2: To which extent does different type of fault influence on the correlation between MFS and faulty code ?}
 
-\textbf{Q2: Different fault type?}
+To answer this question, we need first give the the characterization and classification of software faults. According to the study \cite{duraes2006emulation}, we decide to conduct experiments on the fault types listed in Table \ref{tab_fault typles}. These faults are classified according to the three ODC \cite{chillarege1996orthogonal} classes, i.e., Assignment, Checking, and Interface faults. Note that we have omit two more types of faults which are originally listed in \cite{duraes2006emulation}, as those two types of faults are related to the design or requirement faults. For each of these faults, they are refined into three sub-types, which are based on the nature of the defects, i.e., the fault caused by missing construct, wrong construct, or superfluous part. The column ``Example'' in Table \ref{tab_fault typles} shows some samples of the corresponding type of fault.
 
-In code commission types. in s, they . With respect to this question, we n
+% Table generated by Excel2LaTeX from sheet 'Sheet1'
+\begin{table*}[!ht]
+  \centering
+  \caption{Fault types according to nature and ODC class}
+    \begin{tabular}{|c|c|c|}  \hline
+    ODC class & Nature & Example \\ \hline
+    Assignment & missing & A variable was not assigned a value, a variable was not initialized, etc. \\
+          & wrong & A wrong value (or expression result, etc) was assigned to a variable \\
+          & extraneous & A variable should not have been subject of an assignment \\  \hline
+    Checking & missing & An "if" construct is missing, part of a logical condition is missing, etc. \\
+          & wrong & Wrong logical expression used in a condition in branch and loop construct. \\
+          & extraneous & An "if" construct is superfluous and should not be present \\  \hline
+    Interface & missing & A parameter in a function call was missing; incomplete expression as used as parameter \\
+          & wrong & Wrong information was passed to a function call (value, expression result, etc.) \\
+          & extraneous & Surplus data is passed to a function \\  \hline
+    \end{tabular}%
+  \label{tab_fault typles}%
+\end{table*}%
 
-Take as an example.
-
- \subsection{The influence of inputs model}
-The last one arises from CT. This question is correlated to the CT. In fact, different building model making differnet MFS. and differnet MFS may have different guaranteed code.
-
-\textbf{Q3: Is the building model affected  MFS ?}
-
-Taks as an example.
+Based on the categories given in Table \ref{tab_fault typles}, we next study these faults and their corresponding MFS to observe whether there exists any distinction among different types.
 
 
-These questions are important, as
+\subsection{The influence of inputs model}
+The last research question is raised from CT itself. It is known that inputs modeling, as the key part of CT \cite{nie2011survey}, significantly influence on the result of CT. For example, if we use the following inputs modeling : $v_{a} = \{ 0, 1 \}$, $v_{b} = \{ 0, 1\}$, $v_{c} = \{ 1, 2\}$, and $v_{d} = \{ 0, 1\}$, respectively, for the program \emph{foo} in Fig \ref{toy-program} instead of what is originally used in Section \ref{sec:pre}. Then it is easy to compute that MFS of \emph{foo} is (-, -, 1, -), which is different from the original MFS (1, -, 1, -). We can learn the new MFS is irrelevant to the parameter $a$; this is because according to the execution tree in Fig \ref{foo-tree}, no matter what $a$ is assigned to ($0$ or $1$), it can only follow $Path 1$ or $Path 2$, and hence cannot execute other paths. As a result, the fault is only depended on what $c$ is assigned to. The changes of MFS also impacts on the guaranteed code. From Table \ref{weg-foo} and \ref{strong-foo}, the weak guaranteed code of (-, -, 1, -) is $S2$ and $S3$, while there is no strong guaranteed code. This results shows that the correlation between MFS and the real faulty code ($S7$) is  very trivial, which is different from the conclusion which is based on the original inputs modeling.
+
+Considering this, the third research question is:
+
+\textbf{Q3: How does the inputs model of CT affect the correlation between MFS and faulty code?}
+
+
+To answer question, for each program subject in our empirical studies, we design 3 different inputs model (they vary in the the number of parameters and the number of values for each parameter). Then we will obtain their MFS, guaranteed code, and the correlation between MFS and faulty code, respectively. At last, we will evaluate whether there exist any difference among these results.
+
+%These questions are important, as
 
 \section{Subject programs}\label{sec:subjects}
+We have prepared 8 program subjects for our experiment, of which 7 subjects programs belong to the Siemens set \cite{hutchins1994experiments}, and the remaining subject is GNU Grep\footnote{https://www.gnu.org/software/grep/}. We obtain these subjects, as well as their program specifications, from the Software Infrastructure Repository (SIR) \cite{do2005supporting}. These subjects have been wildly used in the studies of fault detection and localization \cite{zeller2002isolating,jones2005empirical,renieres2003fault,ghandehari2013fault}.  Table \ref{subjects_Chaar} shows the specific program subjects, number of lines of code, the brief introduction, and the number faulty versions for each subject.
 
-\subsection{Generating faulty programs}
+%. Note that althouth , but they contain many.
+%The Siemens programs perform a variety of tasks: tcas is an aircraft collision avoidance system, schedule2 and schedule are priority schedulers, totinfo computes statistics given input data, printtokens and printtokens2 are lexical analyzers, and replace performs pattern matching and substitution.
 
-\subsection{Symbolic execution of the paths}
+\begin{table*}[!ht]
+  \centering
+  \caption{Characteristics of subject programs}
+    \begin{tabular}{|c|c|c|c|}  \hline
+    Subject & Loc & Description & \# of faulty versions \\ \hline
+    printtokens & 472 & lexical analyzers   &  7 \\
+    printtokens2 & 399 & -   &  10 \\
+    replace & 512 & performs pattern matching and substitution   &  32 \\
+    schedule & 292 & priority schedulers   &  9 \\
+    schedule2 & 301 & -   &  10 \\
+    tcas &  141 & aircraft collision avoidance system   &  41 \\
+    totinfo & 440  & computes statistics given input data   &  23 \\
+    grep & 10068  & searching for lines matching a regular expression.   &  19 \\  \hline
+    \end{tabular}%
+  \label{subjects_Chaar}%
+\end{table*}%
 
+
+\subsection{Fault characteristics}
+For each program subject in our experiment, there are several faulty versions come with the correct version. These faults vary in different types and locations.  With respect to the research question 2, we need to classify these faults into 3 main types and each of them has 3-sub types. For this, we checked the source file for each version of the specific programs, compared them with the correct version, and then classified the faults according to the aforementioned types. Table \ref{subject fault} shows the fault type distribution for each subject.
+%Using mutation to inject faults into.
+\begin{table*}[!ht]
+  \centering
+  \caption{Fault type distribution of subject programs}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}  \hline
+    \multirow{2}{*}{Subjects} & \multicolumn{3}{c|}{Assignment} & \multicolumn{3}{c|}{Checking} & \multicolumn{3}{c|}{Interface} \\ \cline{2-10}
+     & missing &  wrong   &  extraneous & missing &  wrong   &  extraneous & missing &  wrong   &  extraneous \\ \hline
+    printtokens & 2 &   2  & 1 & 0 &   1  & 1 &  1&   0  & 0   \\
+    printtokens2 & 1 &  2  & 0 & 2 &  1   & 3 & 0 &  1   & 0  \\
+    replace & 1 &  9  & 1 & 10 &  8   & 4 & 0 &  3   & 0  \\
+    schedule &  1 & 2  & 0 & 1 &   4  & 1 & 0  & 0    & 0  \\
+    schedule2 &  1 &  1    & 0 & 5  &  0   & 2 & 0 &  1   & 0   \\
+    tcas & 0 &  40  & 2 &  1 &   1   & 0  & 0 &  0   & 0 \\
+    totinfo & 0 &  9  &0 &1  & 8    &3  & 1 & 1    & 0   \\
+    grep & 0 &  0  &6 &  0&   0  & 13 &  0&   0  &  0 \\  \hline
+    \end{tabular}%
+  \label{subject fault}%
+\end{table*}%
+
+Note that there may exist multiple types of faults in one subject. For example, the fault version 1 of subject \emph{printtokens} has two types of faults, which are belong to missing code of variable assignment and extraneous code of variable assignment, respectively. As a result, the total number of the faulty types of the programs with all the versions is large than the number of faulty versions of the programs.
+
+\subsection{Input modeling}
+
+To test each subject program, we need to model their inputs space firstly. Specifically, We initially followed the instructions described in \cite{ghandehari2013applying} to build the corresponding model for each subject, which include defining the key parameters and the values of each parameter for the programs, obtaining the possible constraints amon these parameters. For example, for the program \emph{replace} in the Siemens suite, we may consider there parameters: pattern, substitute and input text. Each of them have different type of value, e.g., the pattern may be a common character, digit, or line matching signal, etc. Besides this initial model, we built 2 more inputs modeling based on the initial one (With removing some parameters or values), such that we can observe and compare the results with different modeling.  Table \ref{subjects_inputs} listed these models (where \emph{Model1} is the initial model obtaining from \cite{ghandehari2013applying}) and the number of constraints of each subject.  The model is presented in the abbreviated form $\#values^{\#number\ of\ parameters} \times ...$.
+
+%The detailed model is also available for review in. The model column in the table shows the number of parameters and their domain size. We represent it by where d indicates that there are k number of parameters with domain size as d. Note that, which is the total number of parameters
+\begin{table*}[ht]
+  \centering
+  \caption{Inputs modeling of subject programs}
+    \begin{tabular}{|c|c|c|c|c|}  \hline
+    Subject & Model1 & Model2 & Model3 & Constraints \\ \hline
+    printtokens & $2^{1} \times 3^{1} \times 4 ^{4} \times 5 ^{1} \times 10 ^{1} \times 13 ^{2} $&     &  &  8 \\
+    printtokens2 & $2^{1} \times 3^{1} \times 4 ^{4} \times 5 ^{1} \times 10 ^{1} \times 13 ^{2} $ &    &  & 8 \\
+    replace & $2^{4} \times 4^{16}$ &  &  &  36\\
+    schedule &  $2^{1} \times 3 ^{8} \times 8 ^{2}$&  &  & 0\\
+    schedule2 & $2^{1} \times 3 ^{8} \times 8 ^{2}$ &   &  & 0 \\
+    tcas & $2 ^{7} \times 3^{2} \times 4 ^{1} \times 10 ^{2}$  &   &  & 0\\
+    totinfo & $3 ^{3} \times 5 ^{2} \times 6^{1}$   &   &  & 0 \\
+    grep & $2 ^{7} \times 4 ^{1} \times  6 ^{5} \times 9 ^{1} \times 13 ^{1}$  &   &   &  2 \\  \hline
+    \end{tabular}%
+  \label{subjects_inputs}%
+\end{table*}%
+
+%\subsection{Obtaining traces}
+%
+%Run all the possible test cases, and obtain their traces. Such that we can compute the guaranteed code of each MFS.
 
 %\section{Getting MFS and their guaranteed code}
 
 \section{Results}\label{sec:results}
+\subsection{The characteristics of the MFS}
+the degree of mfs
+
+the number wg and sg number of lines.
 
 \subsection{General Correlation}
+After we use the real. use the diff to find the variance between , their .
+After compare the . the result is listed .
 
 \subsection{Fault types}
 
-\subsection{Model }
+We can firstly learn that the correlativeness has no means to do with ODC class. only with types.
 
+the faulty code is, wrong the code, extra the code, missing two codes nearest it.
+
+
+The conclusion is, that the wrong code and extra code are more close, because those which control this is more close to introducing faulty.
+
+While the missing is very. This is because some code may be .
+
+\subsection{Inputs modeling }
+
+
+Different modeling,
+
+the coverage (line coverage, condition coverage), correlated to the faulty code with guaranteed code distance.
+
+(Note that in some pictures, the condition coverage cannot be 100 percent because some exception will not be triggered in the current inputs, e.g., the input memory exception handle module will not be triggered)
+
+Above all, the answer to the question 3 is :
+
+\textbf{The more the coverage the inputs modeling supports, the more accurate the MFS is correlated to the faulty code.}
+
+%注意这个结果只是一个经验性地结果，其实对于错误，很难确定其真正地type， 比如说，如果一个assign 被用到后面地check 呢？， 这就导致其实assign check 地很
+%与其这样分，我们发现很多分类不合理
+
+%宏会影响错误，因为它是直接编译地
 
 \subsection{Threats to Validation}
 
+There are several threats to validity in our empirical studies.
+
+First, our experiments are based on only 8 open-source software. More subject programs are desired to make the results more general.
+
+Second, the faults should be extended to more real faults, not only with those injected ones.
+
+At last, we should balance the number of different types of faults. Specifically, the checking, interface types should be increased, as well as the missing and extraneous code.
+%For example, it is appealing to study the multiple faults in one program, or faults that are related to more than one statements.
 
 \section{Related works}\label{sec:related}
 
-There are many methods aims at identifying MFS in CT, which can be classified into two categories:
+There are several works that are related to our study, and they can be categorised into two types:
 
-1. MFS in CT
+The first type of methods studies the MFS in CT. Nie \cite{nie2011minimal} firstly studied the properties of the MFS in SUT, based on which additional test cases were generated to identify them. Other approaches to identify the MFS in SUT include building a tree model \cite{yilmaz2006covering}, adaptively generating additional test cases according to the outcome of the last test case \cite{zhang2011characterizing}, ranking suspicious interactions based on some rules \cite{ghandehari2012identifying}, and using graphic-based deduction \cite{martinez2008algorithms}, among others. These approaches can be partitioned into two categories \cite{colbourn2008locating} according to how the additional test cases are generated: \emph{adaptive}--additional test cases are chosen based on the outcomes of the executed tests \cite{shi2005software,nie2011minimal,ghandehari2012identifying,niu2013identifying,zhang2011characterizing,shakya2012isolating,wang2010adaptive,li2012improved}or \emph{nonadaptive}--additional test cases are chosen independently and can be executed in parallel \cite{yilmaz2006covering,colbourn2008locating,martinez2008algorithms,martinez2009locating,zhang2012faulty}. All these works focused on input-level or configuration-level testing, i.e., their target is to identify the failure-inducing inputs or options, not the code in the program.
 
+Besides these work, there exists two studies that focus on utilizing MFS to locate the faulty statement in the program \cite{ma2013locating,ghandehari2013fault}. The first work \cite{ma2013locating} adopted OFOT \cite{nie2011minimal} to calculate the MFS, and then compares the additional generated test cases with the original failing test cases to locate the failure-causing chains and corresponding statements. The second work \cite{ghandehari2013fault} took the ranking method \cite{ghandehari2012identifying} to identify the MFS. Then  it generated additional passing test cases based on the MFS, and ranked the suspicious statements by comparing the spectrum of the failing test case and passing test cases.
 
+Our work differs from the first type of work in that we focus on both MFS and faulty code, not just any single object. Additionally, our work does not specifically describes how to identify MFS or how to conduct code-level fault localization, instead, we studied the correlation between them. We believe this is important and will give a guideline for how to utilize MFS for fault diagnosis.
 
+%Combinatorial testing has been widely applied in industry \cite{kuhn2010practical}. Fault localization is an important part of CT studies. \cite{nie2011survey}, as it can facilitate debugging efforts by reducing the scope of code that is needed for inspection \cite{ghandehari2012identifying}.
+%
+%Shi and Nie \cite{shi2005software} presented an approach for failure revealing and failure diagnosis in CT , which first tests the SUT with a covering array, then reduces the value schemas contained in the failing test case by eliminating those appearing in the
+%passing test cases.
+%
+%Nie's approach in \cite {nie2011minimal} first separates the faulty-possible tuples and healthy-possible tuples into two sets. Subsequently, by changing one parameter value at a time of the original test case, this approach generates extra test cases. After executing the configurations, the approach converges by reducing the number of tuples in the faulty-possible sets. Wang then \cite{wang2010adaptive} extended this approach by adaptively mutates multiple parameter values instead of only one factor at a time.
+%
+%Delta debugging \cite{zeller2002simplifying} proposed by Zeller is an adaptive divide-and-conquer approach to locate interaction fault. It is very efficient and has been applied to real-life software environment. Zhang et al. \cite{zhang2011characterizing} also proposed a similar approach that can identify the failure-inducing combinations that have no overlapped part efficiently.  JieLi proposed a similar approach \cite{li2012improved}.
+%
+%%Charles \cite{colbourn2008locating} proposed,
+%
+% Charles \cite{colbourn2008locating} proposed the notion of ($d$,$t$)-detecting array, which corresponds to test cases that permit the determination of MFS in the SUT, if the number of MFS $d$ and degree of MFS $t$ are known in prior.  C. Martiez \cite{martinez2008algorithms} also proposed a non-adaptive method. Their approach extends the covering array to the locating array to detect and locate interaction faults. They \cite{martinez2009locating} then extend this non-adaptive method to any degree with the theory of hyber-graphic.  C. Martiez \cite{martinez2008algorithms,martinez2009locating}proposed two adaptive algorithms. The first one needs safe value as their assumption and the second one remove this assumption when the number of values of each parameter is equal to 2. Their algorithms focus on identifying the faulty tuples that have no more than 2 parameters.
+%
+%Ghandehari.etc \cite{ghandehari2012identifying} defines the suspiciousness of tuple and suspiciousness of the environment of a tuple. Based on this, they rank the possible tuples and generate the test cases. Although their approach imposes minimal assumption, it does not ensure that the tuples ranked in the top are the faulty tuples. They further utilized the test cases generated from the inducing interaction to locate the fault \cite{ghandehari2013fault}.
+%
+%Yilmaz \cite{yilmaz2006covering} proposed a machine learning method to identify inducing combinations from a combinatorial testing set. They construct a classified tree to analyze the covering arrays and detect potential faulty combinations. They \cite{yilmaz2006covering} additionally extend their work on variable covering array. Beside this, Fouch{\'e} \cite{fouche2009incremental} and Shakya \cite{shakya2012isolating} made some improvements in identifying failure-inducing combinations based on Yilmaz' work.
+%
+%Zhang \cite{zhang2012faulty} proposed an approach that are directly based on covering
+%array. This approach translates MFS identification to a constraints satisfaction and optimal problem.
 
-All these methods. with respect to the code level which utilizes.
-2. use MFS to isolate faulty code. machunhyan \cite{ma2013locating}  and leiyu \cite{ghandehari2013fault}
+%Studies on symbolic execution, has .
 
+%The second type of work focus on the code-level diagnosis in software, i.e., the fault localization techniques. Many methods
 
-Studies on symbolic execution, has .
+The second type of work  relates to the guaranteed code.
 
-4. Use symoblic execution in CT. Charles song \cite{reisner2010using} first. Then extend to itree \cite{song2012itree}, then extends to multiple leaves with \cite{song2014itree}.
+Elnatan \cite{reisner2010using} firstly used symbolic evaluation to analyse the configuration options in the program. In that work, they proposes the notion of guaranteed coverage, from which they find that the effective configuration space is relatively small when compared to the all the possible combinations of options. What's more, most coverage was accounted for by lower-strength interactions (2-way or 3-way), across all of line, basic block, edge, and conditions, but higher-strength interactions are needed for maximum coverage.  Based on this work, Charles \cite{song2012itree} proposed a test cases generation method, called iTree, which combines covering array and machine learning techniques to discover as more new coverage interactions as possible. Their experiments shows that their method is more effective than traditional CT and random methods at generating test cases with more coverage of program statements. They further refined their method iTree \cite{song2014itree} by re-constructing the composite interactions.
 
-Our work differs from them
+Our work differs from them in 1) we only focus on the guaranteed code of the MFS instead of all the possible interactions in the SUT. 2) we mainly studied the guaranteed code for fault localization instead of test case generation and program statements coverage.
 
 \section{Conclusions and Future works}\label{sec:conclusion}
+Combinatorial testing has been proven to be effective at detecting and identifying the failure-inducing interactions, i.e., MFS in the SUT. Most of their work focus on how to generate test cases and how to effectively identify the MFS. Few of them consider the relationship between MFS and code-level problem. In this paper, we studied the correlation between MFS and faulty code. Specifically, we obtain the weak and strong guaranteed code of MFS, and then compare them with faulty code to observe their relationship. Our empirical studies suggest that it do exists correlation between MFS and faulty code, but the extent to which of this relation depends on the faulty types and inputs modeling.
 
 %\end{document}  % This is where a 'short' article might terminate
+
+As a further work, we plan to use the conclusion in this paper to utilize MFS for code-level fault diagnosis. It is also appealing to study whether code-level fault diagnosis can optimal the inputs modeling of CT, according to the our 3rd empirical study. Besides them, we would like to conduct studies on more software programs with more types of faults to increase the generality of our work.
 
 %ACKNOWLEDGMENTS are optional
 \section{Acknowledgments}
@@ -618,7 +783,7 @@ This work was supported by the National Natural Science Foundation of China (No.
 %
 %APPENDICES are optional
 %\balancecolumns
-\appendix
+%\appendix
 %Appendix A
 %\section{Headings in Appendices}
 %The rules about hierarchical headings discussed above for

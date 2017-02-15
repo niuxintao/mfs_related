@@ -612,3 +612,19 @@ ISSN={0098-5589}
   year={2005},
   organization={ACM}
 }
+@inproceedings{renieres2003fault,
+  title={Fault localization with nearest neighbor queries},
+  author={Renieres, Manos and Reiss, Steven P},
+  booktitle={Automated Software Engineering, 2003. Proceedings. 18th IEEE International Conference on},
+  pages={30--39},
+  year={2003},
+  organization={IEEE}
+}
+@inproceedings{zeller2002isolating,
+  title={Isolating cause-effect chains from computer programs},
+  author={Zeller, Andreas},
+  booktitle={Proceedings of the 10th ACM SIGSOFT symposium on Foundations of software engineering},
+  pages={1--10},
+  year={2002},
+  organization={ACM}
+}

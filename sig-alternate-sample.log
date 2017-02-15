@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2014.9.10)  5 FEB 2017 04:58
+This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2014.9.10)  16 FEB 2017 05:44
 entering extended mode
 **sig-alternate-sample.tex
 (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.tex
@@ -288,7 +288,7 @@ Requested font "cmex7" at 6.0pt
  -> cmex7
 Requested font "cmex7" at 5.0pt
  -> cmex7
-LaTeX Font Info:    Try loading font information for U+msa on input line 193.
+LaTeX Font Info:    Try loading font information for U+msa on input line 207.
 
 (C:\CTEX\MiKTeX\tex\latex\amsfonts\umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
@@ -299,7 +299,7 @@ Requested font "msam7" at 6.0pt
  -> msam7
 Requested font "msam5" at 5.0pt
  -> msam5
-LaTeX Font Info:    Try loading font information for U+msb on input line 193.
+LaTeX Font Info:    Try loading font information for U+msb on input line 207.
 
 (C:\CTEX\MiKTeX\tex\latex\amsfonts\umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
@@ -310,7 +310,7 @@ Requested font "msbm7" at 6.0pt
  -> msbm7
 Requested font "msbm5" at 5.0pt
  -> msbm5
-LaTeX Font Info:    Try loading font information for U+lasy on input line 193.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 207.
 
 (C:\CTEX\MiKTeX\tex\latex\base\ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
@@ -321,21 +321,25 @@ Requested font "lasy6" at 6.0pt
  -> lasy6
 Requested font "lasy5" at 5.0pt
  -> lasy5
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 193.
 
+Overfull \hbox (91.85365pt too wide) in paragraph at lines 207--207
+ []\eaddfnt laleh.shikhgholamhosseing@mavs.uta.edu| 
+ []
+
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 207.
 (C:\CTEX\MiKTeX\tex\latex\psnfss\t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 )
 Requested font "ptmr8t" at 7.0pt
  -> ptmr8t
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 193.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 207.
 
 
 (C:\CTEX\MiKTeX\tex\latex\psnfss\omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <7> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 193.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 207.
 Requested font "aer8" at 8.0pt
  -> aer8
 Requested font "cmr8" at 8.0pt
@@ -352,27 +356,27 @@ Requested font "msbm10" at 8.0pt
  -> msbm10
 Requested font "lasy8" at 8.0pt
  -> lasy8
-LaTeX Font Info:    Try loading font information for OMS+aer on input line 233.
+LaTeX Font Info:    Try loading font information for OMS+aer on input line 247.
 
 
 (C:\CTEX\MiKTeX\tex\latex\ae\omsaer.fd
 File: omsaer.fd 1999/12/27
 )
 LaTeX Font Info:    Font shape `OMS/aer/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 233.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 247.
 Requested font "aebx9" at 9.0pt
  -> aebx9
+
+Underfull \vbox (badness 5862) has occurred while \output is active []
+
 Requested font "aeti9" at 9.0pt
  -> aeti9
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
  [1
 
 
 ]
 \c@definition=\count114
-LaTeX Font Info:    Try loading font information for T1+aett on input line 325.
+LaTeX Font Info:    Try loading font information for T1+aett on input line 339.
 
 
 (C:\CTEX\MiKTeX\tex\latex\ae\t1aett.fd
@@ -384,15 +388,14 @@ Requested font "aer5" at 5.0pt
  -> aer5
 Requested font "aebxti10" at 9.0pt
  -> aebxti10
-
-Overfull \hbox (1.81006pt too wide) in paragraph at lines 379--379
+ [2]
+Overfull \hbox (1.81006pt too wide) in paragraph at lines 393--393
 []\secfnt Formal de-scrip-tion about guar-an-teed code 
  []
 
-[2]
 File: foo_tree.eps Graphic file (type eps)
- <foo_tree.eps>
-Overfull \hbox (5.71754pt too wide) in paragraph at lines 385--386
+<foo_tree.eps>
+Overfull \hbox (5.71754pt too wide) in paragraph at lines 399--400
 [][] 
  []
 
@@ -403,113 +406,120 @@ Requested font "aer6" at 6.0pt
 Requested font "aecsc10" at 9.0pt
  -> aecsc10
  [4] [5]
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 684 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 685 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 685 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 685 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 685 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 685 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 685 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 685 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 685 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 685 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 685 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 685 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 685 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 685 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 685 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 685 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 685 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 685 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 685 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 687 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 687 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 687 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 687 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 687 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 687 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 687 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 687 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 687 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 687 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 687 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 687 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 687 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 687 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 687 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 687 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 687 replaced by U+FFFD.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \vbox (badness 5548) has occurred while \output is active []
 
  [6]
-(C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.bbl [7]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Overfull \hbox (11.5533pt too wide) in paragraph at lines 729--729
+[]\secfnt The cor-re-la-tion be-tween MF-S and re-al fault-
+ []
+
+[7]
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 758 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 759 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 759 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 759 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 759 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 759 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 759 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 759 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 759 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 759 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 759 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 759 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 759 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 759 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 759 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 759 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 759 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 759 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 759 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 761 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 761 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 761 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 761 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 761 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 761 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 761 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 761 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 761 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 761 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 761 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 761 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 761 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 761 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 761 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 761 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 761 replaced by U+FFFD.
+ (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.bbl [8]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [8])
-[9
+ [9])
+[10
 
 ] (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.aux) ) 
 Here is how much of TeX's memory you used:
- 2747 strings out of 430478
- 31930 string characters out of 3191502
- 109780 words of memory out of 3000000
- 5828 multiletter control sequences out of 15000+200000
+ 2750 strings out of 430478
+ 31984 string characters out of 3191502
+ 124780 words of memory out of 3000000
+ 5831 multiletter control sequences out of 15000+200000
  51377 words of font info for 65 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 39i,10n,34p,1416b,464s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 39i,11n,34p,1416b,464s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on sig-alternate-sample.pdf (9 pages).
+Output written on sig-alternate-sample.pdf (10 pages).

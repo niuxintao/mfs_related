@@ -131,11 +131,11 @@ SIG-ALTERNATE.CLS. Supported by ACM.}}
 %
 % 1st. author
 \alignauthor
-Xintao Niu, Changhai Nie\\
+Xintao Niu\\
        \affaddr{State Key Laboratory for Novel Software Technology}\\
        \affaddr{Nanjing University}\\
        \affaddr{China, 210023}\\
-%       \affaddr{niuxintao@gmail.com}
+       \email{niuxintao@gmail.com}
 %       \affaddr{changhainie@gmail.com}
 % 2nd. author
 %\alignauthor
@@ -146,13 +146,27 @@ Xintao Niu, Changhai Nie\\
 %       \email{changhainie@nju.edu.cn}
 % 3rd. author
 \alignauthor
-Laleh Sh. Ghandehari, Jeff Lei \\
+Laleh Sh. Ghandehari \\
        \affaddr{Department of Computer}\\
        \affaddr{Science and Engineering }\\
        \affaddr{The University of Texas at Arlington}\\
 %       \affaddr{Arlington, Texas}\\
-%       \email{laleh.shikhgholamhosseing@mavs.uta.edu}
+       \email{laleh.shikhgholamhosseing@mavs.uta.edu}
 %       \email{ylei@cse.uta.edu}
+ \and
+\alignauthor
+Changhai Nie\\
+       \affaddr{State Key Laboratory for Novel Software Technology}\\
+       \affaddr{Nanjing University}\\
+       \affaddr{China, 210023}\\
+       \email{changhainie@gmail.com}
+\alignauthor
+Jeff Lei \\
+       \affaddr{Department of Computer}\\
+       \affaddr{Science and Engineering }\\
+       \affaddr{The University of Texas at Arlington}\\
+%       \affaddr{Arlington, Texas}\\
+       \email{ylei@cse.uta.edu}
 \alignauthor
 Xiaoyin Wang \\
        \affaddr{Department of Computer}\\
@@ -161,7 +175,7 @@ Xiaoyin Wang \\
        \affaddr{Texas at San Antonio}\\
  %      \affaddr{China, 211171}\\
 %       \email{xujiaxi@njxzc.edu.cn} \\
-%       \email{Xiaoyin.Wang@utsa.edu}
+       \email{Xiaoyin.Wang@utsa.edu}
  % use '\and' if you need 'another row' of author names
 % \and
 % 4th. author
@@ -192,7 +206,7 @@ Xiaoyin Wang \\
 
 \maketitle
 \begin{abstract}
-Combinatorial Testing (CT) is an effective technique for testing the interactions of factors in the Software Under Test(SUT). Most works in CT focus on the method itself, e.g., how to generate test cases, model the inputs, or handle the constraints of the inputs. Few of the works consider the justification of CT, i.e., is detecting and identifying the failure-inducing interactions really useful and helpful to code-level fault diagnosis? In this paper, we novelty studied the relationship between the failure-inducing interactions and code which causes the failure. Specifically, based on symbolic execution, we firstly obtain the guaranteed code of the corresponding failure-inducing interactions, i.e., those program entities which are directly affected by these interactions. And then we will compared these guaranteed code with those real faulty code to see whether there exists any associations between failure-inducing interactions with these real faulty code. Our empirical studies based on 5 real subjects showed that the failure-inducing interactions are strongly correlated with faulty code in the SUT.
+Combinatorial Testing (CT) is an effective technique for testing the interactions of factors in the Software Under Test(SUT). Most works in CT focus on the method itself, e.g., how to generate test cases, model the inputs, or handle the constraints of the inputs. Few of the works consider the justification of CT, i.e., is detecting and identifying the failure-inducing interactions really useful and helpful to code-level fault diagnosis? In this paper, we novelty studied the relationship between the failure-inducing interactions and code which causes the failure. Specifically, we firstly obtain the guaranteed code of the corresponding failure-inducing interactions, i.e., those program entities which are directly affected by these interactions. And then we will compared these guaranteed code with those real faulty code to see whether there exists any associations between failure-inducing interactions with these real faulty code. Our empirical studies based on some real subjects showed that the failure-inducing interactions are correlated with faulty code in the SUT to some extent, but their correlation are affected by many factors.
 
 \end{abstract}
 
@@ -372,7 +386,7 @@ $t_{4}$ &\multicolumn{4}{l}{1  \ \ \ \  0 \ \ \ \  1 \ \ \ \ 0 } & Fail \\
 \end{tabular}
 \end{table}
 
-This identification process mutate one factor of the original test case at a time to generate extra test cases. Then according to the outcome of the test cases execution result, it will identify the MFS of the original failing test cases. It is called the OFOT method \cite{nie2011minimal}, which is a well-known MFS identification method in CT. In this paper, we will focus on this identification method.
+This identification process mutate one factor of the original test case at a time to generate extra test cases. Then according to the outcome of the test cases execution result, it will identify the MFS of the original failing test cases. It is called the OFOT method \cite{nie2011minimal}, which is a well-known MFS identification method in CT.
 %It should be noted that the following proposed CT framework can be easily applied to other MFS identification methods.
 
 
@@ -596,7 +610,7 @@ We have prepared 8 program subjects for our experiment, of which 7 subjects prog
     schedule2 & 301 & -   &  10 \\
     tcas &  141 & aircraft collision avoidance system   &  41 \\
     totinfo & 440  & computes statistics given input data   &  23 \\
-    grep & 10068  & searching for lines matching a regular expression.   &  5 \\  \hline
+    grep & 10068  & searching for lines matching a regular expression.   &  19 \\  \hline
     \end{tabular}%
   \label{subjects_Chaar}%
 \end{table*}%
@@ -611,26 +625,26 @@ For each program subject in our experiment, there are several faulty versions co
     \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}  \hline
     \multirow{2}{*}{Subjects} & \multicolumn{3}{c|}{Assignment} & \multicolumn{3}{c|}{Checking} & \multicolumn{3}{c|}{Interface} \\ \cline{2-10}
      & missing &  wrong   &  extraneous & missing &  wrong   &  extraneous & missing &  wrong   &  extraneous \\ \hline
-    printtokens &  &     &  &  &     &  &  &     &    \\
-    printtokens2 &  &    &  &  &     &  &  &     &   \\
-    replace &  &    &  &  &     &  &  &     &   \\
-    schedule &  &      &  &  &     &  &  &     &   \\
-    schedule2 &  &      & &  &     &  &  &     &    \\
-    tcas &  &    & &  &     &  &  &     &   \\
-    totinfo &  &    &  &  &     &  &  &     &   \\
-    grep &  &    & &  &     &  &  &     &   \\  \hline
+    printtokens & 2 &   2  & 1 & 0 &   1  & 1 &  1&   0  & 0   \\
+    printtokens2 & 1 &  2  & 0 & 2 &  1   & 3 & 0 &  1   & 0  \\
+    replace & 1 &  9  & 1 & 10 &  8   & 4 & 0 &  3   & 0  \\
+    schedule &  1 & 2  & 0 & 1 &   4  & 1 & 0  & 0    & 0  \\
+    schedule2 &  1 &  1    & 0 & 5  &  0   & 2 & 0 &  1   & 0   \\
+    tcas & 0 &  40  & 2 &  1 &   1   & 0  & 0 &  0   & 0 \\
+    totinfo & 0 &  9  &0 &1  & 8    &3  & 1 & 1    & 0   \\
+    grep & 0 &  0  &6 &  0&   0  & 13 &  0&   0  &  0 \\  \hline
     \end{tabular}%
   \label{subject fault}%
 \end{table*}%
 
-Based on this table, we can learn that.
+Note that there may exist multiple types of faults in one subject. For example, the fault version 1 of subject \emph{printtokens} has two types of faults, which are belong to missing code of variable assignment and extraneous code of variable assignment, respectively. As a result, the total number of the faulty types of the programs with all the versions is large than the number of faulty versions of the programs.
 
 \subsection{Input modeling}
 
 To test each subject program, we need to model their inputs space firstly. Specifically, We initially followed the instructions described in \cite{ghandehari2013applying} to build the corresponding model for each subject, which include defining the key parameters and the values of each parameter for the programs, obtaining the possible constraints amon these parameters. For example, for the program \emph{replace} in the Siemens suite, we may consider there parameters: pattern, substitute and input text. Each of them have different type of value, e.g., the pattern may be a common character, digit, or line matching signal, etc. Besides this initial model, we built 2 more inputs modeling based on the initial one (With removing some parameters or values), such that we can observe and compare the results with different modeling.  Table \ref{subjects_inputs} listed these models (where \emph{Model1} is the initial model obtaining from \cite{ghandehari2013applying}) and the number of constraints of each subject.  The model is presented in the abbreviated form $\#values^{\#number\ of\ parameters} \times ...$.
 
 %The detailed model is also available for review in. The model column in the table shows the number of parameters and their domain size. We represent it by where d indicates that there are k number of parameters with domain size as d. Note that, which is the total number of parameters
-\begin{table*}[!ht]
+\begin{table*}[ht]
   \centering
   \caption{Inputs modeling of subject programs}
     \begin{tabular}{|c|c|c|c|c|}  \hline
@@ -640,7 +654,7 @@ To test each subject program, we need to model their inputs space firstly. Speci
     replace & $2^{4} \times 4^{16}$ &  &  &  36\\
     schedule &  $2^{1} \times 3 ^{8} \times 8 ^{2}$&  &  & 0\\
     schedule2 & $2^{1} \times 3 ^{8} \times 8 ^{2}$ &   &  & 0 \\
-    tcas & $2 ^{7} \times 3^{2} \times 4 ^{1} \times 10 ^{2}$  &   &  & 0\\
+    tcas & $2 ^{7} \times 3^{2} \times 4 ^{1} \times 10 ^{2}$  & $2 ^{7} \times 3^{2} \times 4 ^{1} $&  $2 ^{7} \times 3^{2}$  & 0\\
     totinfo & $3 ^{3} \times 5 ^{2} \times 6^{1}$   &   &  & 0 \\
     grep & $2 ^{7} \times 4 ^{1} \times  6 ^{5} \times 9 ^{1} \times 13 ^{1}$  &   &   &  2 \\  \hline
     \end{tabular}%
@@ -654,12 +668,72 @@ To test each subject program, we need to model their inputs space firstly. Speci
 %\section{Getting MFS and their guaranteed code}
 
 \section{Results}\label{sec:results}
+In this section, we will display and analyse the results of our experiments, based on which we will answer the three research questions posed in Section \ref{sec:research}.
 
-\subsection{General Correlation}
+\subsection{The characteristics of the MFS}
+We firstly give the characteristics of the MFS.  These MFS are identified by our tool \emph{TRT}\cite{niu2013identifying}.
+Table \ref{subject mfs} shows the distribution of the MFS with various degree for each subject.
+
+\begin{table*}[!ht]
+  \centering
+  \caption{The degree of the mfs for the subject programs}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}  \hline
+    \multirow{2}{*}{Subjects} & \multicolumn{12}{c|}{The number of MFS with specific degree} &  \multirow{2}{*}{Total}\\ \cline{2-13}
+        & 1 &  2   &  3 & 4 &  5   &  6 & 7 &  8   &  9  & 10 & 11 & 12 &  \\ \hline
+    printtokens & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 & 0  \\
+    printtokens2 & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 & 0 \\
+    replace & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 & 0 \\
+    schedule & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 & 0  \\
+    schedule2 & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 & 0   \\
+    tcas & 0 &   0  & 0 & 0 &   0  & 76 &  465&   1130  & 2882 & 3057 &1274 & 132 & 9076  \\
+    totinfo & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 & 0 \\
+    grep & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 & 0\\  \hline
+    \end{tabular}%
+  \label{subject mfs}%
+\end{table*}%
+
+We can learn that most of the degree of the MFS are less than 6, which is in accordance with the observation in the study \cite{kuhn2002investigation}. One exception is tcas, we found that the degree of the most MFS of tcas are greater than 6 (up to 12). With inspecting the code of tcas, we believe the cause of this result is the \emph{Coincidental Correctness} problem \cite{masri2014prevalence}, i.e., the fault is triggered by a relative small number (1 to 6) of parameter values, but it may not be observed because it cannot propagate to the output. There exist many restrictions that make this fault observable, and hence the degree of the MFS increases. Another observation from Table \ref{subject mfs} is that there may exists multiple mfs for a single faulty version. Hence, the total number of MFS is far greater than the number of faulty versions.
+
+Next, we will show the average number of lines of the guaranteed code (weak and strong) for the MFS with different degree in Table \ref{mfs wk_numberlines}.
+
+\begin{table*}[!ht]
+  \centering
+  \caption{The average number of lines of guaranteed code of the mfs}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}  \hline
+    & \multirow{2}{*}{Subjects} & \multicolumn{12}{c|}{The average number of lines code of the MFS with specific degree} \\ \cline{3-14}
+    &    & 1 &  2   &  3 & 4 &  5   &  6 & 7 &  8   &  9  & 10 & 11 & 12  \\ \hline
+   \multirow{8}{*}{\rotatebox{90}{Weak guaranteed}} & printtokens & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0   \\
+   & printtokens2 & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0  \\
+   & replace & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 \\
+   & schedule & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 \\
+   & schedule2 & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0    \\
+   & tcas &   -  & - & - &- & -  & 51.1 &  51.5  & 50.6 & 50.6 &  50.9  & 51.5 &  52.5  \\
+   & totinfo & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0  \\
+   & grep & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 \\  \hline
+  \multirow{8}{*}{\rotatebox{90}{Strong guaranteed}}  & printtokens & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0   \\
+   & printtokens2 & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0  \\
+   & replace & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 \\
+   & schedule & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 \\
+   & schedule2 & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0    \\
+   & tcas &   -  & - & - &- & -  & 0.0 &  0.0  & 0.1 & 0.2 &  0.2  & 0.1 &  0.0  \\
+   & totinfo & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0  \\
+   & grep & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 \\  \hline
+    \end{tabular}%
+  \label{mfs wk_numberlines}%
+\end{table*}%
+
+One observation of Table \ref{mfs wk_numberlines} is that the number of lines of weak guaranteed is far more than that of strong guaranteed. It is easy to understand, as according to the definition, we need to remove many lines of code from weak guaranteed to obtain the strong guaranteed.
+
+Another point that we can learn from this table is that, with the increase of the degree of the MFS, the number of lines of weak guaranteed code also increases. This because the MFS with less degree may have more compatible paths that can contain this schema. Take the example in Section \ref{sec:pre}, 1-degree schema (1, - , -, -  )have two compatible paths (Path 1, 2), while 2-degree (1, -, 1, -) only have one path (Path 1). As result, to obtain the weak guaranteed code, the MFS with less degree need to conduct more intersection between the lines of code of paths, and hence it may decrease the number of lines of code for the weak guaranteed code.
+
+\subsection{The correlation between MFS and real faulty code}
+After we use the real. use the diff to find the variance between , their .
+After compare the . the result is listed .
+
 
 \subsection{Fault types}
 
-We can firstly learn that the correlativeness has no means to do with odc class. only with types.
+We can firstly learn that the correlativeness has no means to do with ODC class. only with types.
 
 the faulty code is, wrong the code, extra the code, missing two codes nearest it.
 
@@ -694,7 +768,7 @@ First, our experiments are based on only 8 open-source software. More subject pr
 
 Second, the faults should be extended to more real faults, not only with those injected ones.
 
-At last, we should balance the number of different types of faults. Specifically, the checking, interface types should be increased, as well as the missing and extraneous code.
+At last, we should balance the number of different types of faults. In fact, noted Table \ref{subject fault}, we have none extanones type in the interfaceing odc class.  Specifically, the checking, interface types should be increased, as well as the missing and extraneous code.
 %For example, it is appealing to study the multiple faults in one program, or faults that are related to more than one statements.
 
 \section{Related works}\label{sec:related}
