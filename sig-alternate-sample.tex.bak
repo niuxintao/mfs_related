@@ -598,22 +598,22 @@ We have prepared 8 program subjects for our experiment, of which 7 subjects prog
 %. Note that althouth , but they contain many.
 %The Siemens programs perform a variety of tasks: tcas is an aircraft collision avoidance system, schedule2 and schedule are priority schedulers, totinfo computes statistics given input data, printtokens and printtokens2 are lexical analyzers, and replace performs pattern matching and substitution.
 
-\begin{table*}[!ht]
+\begin{table}[!ht]
   \centering
   \caption{Characteristics of subject programs}
     \begin{tabular}{|c|c|c|c|}  \hline
-    Subject & Loc & Description & \# of faulty versions \\ \hline
+    Subject & Loc & Description & Versions \\ \hline
     printtokens & 472 & lexical analyzers   &  7 \\
     printtokens2 & 399 & -   &  10 \\
-    replace & 512 & performs pattern matching and substitution   &  32 \\
-    schedule & 292 & priority schedulers   &  9 \\
+    replace & 512 & pattern substitution   &  32 \\
+    schedule & 292 & priority scheduler   &  9 \\
     schedule2 & 301 & -   &  10 \\
-    tcas &  141 & aircraft collision avoidance system   &  41 \\
-    totinfo & 440  & computes statistics given input data   &  23 \\
-    grep & 10068  & searching for lines matching a regular expression.   &  19 \\  \hline
+    tcas &  141 & altitude separation   &  41 \\
+    totinfo & 440  & information measure   &  23 \\
+    grep & 10068  & pattern recognition   &  19 \\  \hline
     \end{tabular}%
   \label{subjects_Chaar}%
-\end{table*}%
+\end{table}%
 
 
 \subsection{Fault characteristics}
@@ -702,7 +702,7 @@ Next, we will show the average number of lines of the guaranteed code (weak and 
     \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}  \hline
     & \multirow{2}{*}{Subjects} & \multicolumn{12}{c|}{The average number of lines code of the MFS with specific degree} \\ \cline{3-14}
     &    & 1 &  2   &  3 & 4 &  5   &  6 & 7 &  8   &  9  & 10 & 11 & 12  \\ \hline
-   \multirow{8}{*}{Weak guaranteed} & printtokens & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0   \\
+   \multirow{8}{*}{\rotatebox{90}{Weak guaranteed}} & printtokens & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0   \\
    & printtokens2 & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0  \\
    & replace & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 \\
    & schedule & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 \\
@@ -710,7 +710,7 @@ Next, we will show the average number of lines of the guaranteed code (weak and 
    & tcas &   -  & - & - &- & -  & 51.1 &  51.5  & 50.6 & 50.6 &  50.9  & 51.5 &  52.5  \\
    & totinfo & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0  \\
    & grep & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 \\  \hline
-  \multirow{8}{*}{Strong guaranteed}  & printtokens & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0   \\
+  \multirow{8}{*}{\rotatebox{90}{Strong guaranteed}}  & printtokens & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0   \\
    & printtokens2 & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0  \\
    & replace & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 \\
    & schedule & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 \\
@@ -722,13 +722,19 @@ Next, we will show the average number of lines of the guaranteed code (weak and 
   \label{mfs wk_numberlines}%
 \end{table*}%
 
-One observation of Table \ref{mfs wk_numberlines} is that the number of lines of weak guaranteed is far more than that of strong guaranteed. It is easy to understand, as according to the definition, we need to remove much lines of code from weak guaranteed to obtain the strong guaranteed.
+One observation of Table \ref{mfs wk_numberlines} is that the number of lines of weak guaranteed code is far more than that of strong guaranteed code. It is easy to understand, as according to the definition, we need to remove many lines of code from weak guaranteed to obtain the strong guaranteed.
 
-Another point that we can learn from this table is that the more degree of mfs, the more number of wg and sg. This because less degree have more paths than contain this schema, and hence the intersection may be small (The common part).
+Another point that we can learn from this table is that, with the increase of the degree of the MFS, the number of lines of weak guaranteed code also increases. This because the MFS with less degree may have more compatible paths that can contain this schema. Take the example in Section \ref{sec:pre}, 1-degree schema (1, - , -, -  )have two compatible paths (Path 1, 2), while 2-degree (1, -, 1, -) only have one path (Path 1). As result, to obtain the weak guaranteed code, the MFS with less degree need to conduct more intersection between the lines of code of paths, and hence it may decrease the number of lines of code for the weak guaranteed code.
 
-\subsection{General Correlation}
+\subsection{The correlation between MFS and real faulty code}
 After we use the real. use the diff to find the variance between , their .
-After compare the . the result is listed .
+After compare the . the result is listed in Fig \ref{result1_fig} .
+
+\begin{figure*}[!ht]
+ \includegraphics[width=6.8in]{result1.eps}
+\caption{The correlation between guaranteed code with real faulty code for each subject}
+\label{result1_fig}
+\end{figure*}
 
 
 \subsection{Fault types}
@@ -736,6 +742,29 @@ After compare the . the result is listed .
 We can firstly learn that the correlativeness has no means to do with ODC class. only with types.
 
 the faulty code is, wrong the code, extra the code, missing two codes nearest it.
+
+\begin{figure*}[!ht]
+ \includegraphics[width=6.8in]{result2.eps}
+\caption{The correlation between guaranteed code with real faulty code for different fault type}
+\label{result2_fig}
+\end{figure*}
+
+\begin{table}[!ht]
+  \centering
+  \caption{The t-test result for different fault types}
+    \begin{tabular}{|c|c|c|c|c|}  \hline
+ \multirow{4}{*}{\rotatebox{90}{weak}} &\multirow{2}{*}{Soc} &  p(a, c) & P(a, i) & P(c, i) \\ \cline{3-5}
+  &  & 7.54E-48 & -  &  -   \\ \cline{2-5}
+  & \multirow{2}{*}{Fault} &  p(m, w) & P(m, e) & P(w, e) \\ \cline{3-5}
+  &  & & &    \\ \hline
+  \multirow{4}{*}{\rotatebox{90}{Strong}} & \multirow{2}{*}{Soc} &  p(a, c) & P(a, i) & P(c, i) \\ \cline{3-5}
+  &  & NaN & - & -    \\ \cline{2-5}
+  & \multirow{2}{*}{Fault} &  p(m, w) & P(m, e) & P(w, e) \\ \cline{3-5}
+  &  & & &    \\ \hline
+    \end{tabular}%
+  \label{type_significance}%
+\end{table}%
+
 
 
 The conclusion is, that the wrong code and extra code are more close, because those which control this is more close to introducing faulty.
@@ -748,6 +777,52 @@ While the missing is very. This is because some code may be .
 Different modeling,
 
 the coverage (line coverage, condition coverage), correlated to the faulty code with guaranteed code distance.
+
+\begin{table*}[!ht]
+  \centering
+  \caption{The degree of the mfs for different input modeling}
+    \begin{tabular}{|c|c|c|c|c|c|c|}  \hline
+   \multirow{2}{*}{Subjects}   & \multicolumn{3}{c|}{2rd Input Model} &  \multicolumn{3}{c|}{3rd Input Model}   \\ \cline{2-7}
+        & Average Degree &  Decrease   &  Significance  & Average Degree &  Decrease   &  Significance   \\ \hline
+    printtokens & 0 &   0  & 0 & 0 &   0  & 0 \\
+    printtokens2  & 0 &   0  & 0 & 0 &   0  & 0 \\
+    replace  & 0 &   0  & 0 & 0 &   0  & 0  \\
+    schedule  & 0 &   0  & 0 & 0 &   0  & 0  \\
+    schedule2 & 0 &   0  & 0 & 0 &   0  & 0    \\
+    tcas & 8.17&-1.23&6.4E-62 &7.27&-2.14 &1.01E-38   \\
+    totinfo  & 0 &   0  & 0 & 0 &   0  & 0  \\
+    grep & 0 &   0  & 0 & 0 &   0  & 0 \\  \hline
+    \end{tabular}%
+  \label{subject degree_model}%
+\end{table*}%
+
+
+\begin{table*}[!ht]
+  \centering
+  \caption{The correlation between guaranteed code and real faulty code for different input modeling}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|}  \hline
+     &  \multirow{2}{*}{Subjects}   & \multicolumn{3}{c|}{2rd Input Model} &  \multicolumn{3}{c|}{3rd Input Model}   \\ \cline{3-8}
+   \multirow{8}{*}{\rotatebox{90}{Weak guaranteed}}   &   & Average Correlation &  Decrease   &  Significance  & Average Correlation &  Decrease   &  Significance   \\ \cline{2-8}
+   &  printtokens & 0 &   0  & 0 & 0 &   0  & 0 \\
+   &  printtokens2  & 0 &   0  & 0 & 0 &   0  & 0 \\
+   &  replace  & 0 &   0  & 0 & 0 &   0  & 0  \\
+   &  schedule  & 0 &   0  & 0 & 0 &   0  & 0  \\
+   &  schedule2 & 0 &   0  & 0 & 0 &   0  & 0    \\
+  &   tcas & 0.02&6.9E-4&0.35 & 0.02&1.9E-3&0.14  \\
+  &   totinfo  & 0 &   0  & 0 & 0 &   0  & 0 \\
+   &  grep & 0 &   0  & 0 & 0 &   0  & 0 \\  \hline
+   \multirow{8}{*}{\rotatebox{90}{Strong guaranteed}}   &   & Average Correlation &  Decrease   &  Significance  & Average Correlation &  Decrease   &  Significance   \\ \cline{2-8}
+  &   printtokens & 0 &   0  & 0 & 0 &   0  & 0 \\
+  &   printtokens2  & 0 &   0  & 0 & 0 &   0  & 0 \\
+  &   replace  & 0 &   0  & 0 & 0 &   0  & 0  \\
+  &   schedule  & 0 &   0  & 0 & 0 &   0  & 0  \\
+  &   schedule2 & 0 &   0  & 0 & 0 &   0  & 0    \\
+  &   tcas & 0& 0 & NaN  & 0&0&NaN  \\
+  &   totinfo  & 0 &   0  & 0 & 0 &   0  & 0 \\
+ &    grep & 0 &   0  & 0 & 0 &   0  & 0 \\  \hline
+    \end{tabular}%
+  \label{subject degree_correlate}%
+\end{table*}%
 
 (Note that in some pictures, the condition coverage cannot be 100 percent because some exception will not be triggered in the current inputs, e.g., the input memory exception handle module will not be triggered)
 
