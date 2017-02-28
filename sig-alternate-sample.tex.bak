@@ -49,6 +49,7 @@
 
 \usepackage{fancyvrb}
 \usepackage{multirow}
+\usepackage{threeparttable}
 
 \begin{document}
 
@@ -206,7 +207,7 @@ Xiaoyin Wang \\
 
 \maketitle
 \begin{abstract}
-Combinatorial Testing (CT) is an effective technique for testing the interactions of factors in the Software Under Test(SUT). Most works in CT focus on the method itself, e.g., how to generate test cases, model the inputs, or handle the constraints of the inputs. Few of the works consider the justification of CT, i.e., is detecting and identifying the failure-inducing interactions really useful and helpful to code-level fault diagnosis? In this paper, we novelty studied the relationship between the failure-inducing interactions and code which causes the failure. Specifically, we firstly obtain the guaranteed code of the corresponding failure-inducing interactions, i.e., those program entities which are directly affected by these interactions. And then we will compared these guaranteed code with those real faulty code to see whether there exists any associations between failure-inducing interactions with these real faulty code. Our empirical studies based on some real subjects showed that the failure-inducing interactions are correlated with faulty code in the SUT to some extent, but their correlation are affected by many factors.
+Combinatorial Testing (CT) is an effective technique for testing the interactions of factors in the Software Under Test(SUT). Most works in CT focus on the technique itself, e.g., how to generate test cases, model the inputs, or handle the constraints of the inputs. Few works have considered the following question, i.e., is detecting and identifying the minimal failure-inducing interactions (MFS), really useful and helpful to code-level fault diagnosis? In this paper, we present the first study on the relationship between MFS and the code which causes the failure. Specifically, we firstly obtained the guaranteed code of the corresponding MFS, i.e., those program entities which are directly affected by these interactions. And then we compared these guaranteed code with those real faulty code to see whether there exists any associations between MFS with these real faulty code. Our empirical studies based on 7 programs from SRI showed that the correlation between failure-inducing interactions and the faulty code in the SUT is low to moderate, and this correlation is affected by the fault types and MFS  characteristics.
 
 \end{abstract}
 
@@ -253,16 +254,16 @@ Combinatorial Testing (CT) is an effective technique for testing the interaction
 
 
 \section{Introduction}
-Modern software is becoming more and more complex. To test such software is challenging, as the candidate factors that can influence the system's behaviour, e.g., configuration options, system inputs, message events, are enormous. Even worse, the interactions between these factors can also crash the system, e.g., the incompatibility problems. In consideration of the scale of the industrial software, to test all the possible interactions of all the factors (we call them the interaction space) is not feasible, and even if it is possible, it is not wise to test all the interactions because most of them do not provide any useful information.
+Modern software is becoming more and more complex. To test such software is challenging, as the candidate factors that can influence the system's behaviour, e.g., configuration options, system inputs, message events, are enormous. Even worse, the interactions between these factors can also cause runtime errors, e.g., the incompatibility problems. In consideration of the scale of the industrial software, to test all the possible interactions of all the factors (we call them the interaction space) is not feasible, and even if it is possible, it is not wise to test all the interactions because most of them do not provide any useful information.
 %Further more, it is a standard . airline
 
 Many empirical studies show that, in real software systems, the effective interaction space, i.e., targeting fault detection, makes up only a small proportion of the overall interaction space \cite{kuhn2002investigation,kuhn2004software}. What's more, the number of factors involved in these effective interactions is relatively small, of which 4 to 6 is usually the upper bounds\cite{kuhn2002investigation}. With this observation, applying Combinatorial testing(CT) in practice is appealing, as it is proven to be effective to detect the interaction faults in the system.
 
-CT tests software with a elaborate test suite which checks all the required parameter value combinations, and after detecting some failures by this test suite, it then identify the failure-inducing interactions, or more formally, failure-causing schemas (MFS) in the SUT. Most works in CT focus on the method itself, e.g, to design smaller test suite with the same interaction coverage \cite{cohen1997aetg,cohen2003augmenting,lei2008ipog,jia2015learning}, or to identify the MFS more accurately \cite{martinez2009locating,nie2011minimal,zhang2011characterizing,niu2013identifying}. Few of the works consider the following question:
+CT tests software with an elaborate test suite which checks all the required parameter value combinations, and after detecting some failures by this test suite, it then identify the failure-inducing interactions, or more formally, failure-causing schemas (MFS) in the SUT. Most works in CT focus on the method itself, e.g, to design smaller test suite with the same interaction coverage \cite{cohen1997aetg,cohen2003augmenting,lei2008ipog,jia2015learning}, or to identify the MFS more accurately \cite{martinez2009locating,nie2011minimal,zhang2011characterizing,niu2013identifying}. Few of the works consider the following question:
 
 \emph{Is detecting and identifying the MFS really useful and helpful to code-level fault diagnosis?}
 
-To analyse this question is important and necessary, because it will build the relationship between MFS and faulty code, which is the foundation to apply CT on code-level debugging. In this paper, we try to answer this question by studying the \emph{guaranteed code} of interactions. The \emph{guaranteed code} of a interaction is the program entities (e.g., statements, branches, blocks, etc.) which are directly \emph{affected} by the interaction according to the previous study \cite{reisner2010using}. Obtaining the guaranteed code of an interaction can help us understand how this interaction influence on the behaviour of the program under test. Furthermore, analysing the guaranteed code of the MFS can offer us an insight into the extent to which the MFS is related to the cause of the failure; based on which, we can learn whether detecting and identifying the MFS can facilitate the debugging, as well as bug fixing.
+To analyse this question is important and necessary, because it builds the relationship between MFS and faulty code, which is the foundation to apply CT on code-level debugging. In this paper, we try to answer this question by studying the \emph{guaranteed code} of interactions. The \emph{guaranteed code} of a interaction is the program entities (e.g., statements, branches, blocks, etc.) which are directly \emph{affected} by the interaction according to the previous study \cite{reisner2010using}. Obtaining the guaranteed code of an interaction can help us understand how this interaction influence on the behaviour of the program under test. Furthermore, analysing the guaranteed code of the MFS can offer us an insight into the extent to which the MFS is related to the cause of the failure; based on which, we can learn whether detecting and identifying the MFS can facilitate the debugging, as well as bug fixing.
 
 %To compute the MFS of the SUT,
 %
@@ -271,9 +272,10 @@ To analyse this question is important and necessary, because it will build the r
 %To compute the guaranteed code of the interaction, We need to utilize symbolic execution. Specifically, we accumulated added on symbolic, and find those guaranteed code. We define the .
 
 %
-There are many techniques to compute the MFS in CT. In this paper, we adopts our previous method proposed in \cite{nie2011minimal}, which is one of the most common MFS identification technique in CT. With respect to guaranteed code, we follow the steps which are original proposed in \cite{reisner2010using}, which firstly utilizes symbolic execution tool to search possible paths for different values assigned to the input parameters, and then calculates the guaranteed code for each possible interaction based on these paths. One difference from study in \cite{reisner2010using} is that we only need to compute the guaranteed code for the MFS we identified in the SUT, instead of all the possible interactions. After obtaining the MFS and corresponding guaranteed codes, we will evaluate the correlation between MFS and faulty code.
+There are many techniques to compute the MFS in CT. In this paper, we adopts the TRT method proposed in \cite{niu2013identifying}, which is an efficient and effective MFS identification technique in CT. With respect to guaranteed code, we follow the steps which are original proposed in \cite{reisner2010using}, which firstly utilizes symbolic execution tool to search possible paths for different values assigned to the input parameters, and then calculates the guaranteed code for each possible interaction based on these paths. One difference from study in \cite{reisner2010using} is that we only need to compute the guaranteed code for the MFS we identified in the SUT, instead of all the possible interactions. After obtaining the MFS and corresponding guaranteed codes, we are able to evaluate and analyze the correlation between MFS and faulty code.
 
-We have design several empirical studies on 5 open-source software subjects. These studies considers several different aspects (e.g., the degree of MFS, the types of faults) of the relationships between MFS and faulty code. Our results suggests that: 1) The MFS does relate to the faulty code to some extent; 2) For different types of faults, the correlation between MFS and faulty code varies;  3) The input model of the program under test significantly impacts on this correlation.
+We designed three empirical studies on 7 open-source software subjects from Software Infrastructure Repository (SIR) \cite{do2005supporting}. These studies considers several different aspects (e.g., the degree of MFS, the types of faults) of the relationships between MFS and faulty code. Our results suggests that: 1) The correlation between MFS  and the faulty code is weak to moderate; 2) There exists a significant decrease in the correlation between MFS and real faulty code with the increase of the degree MFS. 3) For different types of faults, the correlation between MFS and faulty code varies.
+%3) The input model of the program under test significantly impacts on this correlation.
 
 %These faults include injected and real ones. We first model their input and computed the MFS and also the guaranteed code of these MFS. We observe their relationships between these code with those real faulty statement. One observation in our case study shows that .  Besides this, we also compare . The results shows that .
 
@@ -286,7 +288,7 @@ This section presents some formal descriptions about MFS and guaranteed code.
 
 \subsection{Basic definitions about CT}\label{sec:pre:ct}
 
-Assume that the Software Under Test (SUT) is influenced by \emph{n} parameters, and each parameter $p_{i}$ can take the values from the finite set $V_{i}$, $|V_{i}|$ = $a_{i}$ ($i$ = 1,2,..n). We will give some basic definitions which are related to failure-inducing interactions in CT.
+Assume that the Software Under Test (SUT) is influenced by \emph{n} parameters, and each parameter $p_{i}$ can take the values from the finite set $V_{i}$, $|V_{i}|$ = $a_{i}$ ($i$ = 1,2,..n). Then we give some basic definitions which are related to failure-inducing interactions in CT.
 
 \newdef{definition}{Definition}
 \begin{definition}
@@ -326,11 +328,13 @@ If all test cases that contain a schema, say $c$, trigger a particular fault, sa
 Note that MFS is identical to the failure-inducing interaction discussed previously. In this paper, the terms \emph{failure-inducing interactions} and \emph{MFS} are used interchangeably.
 %Figuring the MFS out helps to identify the root cause of a failure and thus facilitate the debugging process.
 
-\subsection{Identification of MFS}\label{sec:pre:mfs}
-When a test case fails during test case, we are still far from figuring out the MFS \cite{colbourn2008locating,martinez2008algorithms,martinez2009locating}, as we do not know exactly which schemas in the failed test cases should be responsible for the failure. For example, if test case (0, 0, 0, 0) failed during testing, there are six 2-degree candidate failure-inducing schemas, which are (0, 0, -, -), (0, -, 0, -), (0, -, -, 0) , (-, 0, 0, -), (-, 0, -, 0), (-, -, 0, 0), respectively. Without
-additional information, it is difficult to figure out the specific schemas in this suspicious set that caused the failure. Considering that the failure can be triggered by schemas with other degrees, e.g., (0, -, -, -) or (0, 0, 0, -), the problem of MFS identification becomes more complicated.
+\subsection{An example of MFS}\label{sec:pre:mfs}
+%When a test case fails during test case, we are still far from figuring out the MFS \cite{colbourn2008locating,martinez2008algorithms,martinez2009locating}, as we do not know exactly which schemas in the failed test cases should be responsible for the failure. In fact, for a failing test case ($v_{1},v_{2},...,v_{n}$), there can be at most $2^{n} - 1$ possible schemas for the MFS. Hence, more test cases should be generated to identify the MFS. The following example shows how MFS identification processes.
 
-In fact, for a failing test case ($v_{1},v_{2},...,v_{n}$), there can be at most $2^{n} - 1$ possible schemas for the MFS. Hence, more test cases should be generated to identify the MFS. Next, we will show how MFS identification processes with an example.
+%For example, if test case (0, 0, 0, 0) failed during testing, there are six 2-degree candidate failure-inducing schemas, which are (0, 0, -, -), (0, -, 0, -), (0, -, -, 0) , (-, 0, 0, -), (-, 0, -, 0), (-, -, 0, 0), respectively. Without
+%additional information, it is difficult to figure out the specific schemas in this suspicious set that caused the failure. Considering that the failure can be triggered by schemas with other degrees, e.g., (0, -, -, -) or (0, 0, 0, -), the problem of MFS identification becomes more complicated.
+
+
 
 Consider an program like Fig \ref{toy-program}, which contains four integer parameters: a, b, c, and d. With respect to applying combinatorial testing, we need to first build a input model for this program. For simplicity, let a, b, c and d can take on the following values:  $v_{a} = \{ 1, 2\}$, $v_{b} = \{ 0, 1\}$, $v_{c} = \{ 1, 2\}$, and $v_{d} = \{ 0, 1\}$, respectively. Assume that through testing of this program, we find a test case, e.g., (a = 1, b = 0, c = 1, d = 1), will trigger an arithmetic exception. Then we will describe how CT identify the MFS in this test case.
 
@@ -386,7 +390,7 @@ $t_{4}$ &\multicolumn{4}{l}{1  \ \ \ \  0 \ \ \ \  1 \ \ \ \ 0 } & Fail \\
 \end{tabular}
 \end{table}
 
-This identification process mutate one factor of the original test case at a time to generate extra test cases. Then according to the outcome of the test cases execution result, it will identify the MFS of the original failing test cases. It is called the OFOT method \cite{nie2011minimal}, which is a well-known MFS identification method in CT.
+This identification process mutate one factor of the original test case at a time to generate extra test cases. Then according to the outcome of the test cases execution result, it identifies the MFS of the original failing test cases. It is called the OFOT method \cite{nie2011minimal}, which is a well-known MFS identification method in CT.
 %It should be noted that the following proposed CT framework can be easily applied to other MFS identification methods.
 
 
@@ -420,16 +424,16 @@ In this tree, a rhombus node represents a path condition, and a rectangle repres
 \end{table}
 
 
-Next we will give some important definitions that are related to the guaranteed code.
+Next we give some important definitions that are related to the guaranteed code.
 %For simplicity, we next use notation $c^\sharp$ indicates a logic expression meaning that the parameter values are equal to those in schema $c$.
 
 \begin{definition}
-For a schema $c$, and a path $\mathcal{P}$, if all the path conditions in this path can be satisfied when given an input that contains this schema, we call $\mathcal{P}$ the \emph{Consistent path} of schema $c$, which can be denoted as $SAT(Pcon(\mathcal{P}) \bigwedge c)$.
+For a schema $c$, and a path $\mathcal{P}$, if all the path conditions in this path can be satisfied when given an input that contains this schema, we call $\mathcal{P}$ a \emph{Consistent path} of schema $c$, which can be denoted as $SAT(Pcon(\mathcal{P}) \bigwedge c)$.
 \end{definition}
 
-In fact, to judge whether a path is the \emph{consistent path} of one schema, is to find whether exist an input that contains this schema and follows all the path conditions of this path. Taking the program \emph{foo} for example, Path 1 is the consistent path of schema (1, -, -, -), because $( a < 2 $ $\wedge $ $c < 2 $ $\wedge $ $a = 1 )$  $= true $ can be solved, e.g., input (1, 1, 1, 1) is such a result.
+In fact, to judge whether a path is a \emph{consistent path} of one schema, is to find whether exist an input that contains this schema and follows all the path conditions of this path. Taking the program \emph{foo} for example, Path 1 is a consistent path of schema (1, -, -, -), because $( a < 2 $ $\wedge $ $c < 2 $ $\wedge $ $a = 1 )$  $= true $ can be solved, e.g., input (1, 1, 1, 1) is such a result.
 
-Based on this definition, we use the notation $c^{\sharp}$ to represent the set of all the consistent paths of schema $c$. Then we will give the formal definition of weak guaranteed of one schema.
+Based on this definition, we use the notation $c^{\sharp}$ to represent the set of all the consistent paths of schema $c$. Then we give the formal definition of weak guaranteed of one schema.
 
 \begin{definition}
 For a schema $c$, the weak guaranteed code of $c$, i.e., $wg(c)$, is the intersection of program entities covered by its consistent paths. Formally, $wg(c)$ = $\bigcap_{\mathcal{P} \in c^{\sharp}} Cov(\mathcal{P})$.
@@ -479,7 +483,7 @@ More formally, we can conclude the relationship of the weak guaranteed code betw
 Given schemas $s_{1}$, $s_{2}$, where $s_{1} \prec s_{2}$, then $wg(s_{1}) \subseteqq wg(s_{}2)$.
 \end{proposition}
 
-It is easy to prove this proposition and we will omit it. Based on this proposition, to understand which code are under the direct control of some schemas, we need to remove the influence from their subschemas.
+It is easy to prove this proposition and hence we omit it here. Based on this proposition, to understand which code are under the direct control of some schemas, we need to remove the influence from their subschemas.
 %Considering this, it may in fact the behaviour under the sub-schema . For example, in Fig.  Hence, to totally reflect the influence behaviour of sub-schemas, we need to remove the impact from the sub-schemas.
 
 \begin{definition}
@@ -513,29 +517,8 @@ Strong guaranteed code are the program entities that under the direct control of
 In this paper, we focus on the guaranteed code of MFS, instead of all the other schemas in the test case. With respect to the example in Fig \ref{toy-program}, it is easily to find that the weak guaranteed code and strong guaranteed code of the MFS (1, -, 1, -) are, (S2, S3, S5, S7, S8), and (S7, S8),  respectively. They are correlated to the faulty code, i.e., S7, where an exception of taking square root of a negative number will be triggered. This example, especially for the strong guaranteed code, implies that MFS is closely related to the faulty code.  However, in the real situation, we do not know whether the conclusion can still hold. As we want to know whether to detect and identify the MFS is really helpful in the code-based diagnosis, hence, we need to do more empirical studies to verify the conclusion.
 
 
-%\subsection{The method to get guaranteed code}\label{sec:pre:getguar}
-%
-%We need to first utilize the symbolic executions.
-%
-%Then for the MFS we need to compute the consisient, we need a smt solver to solve this problem.
-%definition guaranteed code
-%
-%definition minimal guaranteed code
-%%
-
-%
-%In this paper, we use the symbolic execution to . The details is as follwos:
-
-
-
-
-%\section{A case study}
-%This section will provide an example to show how to
-
-
-
 \section{Research questions} \label{sec:research}
-To comprehensive study the correlativeness between the MFS and faulty code, we propose three research questions in the following.
+To comprehensively study the correlativeness between the MFS and faulty code, we propose three research questions in the following.
 
 \subsection{The correlation between MFS and faulty code}
 As discussed before, it is important to study the relationship between MFS and faulty code. Although the simple example in Section \ref{sec:pre:guar} shows there exists a strong correlation between the guaranteed code , it is necessary to verify it on more real program subjects. Hence, it motivates our first research question, which is also the key reteach question, that is :
@@ -546,15 +529,26 @@ To answer this question, we need to conduct studies on a batch of program subjec
  \begin{equation}\begin{aligned}\label{eq:metric}
  Correlation (A, B)= \frac{Common(A, B)}{Common(A, B) + Different(A, B)} .\end{aligned} \end{equation}
 
-Here, $Common(A, B)$ means the number of common statements between two code blocks A and B, and $Differen$ $t (A, B)$ means the number of different statements contained in them. Based on this formula, more number of common code indicates a closer correlation, while more number of different code, on the contrary, indicates a more distinct or irrelative relationship.
+Here, $Common(A, B)$ means the number of common statements between two code blocks A and B, and $Differen$ $t (A, B)$ means the number of different statements contained in either  A or B. Based on this formula, more number of common code indicates a closer correlation, while more number of different code, on the contrary, indicates a more distinct or irrelative relationship.
+
+
+\subsection{The influence of the degree of MFS}
+The second research question is raised from the degree of the MFS. Based on the definition of guaranteed code, it is easy to learn that, with the increase of the degree of the MFS, the number of lines of weak guaranteed code also increases. This because the MFS with less degree may have more compatible paths that can contain this schema. Take the example in Section \ref{sec:pre}, 1-degree schema (1, - , -, -  )have two compatible paths (Path 1, 2), while 2-degree (1, -, 1, -) only have one path (Path 1). As result, to obtain the weak guaranteed code, the MFS with less degree need to conduct more intersection between the lines of code of paths, and hence it may decrease the number of lines of code for the weak guaranteed code. However, more number of lines may have a negative effect on the correlation between guaranteed code with real faulty code (Considering that there may exists much more different lines of code between them).
+
+Hence, the second research question is:
+
+\textbf{Q2: To what extent does the degree of MFS affect the correlation between it and faulty code?}
+
+
+To answer question, we need to classify the MFS into different groups according to their degrees, and then observe whether there exists significant differences among these groups with respect to the correlation between their guaranteed code with real faulty code.
 
 % the number of blocks that we still need to inspect until we hit the faulty code. Considering we only offer one possible statement, other statements are all depend on their execution sequence. If there is many, we only obtain the sentect that hit the failure, and its distance.
 
 \subsection{The influence of different types of faults}
 
-According to the nature of the defect, e.g., missing construct, or wrong construct, faults can be categorized into many types. The influence of different type of fault varies widely; as a consequence, the MFS and corresponding guaranteed code of different type of fault may also varies. Hence, focusing on single type of fault may significantly impact on the generality of our study about the correlation between MFS and faulty code, which motivates the second research question:
+According to the nature of the defect, e.g., missing construct, or wrong construct, faults can be categorized into many types. The influence of different type of fault varies widely; as a consequence, the MFS and corresponding guaranteed code of different type of fault may also varies. Hence, focusing on single type of fault may significantly impact on the generality of our study about the correlation between MFS and faulty code, which motivates the last research question:
 
-\textbf{Q2: To which extent does different type of fault influence on the correlation between MFS and faulty code ?}
+\textbf{Q3: To which extent does different type of fault influence on the correlation between MFS and faulty code ?}
 
 To answer this question, we need first give the the characterization and classification of software faults. According to the study \cite{duraes2006emulation}, we decide to conduct experiments on the fault types listed in Table \ref{tab_fault typles}. These faults are classified according to the three ODC \cite{chillarege1996orthogonal} classes, i.e., Assignment, Checking, and Interface faults. Note that we have omit two more types of faults which are originally listed in \cite{duraes2006emulation}, as those two types of faults are related to the design or requirement faults. For each of these faults, they are refined into three sub-types, which are based on the nature of the defects, i.e., the fault caused by missing construct, wrong construct, or superfluous part. The column ``Example'' in Table \ref{tab_fault typles} shows some samples of the corresponding type of fault.
 
@@ -580,20 +574,20 @@ To answer this question, we need first give the the characterization and classif
 Based on the categories given in Table \ref{tab_fault typles}, we next study these faults and their corresponding MFS to observe whether there exists any distinction among different types.
 
 
-\subsection{The influence of inputs model}
-The last research question is raised from CT itself. It is known that inputs modeling, as the key part of CT \cite{nie2011survey}, significantly influence on the result of CT. For example, if we use the following inputs modeling : $v_{a} = \{ 0, 1 \}$, $v_{b} = \{ 0, 1\}$, $v_{c} = \{ 1, 2\}$, and $v_{d} = \{ 0, 1\}$, respectively, for the program \emph{foo} in Fig \ref{toy-program} instead of what is originally used in Section \ref{sec:pre}. Then it is easy to compute that MFS of \emph{foo} is (-, -, 1, -), which is different from the original MFS (1, -, 1, -). We can learn the new MFS is irrelevant to the parameter $a$; this is because according to the execution tree in Fig \ref{foo-tree}, no matter what $a$ is assigned to ($0$ or $1$), it can only follow $Path 1$ or $Path 2$, and hence cannot execute other paths. As a result, the fault is only depended on what $c$ is assigned to. The changes of MFS also impacts on the guaranteed code. From Table \ref{weg-foo} and \ref{strong-foo}, the weak guaranteed code of (-, -, 1, -) is $S2$ and $S3$, while there is no strong guaranteed code. This results shows that the correlation between MFS and the real faulty code ($S7$) is  very trivial, which is different from the conclusion which is based on the original inputs modeling.
-
-Considering this, the third research question is:
-
-\textbf{Q3: How does the inputs model of CT affect the correlation between MFS and faulty code?}
-
-
-To answer question, for each program subject in our empirical studies, we design 3 different inputs model (they vary in the the number of parameters and the number of values for each parameter). Then we will obtain their MFS, guaranteed code, and the correlation between MFS and faulty code, respectively. At last, we will evaluate whether there exist any difference among these results.
+%\subsection{The influence of inputs model}
+%The last research question is raised from CT itself. It is known that inputs modeling, as the key part of CT \cite{nie2011survey}, significantly influence on the result of CT. For example, if we use the following inputs modeling : $v_{a} = \{ 0, 1 \}$, $v_{b} = \{ 0, 1\}$, $v_{c} = \{ 1, 2\}$, and $v_{d} = \{ 0, 1\}$, respectively, for the program \emph{foo} in Fig \ref{toy-program} instead of what is originally used in Section \ref{sec:pre}. Then it is easy to compute that MFS of \emph{foo} is (-, -, 1, -), which is different from the original MFS (1, -, 1, -). We can learn the new MFS is irrelevant to the parameter $a$; this is because according to the execution tree in Fig \ref{foo-tree}, no matter what $a$ is assigned to ($0$ or $1$), it can only follow $Path 1$ or $Path 2$, and hence cannot execute other paths. As a result, the fault is only depended on what $c$ is assigned to. The changes of MFS also impacts on the guaranteed code. From Table \ref{weg-foo} and \ref{strong-foo}, the weak guaranteed code of (-, -, 1, -) is $S2$ and $S3$, while there is no strong guaranteed code. This results shows that the correlation between MFS and the real faulty code ($S7$) is  very trivial, which is different from the conclusion which is based on the original inputs modeling.
+%
+%Considering this, the third research question is:
+%
+%\textbf{Q3: How does the inputs model of CT affect the correlation between MFS and faulty code?}
+%
+%
+%To answer question, for each program subject in our empirical studies, we design 3 different inputs model (they vary in the the number of parameters and the number of values for each parameter). Then we will obtain their MFS, guaranteed code, and the correlation between MFS and faulty code, respectively. At last, we will evaluate whether there exist any difference among these results.
 
 %These questions are important, as
 
 \section{Subject programs}\label{sec:subjects}
-We have prepared 8 program subjects for our experiment, of which 7 subjects programs belong to the Siemens set \cite{hutchins1994experiments}, and the remaining subject is GNU Grep\footnote{https://www.gnu.org/software/grep/}. We obtain these subjects, as well as their program specifications, from the Software Infrastructure Repository (SIR) \cite{do2005supporting}. These subjects have been wildly used in the studies of fault detection and localization \cite{zeller2002isolating,jones2005empirical,renieres2003fault,ghandehari2013fault}.  Table \ref{subjects_Chaar} shows the specific program subjects, number of lines of code, the brief introduction, and the number faulty versions for each subject.
+We have prepared 7 program subjects for our experiment, which are belong to the Siemens set \cite{hutchins1994experiments}. We obtain these subjects, as well as their program specifications, from the Software Infrastructure Repository (SIR) \cite{do2005supporting}. These subjects have been wildly used in the studies of fault detection and localization \cite{zeller2002isolating,jones2005empirical,renieres2003fault,ghandehari2013fault}.  Table \ref{subjects_Chaar} shows the specific program subjects, number of lines of code, the brief introduction, and the number faulty versions for each subject.
 
 %. Note that althouth , but they contain many.
 %The Siemens programs perform a variety of tasks: tcas is an aircraft collision avoidance system, schedule2 and schedule are priority schedulers, totinfo computes statistics given input data, printtokens and printtokens2 are lexical analyzers, and replace performs pattern matching and substitution.
@@ -609,15 +603,15 @@ We have prepared 8 program subjects for our experiment, of which 7 subjects prog
     schedule & 292 & priority scheduler   &  9 \\
     schedule2 & 301 & -   &  10 \\
     tcas &  141 & altitude separation   &  41 \\
-    totinfo & 440  & information measure   &  23 \\
-    grep & 10068  & pattern recognition   &  19 \\  \hline
+    totinfo & 440  & information measure   &  23 \\ \hline
+  %  grep & 10068  & pattern recognition   &  19 \\  \hline
     \end{tabular}%
   \label{subjects_Chaar}%
 \end{table}%
 
 
 \subsection{Fault characteristics}
-For each program subject in our experiment, there are several faulty versions come with the correct version. These faults vary in different types and locations.  With respect to the research question 2, we need to classify these faults into 3 main types and each of them has 3-sub types. For this, we checked the source file for each version of the specific programs, compared them with the correct version, and then classified the faults according to the aforementioned types. Table \ref{subject fault} shows the fault type distribution for each subject.
+For each program subject in our experiment, there are several faulty versions come with the correct version. These faults vary in different types and locations.  With respect to research question 3, we need to classify these faults into 3 main types and each of them has 3-sub types. Therefore, we checked the source file for each version of the specific programs, compared them with the correct version, and then classified the faults according to the aforementioned types. Table \ref{subject fault} shows the fault type distribution for each subject.
 %Using mutation to inject faults into.
 \begin{table*}[!ht]
   \centering
@@ -631,8 +625,8 @@ For each program subject in our experiment, there are several faulty versions co
     schedule &  1 & 2  & 0 & 1 &   4  & 1 & 0  & 0    & 0  \\
     schedule2 &  1 &  1    & 0 & 5  &  0   & 2 & 0 &  1   & 0   \\
     tcas & 0 &  40  & 2 &  1 &   1   & 0  & 0 &  0   & 0 \\
-    totinfo & 0 &  9  &0 &1  & 8    &3  & 1 & 1    & 0   \\
-    grep & 0 &  0  &6 &  0&   0  & 13 &  0&   0  &  0 \\  \hline
+    totinfo & 0 &  9  &0 &1  & 8    &3  & 1 & 1    & 0   \\ \hline
+   % grep & 0 &  0  &6 &  0&   0  & 13 &  0&   0  &  0 \\  \hline
     \end{tabular}%
   \label{subject fault}%
 \end{table*}%
@@ -641,37 +635,37 @@ Note that there may exist multiple types of faults in one subject. For example, 
 
 \subsection{Input modeling}
 
-To test each subject program, we need to model their inputs space firstly. Specifically, We initially followed the instructions described in \cite{ghandehari2013applying} to build the corresponding model for each subject, which include defining the key parameters and the values of each parameter for the programs, obtaining the possible constraints amon these parameters. For example, for the program \emph{replace} in the Siemens suite, we may consider there parameters: pattern, substitute and input text. Each of them have different type of value, e.g., the pattern may be a common character, digit, or line matching signal, etc. Besides this initial model, we built 2 more inputs modeling based on the initial one (With removing some parameters or values), such that we can observe and compare the results with different modeling.  Table \ref{subjects_inputs} listed these models (where \emph{Model1} is the initial model obtaining from \cite{ghandehari2013applying}) and the number of constraints of each subject.  The model is presented in the abbreviated form $\#values^{\#number\ of\ parameters} \times ...$.
+To test each subject program, we need to model their inputs space firstly. Specifically, We followed the instructions described in \cite{ghandehari2013applying} to build the corresponding model for each subject, which include defining the key parameters and the values of each parameter for the programs, obtaining the possible constraints amon these parameters. For example, for the program \emph{replace} in the Siemens suite, we may consider there parameters: pattern, substitute and input text. Each of them have different type of value, e.g., the pattern may be a common character, digit, or line matching signal, etc. Table \ref{subjects_inputs} listed these models, the number of test cases, and the number of constraints of each subject. The model is presented in the abbreviated form $\#values^{\#num\ of\ param} \times ...$. For example, in Table \ref{subjects_inputs}, schedule subject, $2^9 \times 3^2$ means that there are 9 parameters with 2 possible values, and 2 parameters with 2 possible values.
 
 %The detailed model is also available for review in. The model column in the table shows the number of parameters and their domain size. We represent it by where d indicates that there are k number of parameters with domain size as d. Note that, which is the total number of parameters
-\begin{table*}[ht]
+\begin{table}[ht]
   \centering
   \caption{Inputs modeling of subject programs}
-    \begin{tabular}{|c|c|c|c|c|}  \hline
-    Subject & Model1 & Model2 & Model3 & Constraints \\ \hline
-    printtokens & $2^{1} \times 3^{1} \times 4 ^{4} \times 5 ^{1} \times 10 ^{1} \times 13 ^{2} $&     &  &  8 \\
-    printtokens2 & $2^{1} \times 3^{1} \times 4 ^{4} \times 5 ^{1} \times 10 ^{1} \times 13 ^{2} $ &    &  & 8 \\
-    replace & $2^{4} \times 4^{16}$ &  &  &  36\\
-    schedule &  $2^{1} \times 3 ^{8} \times 8 ^{2}$&  &  & 0\\
-    schedule2 & $2^{1} \times 3 ^{8} \times 8 ^{2}$ &   &  & 0 \\
-    tcas & $2 ^{7} \times 3^{2} \times 4 ^{1} \times 10 ^{2}$  & $2 ^{7} \times 3^{2} \times 4 ^{1} $&  $2 ^{7} \times 3^{2}$  & 0\\
-    totinfo & $3 ^{3} \times 5 ^{2} \times 6^{1}$   &   &  & 0 \\
-    grep & $2 ^{7} \times 4 ^{1} \times  6 ^{5} \times 9 ^{1} \times 13 ^{1}$  &   &   &  2 \\  \hline
+    \begin{tabular}{|c|c|c|c|}  \hline
+    Subject & Model & Tests & Cons \\ \hline
+    printtokens & $2^{5} \times 3^{1} \times 4 ^{2} \times 5 ^{2} $&   38400  &  8 \\
+    printtokens2 & $2^{7} \times 3 ^{2} \times 4 ^{1}  $ &   4608   & 8 \\
+    replace & $2^{11}$  &  2048 &  36\\
+    schedule &  $2^{9} \times 3 ^{2}$& 4608 & 0\\
+    schedule2 & $2^{9} \times 3 ^{2}$ & 4608  & 0 \\
+    tcas & $2 ^{7} \times 3^{2} \times 4 ^{1} \times 10 ^{2}$  & 460860  & 0\\
+    totinfo & $3 ^{3} \times 5 ^{2} \times 6^{1}$   & 4050  & 0 \\ \hline
+  %  grep & $2 ^{7} \times 4 ^{1} \times  6 ^{5} \times 9 ^{1} \times 13 ^{1}$  &    &  2 \\  \hline
     \end{tabular}%
   \label{subjects_inputs}%
-\end{table*}%
+\end{table}%
 
 %\subsection{Obtaining traces}
-%
+%%
 %Run all the possible test cases, and obtain their traces. Such that we can compute the guaranteed code of each MFS.
 
 %\section{Getting MFS and their guaranteed code}
 
 \section{Results}\label{sec:results}
-In this section, we will display and analyse the results of our experiments, based on which we will answer the three research questions posed in Section \ref{sec:research}.
+In this section, we display and analyse the results of our experiments, based on which we will answer the three research questions posed in Section \ref{sec:research}.
 
 \subsection{The characteristics of the MFS}
-We firstly give the characteristics of the MFS.  These MFS are identified by our tool \emph{TRT}\cite{niu2013identifying}.
+We firstly give the characteristics of the MFS.  These MFS are identified by the tool \emph{TRT}\cite{niu2013identifying}.
 Table \ref{subject mfs} shows the distribution of the MFS with various degree for each subject.
 
 \begin{table*}[!ht]
@@ -680,21 +674,23 @@ Table \ref{subject mfs} shows the distribution of the MFS with various degree fo
     \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}  \hline
     \multirow{2}{*}{Subjects} & \multicolumn{12}{c|}{The number of MFS with specific degree} &  \multirow{2}{*}{Total}\\ \cline{2-13}
         & 1 &  2   &  3 & 4 &  5   &  6 & 7 &  8   &  9  & 10 & 11 & 12 &  \\ \hline
-    printtokens & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 & 0  \\
-    printtokens2 & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 & 0 \\
-    replace & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 & 0 \\
-    schedule & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 & 0  \\
-    schedule2 & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 & 0   \\
+    printtokens & 0 &   0  & 8 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 & 8  \\
+    printtokens2 & 0 &   11 & 8 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 & 19 \\
+    replace & 0 &   11  & 8 & 9 &   120  & 133 &  472 &   1135  & 2883 & 0 &0 & 0 & 4671 \\
+    schedule & 0 &   14  & 20 & 10 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 & 44  \\
+    schedule2 & 0 &   0  & 0 & 0 &   132 & 187 &  523&   1139  & 0 & 0 &0 & 0 & 1981   \\
     tcas & 0 &   0  & 0 & 0 &   0  & 76 &  465&   1130  & 2882 & 3057 &1274 & 132 & 9076  \\
-    totinfo & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 & 0 \\
-    grep & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 & 0\\  \hline
+    totinfo & 0 &   0  & 0 & 8 &   110  & 114 &  0&   0  & 0 & 0 &0 & 0 & 232 \\ \hline
+  %  grep & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 & 0\\  \hline
     \end{tabular}%
   \label{subject mfs}%
 \end{table*}%
 
-We can learn that most of the degree of the MFS are less than 6, which is in accordance with the observation in the study \cite{kuhn2002investigation}. One exception is tcas, we found that the degree of the most MFS of tcas are greater than 6 (up to 12). With inspecting the code of tcas, we believe the cause of this result is the \emph{Coincidental Correctness} problem \cite{masri2014prevalence}, i.e., the fault is triggered by a relative small number (1 to 6) of parameter values, but it may not be observed because it cannot propagate to the output. There exist many restrictions that make this fault observable, and hence the degree of the MFS increases. Another observation from Table \ref{subject mfs} is that there may exists multiple mfs for a single faulty version. Hence, the total number of MFS is far greater than the number of faulty versions.
+We can learn that the degree of most MFS is less than 6, which is in accordance with the observation in the study \cite{kuhn2002investigation}. One exception is tcas, we found that most of them are greater than 6 (up to 12).
+%With inspecting the code of tcas, we believe the cause of this result is the \emph{Coincidental Correctness} problem \cite{masri2014prevalence}, i.e., the fault is triggered by a relative small number (1 to 6) of parameter values, but it may not be observed because it cannot propagate to the output. There exist many restrictions that make this fault observable, and hence the degree of the MFS increases.
+Another observation from Table \ref{subject mfs} is that there may exists multiple MFS for a single faulty version. Hence, the total number of MFS is far greater than the number of faulty versions.
 
-Next, we will show the average number of lines of the guaranteed code (weak and strong) for the MFS with different degree in Table \ref{mfs wk_numberlines}.
+Next, we will show the average number of lines of the guaranteed code (weak and strong) for the MFS with different degrees in Table \ref{mfs wk_numberlines}.
 
 \begin{table*}[!ht]
   \centering
@@ -702,33 +698,32 @@ Next, we will show the average number of lines of the guaranteed code (weak and 
     \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}  \hline
     & \multirow{2}{*}{Subjects} & \multicolumn{12}{c|}{The average number of lines code of the MFS with specific degree} \\ \cline{3-14}
     &    & 1 &  2   &  3 & 4 &  5   &  6 & 7 &  8   &  9  & 10 & 11 & 12  \\ \hline
-   \multirow{8}{*}{\rotatebox{90}{Weak guaranteed}} & printtokens & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0   \\
-   & printtokens2 & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0  \\
-   & replace & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 \\
-   & schedule & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 \\
-   & schedule2 & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0    \\
+   \multirow{8}{*}{\rotatebox{90}{Weak}} & printtokens & - &   -  & 123.9 & - &   -  & - &  - & - &- & -&- & -    \\
+   & printtokens2 & - &  116.5  & 123.8 & - &   -  & - &  - & - &- & -&- & -  \\
+   & replace & - &   116.6  & 123.9 & 46.0 &   58.3  & 69.9 &  53.4 & 51.2 & 50.6 & -&- & -  \\
+   & schedule & - &   108.3  & 96.4 & 49.2 &   -  & - &  - & - &- & -&- & -  \\
+   & schedule2 & - &   -  & - & - &  60.6  & 73.7 &  56.3 & 51.3 &- & -&- & -     \\
    & tcas &   -  & - & - &- & -  & 51.1 &  51.5  & 50.6 & 50.6 &  50.9  & 51.5 &  52.5  \\
-   & totinfo & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0  \\
-   & grep & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 \\  \hline
-  \multirow{8}{*}{\rotatebox{90}{Strong guaranteed}}  & printtokens & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0   \\
-   & printtokens2 & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0  \\
-   & replace & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 \\
-   & schedule & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 \\
-   & schedule2 & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0    \\
+   & totinfo & - &   -  & - & 29.5 &   47.7  & 52.4 &  -&   -  & - & - &- & -  \\ \hline
+ %  & grep & - &   -  & - & - &   -  & - &  - & - &- & -&- & -  \\  \hline
+  \multirow{8}{*}{\rotatebox{90}{Strong}}  & printtokens & - &   -  & - & 0.0 &   -  & - &  - & - &- & -&- & -    \\
+   & printtokens2 & - &   5.1  & 0.0 & - &   -  & - &  - & - &- & -&- & -  \\
+   & replace & - &   5.1  & 0.0 & 7.1 &   26.3 & 5.5 &  0.0 & 0.1 &0.2 & -&- & - \\
+   & schedule & - &   4.0  & 0.0  & 6.4 &   -  & - &  - & - &- & -&- & -  \\
+   & schedule2 & - &   -  & - & - &   23.9  & 3.9 &  0.0 &  0.1 &- & -&- & -    \\
    & tcas &   -  & - & - &- & -  & 0.0 &  0.0  & 0.1 & 0.2 &  0.2  & 0.1 &  0.0  \\
-   & totinfo & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0  \\
-   & grep & 0 &   0  & 0 & 0 &   0  & 0 &  0&   0  & 0 & 0 &0 & 0 \\  \hline
+   & totinfo & - &   -  & - & 8.0 &   28.6  & 6.5 &  - & - &- & -&- & -  \\ \hline
+   %& grep & - &   -  & - & - &   -  & - &  - & - &- & -&- & -  \\  \hline
     \end{tabular}%
   \label{mfs wk_numberlines}%
 \end{table*}%
 
 One observation of Table \ref{mfs wk_numberlines} is that the number of lines of weak guaranteed code is far more than that of strong guaranteed code. It is easy to understand, as according to the definition, we need to remove many lines of code from weak guaranteed to obtain the strong guaranteed.
 
-Another point that we can learn from this table is that, with the increase of the degree of the MFS, the number of lines of weak guaranteed code also increases. This because the MFS with less degree may have more compatible paths that can contain this schema. Take the example in Section \ref{sec:pre}, 1-degree schema (1, - , -, -  )have two compatible paths (Path 1, 2), while 2-degree (1, -, 1, -) only have one path (Path 1). As result, to obtain the weak guaranteed code, the MFS with less degree need to conduct more intersection between the lines of code of paths, and hence it may decrease the number of lines of code for the weak guaranteed code.
+%Another point that we can learn from this table is that, with the increase of the degree of the MFS, the number of lines of weak guaranteed code also increases. This result matches our analysis in Section \ref{sec:research}.
 
 \subsection{The correlation between MFS and real faulty code}
-After we use the real. use the diff to find the variance between , their .
-After compare the . the result is listed in Fig \ref{result1_fig} .
+We first utilized the GNU tool \emph{diff} to compare the correct and faulty programs. We mark the differences between them as the real faulty code, i.e., the line numbers of different code in the faulty versions. Then we used these real faulty code to evaluate the accurateness of the guaranteed code (weak and strong) of those identified MFS according to the Formula \ref{eq:metric} in Section \ref{sec:research}. The results are listed in Fig \ref{result1_fig}. Each sub-figure of Fig \ref{result1_fig} shows the correlations between real faulty code and the guaranteed code (Weak and Strong) for one program subject.
 
 \begin{figure*}[!ht]
  \includegraphics[width=6.8in]{result1.eps}
@@ -736,12 +731,75 @@ After compare the . the result is listed in Fig \ref{result1_fig} .
 \label{result1_fig}
 \end{figure*}
 
+From this figure, we can first observe that for different program subjects, the correlation between guaranteed code and real faulty code varies. For example, with respect to weak guaranteed code, its correlation with real faulty code is around 0.02 for \emph{tcas}, while it reaches about 0.04 for \emph{totinfo}. With respect to strong guaranteed code, the result is ranged from 0.05 to 0.25 for \emph{totinfo}, while for \emph{tcas}, this result is 0 for all the MFS.
+
+
+Second, the correlation of strong guaranteed code is either greater than that of weak guaranteed code, or alternatively, is equal to 0 (which indicates that it has non correlation with the real faulty code). For example, it reaches 0.25 for \emph{totinfo}, which means that we only need to inspect at most four program lines on average to obtain one real faulty code. This result is relatively effective for fault localization, and is far greater than the correlation of its weak guaranteed code, which is about 0.02 to 0.04.  While for subjects \emph{schedule}, {schedule2}, and \emph{tcas}, all the results for the correlation of strong guaranteed code is 0.  This observation implies that,  when compared to the weak guaranteed code, the strong guaranteed code of the MFS may remove some program entities that are exactly the real faulty statements. As a result, the correlation between the strong guaranteed code and real faulty code may be 0.
+
+The last, and the most important observation of this figure is that, for most subjects, the correlation between guaranteed code and real faulty code is low to moderate (Most of them are around  0.01, 0.02 and even to 0). It implies that the MFS cannot be directly used in most cases with respect to code-level fault localization. By inspecting the programs in our subjects, we conclude two reasons that cause the negativeness results:
+
+1) The guaranteed code is large (containing too many program entities that are non-faulty). We believe the cause of this result is the \emph{Coincidental Correctness} problem \cite{masri2014prevalence}, i.e., the fault is triggered by a relative small number (1 to 6) of parameter values, but it may not be observed because it cannot propagate to the output. As a result, there exist many restrictions that make this fault observable, and hence the MFS contain many factors that are not related to the fault itself but related to how to make the fault observable.
+
+2) Multiple faults in the program. This will result in that, for one MFS, its consistent paths may actually trigger different faults from each other. Hence, the intersection of the code of its consistent paths, i.e., the weak guaranteed code, may not contain the code of any fault (Note that it happens in the condition that there is no common code between different faults).
+
+%One exception is tcas, of which the correlation of weak guaranteed code is greater than that of strong guaranteed code. In fact all the result of strong guaranteed code is 0, indicating that there is no correlation between them.
+
+
+%With inspecting the code of tcas,
+
+% many program problem, makes the fault hard to observe, . In fact, when we find that wrong strong code, we can learn it is the last , which is under the last part of the control path with this code. That is, it is on same \emph{slicing}. We believe for programs like tcas, it is good to combine program slicing to obtain the real faulty code.
+
+Above all, the answer for the research question 1 is :
+
+\textbf{The correlation between MFS and real faulty code is low to moderate, and some factors, i.e., coincidental correctness, and multiple faults, may negatively affect the result.}
+
+
+\subsection{MFS degree}
+The second experiment is to evaluate whether there exists any difference, with respect to the correlation between real faulty code and guaranteed code, in the MFS with different degrees. For this purpose, we classified the results in the first experiment according to 3 types of degrees, which are the MFS with degrees of 1 to 3, with degrees of 4 to 6, and with degrees more than 6, respectively.  Additionally, to determine whether there exists significant difference between those three types, we conduct the t-test on each pair of them. The results are shown in Table \ref{degree_significance}. Note that a p-value smaller than 0.05 indicates that the performance of these two approaches are statistically different with each other at 95\% confidence. We can learn that most results are statistically significant.
+\begin{figure}[!ht]
+ \includegraphics[width=3.4in]{result3.eps}
+\caption{The correlation between guaranteed code with real faulty code for different degree of MFS}
+\label{result3_fig}
+\end{figure}
+
+According to Fig \ref{result3_fig}, it is clear that the MFS with degrees ranging from 4 to 6 have the highest correlation with real faulty code , following by the MFS with other two types of degrees. This result applies to both weak guaranteed code and strong guaranteed code. More specifically, when compared the MFS with degree ranged from 1 to 3 and MFS with degree more than 6, there is a decrease about 15\% in the correlation of weak guaranteed code, and 100\% decrease in the correlation of strong guaranteed code (Note that the correlation is 0 for both other two types), respectively.
+
+There are two implications that we can learn from this observation:
+
+1) If the MFS has a high degree, it seems that the useful information related to the real fault makes up only a small proportion of its guaranteed code. An intuitive explanation for this result is that a MFS with high degree may contain some \emph{noisy} factors, i.e., these parameter values may not be related to the fault, but always appears with it. Additionally, the guaranteed code of MFS with high degree may contain a large number code lines (See Table \ref{mfs wk_numberlines}), which may have a negative effect on the score of correlation between it with real faulty code (The latter contain only a small number of lines in our program subjects).
+
+2) On the other hand, if the MFS has a low degree, it may results in that its guaranteed code may not contain the real faulty code. This is because the MFS with low degree may have many consistent paths. When these consistent paths diffs greatly from each other (For example, when there are different faults in these paths), the intersection of their covered lines can hardly contain the faulty code.
+
+%The second is that, with respect to ODC class. the is best (around ), followed by  (), the last is . It is easy to understand, because. While with respect to the defect natures, we can learn that the is best (around ), followed by  (), the last is . For this, we believe it is because.
+Hence, the answer for the research question 2 is :
+
+\textbf{There exists a significant decrease in the correlation between guaranteed code and real faulty code with the increase of the degree MFS.}
+
+\begin{table}[!ht]
+\centering
+\caption{The t-test result for different MFS degree}
+\begin{threeparttable}
+  \centering
+    \begin{tabular}{|c|c|c|c|}  \hline
+ \multirow{2}{*}{weak} &  P(x, y)\tnote{1} & P(x, z) & P(y, z) \\ \cline{2-4}
+  &  2.0E-17 & 6.3E-22 & 2.7E-23   \\ \hline
+  \multirow{2}{*}{Strong}&  P(x, y) & P(x, z) & P(y, z) \\ \cline{2-4}
+  &  5.0E-11 & NaN & 4.9E-11 \\ \hline
+    \end{tabular}%
+
+       \begin{tablenotes}
+        \footnotesize
+        \item[1]  $p(m,n)$ denotes the p-value of a test of significance for the probability that the results of two metrics, i.e., m and n, are equal, where m, n can be x = the results of MFS with degree 1 to 3, y = MFS with degree 4 to 6, and z = MFS with degree more than 6.
+      \end{tablenotes}
+
+\end{threeparttable}
+  \label{degree_significance}%
+\end{table}%
 
 \subsection{Fault types}
-
-We can firstly learn that the correlativeness has no means to do with ODC class. only with types.
-
-the faulty code is, wrong the code, extra the code, missing two codes nearest it.
+In the last experiment, we investigate whether the correlation between faulty code and guaranteed code is affected by various fault types. Therefore, we separated the results in the first experiment according to different ODC classes and defect classes (include missing code type, wrong code type, and extraneous code type). The results are listed in Figure \ref{result2_fig}, where the left part shows the results of three ODC classes, and the right part shows the results of three defect classes. Similar to the second experiment, to determine whether there exists significant difference between those metrics, we conduct the t-test on each pair of the metrics in soc, defect classes, respectively. The results are shown in Table \ref{type_significance}.
+%Note that a p-value smaller than 0.05 indicates that the performance of these two approaches are statistically different with each other at 95\% confidence.
+%Note that statistically significant.
 
 \begin{figure*}[!ht]
  \includegraphics[width=6.8in]{result2.eps}
@@ -750,101 +808,126 @@ the faulty code is, wrong the code, extra the code, missing two codes nearest it
 \end{figure*}
 
 \begin{table}[!ht]
+\centering
+\caption{The t-test result for different fault types}
+\begin{threeparttable}
   \centering
-  \caption{The t-test result for different fault types}
     \begin{tabular}{|c|c|c|c|c|}  \hline
- \multirow{4}{*}{\rotatebox{90}{weak}} &\multirow{2}{*}{Soc} &  p(a, c) & P(a, i) & P(c, i) \\ \cline{3-5}
-  &  & 7.54E-48 & -  &  -   \\ \cline{2-5}
-  & \multirow{2}{*}{Fault} &  p(m, w) & P(m, e) & P(w, e) \\ \cline{3-5}
-  &  & & &    \\ \hline
-  \multirow{4}{*}{\rotatebox{90}{Strong}} & \multirow{2}{*}{Soc} &  p(a, c) & P(a, i) & P(c, i) \\ \cline{3-5}
-  &  & NaN & - & -    \\ \cline{2-5}
-  & \multirow{2}{*}{Fault} &  p(m, w) & P(m, e) & P(w, e) \\ \cline{3-5}
-  &  & & &    \\ \hline
+ \multirow{4}{*}{\rotatebox{90}{weak}} &\multirow{2}{*}{Soc} &  P(a, c)\tnote{1} & P(a, i) & P(c, i) \\ \cline{3-5}
+  &  & 0.49  & 4.3E-6  &  1.3E-5   \\ \cline{2-5}
+  & \multirow{2}{*}{Defect} &  P(m, w) & P(m, e) & P(w, e) \\ \cline{3-5}
+  &  & 1.3E-8 &0.37 & 5.6E-3   \\ \hline
+  \multirow{4}{*}{\rotatebox{90}{Strong}} & \multirow{2}{*}{Soc} &  P(a, c) & P(a, i) & P(c, i) \\ \cline{3-5}
+  &  & 0.15 & 7.6E-7 & 2.4E-7   \\ \cline{2-5}
+  & \multirow{2}{*}{Defect} &  P(m, w) & P(m, e) & P(w, e) \\ \cline{3-5}
+  &  &0.26 & 0.3&    0.26\\ \hline
     \end{tabular}%
+
+       \begin{tablenotes}
+        \footnotesize
+        \item[1]  a = assignment, c = checking, i = interface, m= missing code, w = wrong code, and e = extraneous code.
+      \end{tablenotes}
+
+\end{threeparttable}
   \label{type_significance}%
 \end{table}%
 
+According to Fig \ref{result2_fig},  we can find that the results vary among different metrics. Specifically, for the \emph{Soc} class, it shows that the \emph{Interface} type has the greatest correlation on the strong guaranteed code (most of them are around 0.25), followed type \emph{Checking} (about 0.02 to 0.04), and \emph{Assignment}  (around 0.02). The weak guaranteed code has a similar result for these three metrics. We believe the cause of this is that, the \emph{Interface} type fault is simple, as it only relates to one or two invocation statements in the program, and hence, it is easy to be distinguished and isolated from other program sentences. While for the \emph{Assignment} and \emph{Checking} types, these faults may combine other other statements (Logic or assignment statements), which results in that they are harder to be distinguished from other statements.
 
+With respect to the defect classes, we can observe that the \emph{Wrong code} type has the greatest correlation on both strong (0.025 to 0.045) and weak guaranteed code (0.01 t0 0.04). The \emph{Extraneous code} type followed, and the last \emph{Missing code} type (Note that some correlation of \emph{Missing code} can reach to 0.25, but these faults are all belong to \emph{Interface} class, all the others are around 0.01). We believe this is because type \emph{Wrong code} and \emph{Extraneous code} has specific lines of code that can trigger the failure. While for type \emph{Missing code}, although we can compare the faulty version with correct version to obtain the location where the correct code is deleted, however, there may exist many other locations where the correct code can be inserted, such that it can also be an equivalent version of the correct version. As a result, the guaranteed code of MFS with type \emph{Missing code} has very limited correlation with the real fault.
 
-The conclusion is, that the wrong code and extra code are more close, because those which control this is more close to introducing faulty.
+Hence, the answer for the research question 3 is :
 
-While the missing is very. This is because some code may be .
+\textbf{For different types of faults, the correlation between MFS and faulty code varies; More specifically, the faults that are belong to \emph{Interface} class and \emph{Wrong Code} type have a greater correlation than that of other types of faults.}
 
-\subsection{Inputs modeling }
+%
+% has no means to do with ODC class. only with types.
+%
+%the faulty code is, wrong the code, extra the code, missing two codes nearest it.
+%
+%
+%The conclusion is, that the wrong code and extra code are more close, because those which control this is more close to introducing faulty.
+%
+%While the missing is very. This is because some code may be .
 
-
-Different modeling,
-
-the coverage (line coverage, condition coverage), correlated to the faulty code with guaranteed code distance.
-
-\begin{table*}[!ht]
-  \centering
-  \caption{The degree of the mfs for different input modeling}
-    \begin{tabular}{|c|c|c|c|c|c|c|}  \hline
-   \multirow{2}{*}{Subjects}   & \multicolumn{3}{c|}{2rd Input Model} &  \multicolumn{3}{c|}{3rd Input Model}   \\ \cline{2-7}
-        & Average Degree &  Decrease   &  Significance  & Average Degree &  Decrease   &  Significance   \\ \hline
-    printtokens & 0 &   0  & 0 & 0 &   0  & 0 \\
-    printtokens2  & 0 &   0  & 0 & 0 &   0  & 0 \\
-    replace  & 0 &   0  & 0 & 0 &   0  & 0  \\
-    schedule  & 0 &   0  & 0 & 0 &   0  & 0  \\
-    schedule2 & 0 &   0  & 0 & 0 &   0  & 0    \\
-    tcas & 8.17&-1.23&6.4E-62 &7.27&-2.14 &1.01E-38   \\
-    totinfo  & 0 &   0  & 0 & 0 &   0  & 0  \\
-    grep & 0 &   0  & 0 & 0 &   0  & 0 \\  \hline
-    \end{tabular}%
-  \label{subject degree_model}%
-\end{table*}%
-
-
-\begin{table*}[!ht]
-  \centering
-  \caption{The correlation between guaranteed code and real faulty code for different input modeling}
-    \begin{tabular}{|c|c|c|c|c|c|c|c|}  \hline
-     &  \multirow{2}{*}{Subjects}   & \multicolumn{3}{c|}{2rd Input Model} &  \multicolumn{3}{c|}{3rd Input Model}   \\ \cline{3-8}
-   \multirow{8}{*}{\rotatebox{90}{Weak guaranteed}}   &   & Average Correlation &  Decrease   &  Significance  & Average Correlation &  Decrease   &  Significance   \\ \cline{2-8}
-   &  printtokens & 0 &   0  & 0 & 0 &   0  & 0 \\
-   &  printtokens2  & 0 &   0  & 0 & 0 &   0  & 0 \\
-   &  replace  & 0 &   0  & 0 & 0 &   0  & 0  \\
-   &  schedule  & 0 &   0  & 0 & 0 &   0  & 0  \\
-   &  schedule2 & 0 &   0  & 0 & 0 &   0  & 0    \\
-  &   tcas & 0.02&6.9E-4&0.35 & 0.02&1.9E-3&0.14  \\
-  &   totinfo  & 0 &   0  & 0 & 0 &   0  & 0 \\
-   &  grep & 0 &   0  & 0 & 0 &   0  & 0 \\  \hline
-   \multirow{8}{*}{\rotatebox{90}{Strong guaranteed}}   &   & Average Correlation &  Decrease   &  Significance  & Average Correlation &  Decrease   &  Significance   \\ \cline{2-8}
-  &   printtokens & 0 &   0  & 0 & 0 &   0  & 0 \\
-  &   printtokens2  & 0 &   0  & 0 & 0 &   0  & 0 \\
-  &   replace  & 0 &   0  & 0 & 0 &   0  & 0  \\
-  &   schedule  & 0 &   0  & 0 & 0 &   0  & 0  \\
-  &   schedule2 & 0 &   0  & 0 & 0 &   0  & 0    \\
-  &   tcas & 0& 0 & NaN  & 0&0&NaN  \\
-  &   totinfo  & 0 &   0  & 0 & 0 &   0  & 0 \\
- &    grep & 0 &   0  & 0 & 0 &   0  & 0 \\  \hline
-    \end{tabular}%
-  \label{subject degree_correlate}%
-\end{table*}%
-
-(Note that in some pictures, the condition coverage cannot be 100 percent because some exception will not be triggered in the current inputs, e.g., the input memory exception handle module will not be triggered)
-
-Above all, the answer to the question 3 is :
-
-\textbf{The more the coverage the inputs modeling supports, the more accurate the MFS is correlated to the faulty code.}
+%\subsection{Inputs modeling }
+%The last experiment is to evaluate the extent to which that inputs model affect the correlation between MFS and faulty code.  Table \ref{subject degree_model} lists the change on the degree of identified MFS for two additional inputs model (Model 2 and Model 3 in Table \ref{subjects_inputs}). In this table, column \emph{Average Degree}
+%
+%\begin{table*}[!ht]
+%  \centering
+%  \caption{The degree of the mfs for different input modeling}
+%    \begin{tabular}{|c|c|c|c|c|c|c|}  \hline
+%   \multirow{2}{*}{Subjects}   & \multicolumn{3}{c|}{2rd Input Model} &  \multicolumn{3}{c|}{3rd Input Model}   \\ \cline{2-7}
+%        & Average Degree &  Change   &  P-value  & Average Degree &  Change   &  P-value   \\ \hline
+%    printtokens & 0 &   0  & 0 & 0 &   0  & 0 \\
+%    printtokens2  & 0 &   0  & 0 & 0 &   0  & 0 \\
+%    replace  & 0 &   0  & 0 & 0 &   0  & 0  \\
+%    schedule  & 0 &   0  & 0 & 0 &   0  & 0  \\
+%    schedule2 & 0 &   0  & 0 & 0 &   0  & 0    \\
+%    tcas & 8.17&-1.23&6.4E-62 &7.27&-2.14 &1.01E-38   \\
+%    totinfo  & 0 &   0  & 0 & 0 &   0  & 0  \\
+%    grep & 0 &   0  & 0 & 0 &   0  & 0 \\  \hline
+%    \end{tabular}%
+%  \label{subject degree_model}%
+%\end{table*}%
+%
+%We can learn that there is a clear decrease in the degree for the two inputs models when compared to the original model (Model 1 in Table \ref{subjects_inputs}). Note that the p-value shows that this decrease is significant. This result shows that with the decrease of number of parameters in the inputs model, the degree of the MFS may also decrease because some of the failure-inducing factors may be eliminated from the inputs model.
+%
+%Next,
+%
+%
+%\begin{table*}[!ht]
+%  \centering
+%  \caption{The correlation between guaranteed code and real faulty code for different input modeling}
+%    \begin{tabular}{|c|c|c|c|c|c|c|c|}  \hline
+%     &  \multirow{2}{*}{Subjects}   & \multicolumn{3}{c|}{2rd Input Model} &  \multicolumn{3}{c|}{3rd Input Model}   \\ \cline{3-8}
+%   \multirow{8}{*}{\rotatebox{90}{Weak guaranteed}}   &   & Average Correlation &  Change   &  P-value  & Average Correlation &  Change   &  P-value   \\ \cline{2-8}
+%   &  printtokens & 0 &   0  & 0 & 0 &   0  & 0 \\
+%   &  printtokens2  & 0 &   0  & 0 & 0 &   0  & 0 \\
+%   &  replace  & 0 &   0  & 0 & 0 &   0  & 0  \\
+%   &  schedule  & 0 &   0  & 0 & 0 &   0  & 0  \\
+%   &  schedule2 & 0 &   0  & 0 & 0 &   0  & 0    \\
+%  &   tcas & 0.02&6.9E-4&0.35 & 0.02&1.9E-3&0.14  \\
+%  &   totinfo  & 0 &   0  & 0 & 0 &   0  & 0 \\
+%   &  grep & 0 &   0  & 0 & 0 &   0  & 0 \\  \hline
+%   \multirow{8}{*}{\rotatebox{90}{Strong guaranteed}}   &   & Average Correlation &  Change   &  P-value  & Average Correlation &  Change   &  P-value   \\ \cline{2-8}
+%  &   printtokens & 0 &   0  & 0 & 0 &   0  & 0 \\
+%  &   printtokens2  & 0 &   0  & 0 & 0 &   0  & 0 \\
+%  &   replace  & 0 &   0  & 0 & 0 &   0  & 0  \\
+%  &   schedule  & 0 &   0  & 0 & 0 &   0  & 0  \\
+%  &   schedule2 & 0 &   0  & 0 & 0 &   0  & 0    \\
+%  &   tcas & 0& 0 & NaN  & 0&0&NaN  \\
+%  &   totinfo  & 0 &   0  & 0 & 0 &   0  & 0 \\
+% &    grep & 0 &   0  & 0 & 0 &   0  & 0 \\  \hline
+%    \end{tabular}%
+%  \label{subject degree_correlate}%
+%\end{table*}%
+%
+%(Note that in some pictures, the condition coverage cannot be 100 percent because some exception will not be triggered in the current inputs, e.g., the input memory exception handle module will not be triggered)
+%
+%Above all, the answer to the question 3 is :
+%
+%\textbf{The more the coverage the inputs modeling supports, the more accurate the MFS is correlated to the faulty code.}
 
 %注意这个结果只是一个经验性地结果，其实对于错误，很难确定其真正地type， 比如说，如果一个assign 被用到后面地check 呢？， 这就导致其实assign check 地很
 %与其这样分，我们发现很多分类不合理
 
 %宏会影响错误，因为它是直接编译地
 
-\subsection{Threats to Validation}
+\subsection{Threats to Validity}
 
 There are several threats to validity in our empirical studies.
 
-First, our experiments are based on only 8 open-source software. More subject programs are desired to make the results more general.
+First, our experiments are based on only 7 open-source software, of which the program scale is small or medium sized. More subject programs are desired to make the results more general.
 
-Second, the faults should be extended to more real faults, not only with those injected ones.
+Second, we only applied on inputs modeling \cite{ghandehari2013applying} for our program subjects. Other inputs modeling may result in different results, e.g., the overall coverage of the programs with these models, and the characteristics of the MFS, may be different with different models.
 
-At last, we should balance the number of different types of faults. In fact, noted Table \ref{subject fault}, we have none extanones type in the interfaceing odc class.  Specifically, the checking, interface types should be increased, as well as the missing and extraneous code.
+At last, we should balance the number of different types of faults. In fact, based on Table \ref{subject fault}, there is none extraneous code type in the odc class \emph{Interface}. We should introduce more faults of such type to avoid deviation.
 %For example, it is appealing to study the multiple faults in one program, or faults that are related to more than one statements.
+%\section{Discussion}\label{sec:discuss}
+%Based on the results of our empirical studies, we can conclude that in most cases, we cannot directly use the MFS into defect analyzing. Only in some special . However, this is based on the . When consider other information, it seems. We have take such a . For tcas, 23 46 in their  slicing of failing test cases. It seems
+
+
 
 \section{Related works}\label{sec:related}
 
@@ -894,8 +977,8 @@ Combinatorial testing has been proven to be effective at detecting and identifyi
 As a further work, we plan to use the conclusion in this paper to utilize MFS for code-level fault diagnosis. It is also appealing to study whether code-level fault diagnosis can optimal the inputs modeling of CT, according to the our 3rd empirical study. Besides them, we would like to conduct studies on more software programs with more types of faults to increase the generality of our work.
 
 %ACKNOWLEDGMENTS are optional
-\section{Acknowledgments}
-This work was supported by the National Natural Science Foundation of China (No. 61272079), the Research Fund for the Doctoral Program of Higher Education of China (No.20130091110032), the Science Fund for Creative Research Groups of the National Natural Science Foundation of China(No. 61321491), the Major Program of National Natural Science Foundation of China (No. 91318301), and National Science Foundation Award CCF-1464425.
+%\section{Acknowledgments}
+%This work was supported by the National Natural Science Foundation of China (No. 61272079), the Major Program of National Natural Science Foundation of China (No. 91318301), and National Science Foundation Award CCF-1464425.
 
 %
 % The following two commands are all you need in the

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2014.9.10)  19 FEB 2017 05:04
+This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2014.9.10)  28 FEB 2017 08:56
 entering extended mode
 **sig-alternate-sample.tex
 (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.tex
@@ -259,19 +259,23 @@ Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix
 ) (C:\CTEX\MiKTeX\tex\latex\multirow\multirow.sty
 \bigstrutjot=\dimen123
 )
+(C:\CTEX\MiKTeX\tex\latex\threeparttable\threeparttable.sty
+Package: threeparttable 2003/06/13  v 3.0
+\@tempboxb=\box31
+)
 (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 53.
-LaTeX Font Info:    ... okay on input line 53.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 54.
+LaTeX Font Info:    ... okay on input line 54.
 Requested font "cmr6" at 6.0pt
  -> cmr6
 Requested font "cmmi9" at 9.0pt
@@ -288,7 +292,7 @@ Requested font "cmex7" at 6.0pt
  -> cmex7
 Requested font "cmex7" at 5.0pt
  -> cmex7
-LaTeX Font Info:    Try loading font information for U+msa on input line 207.
+LaTeX Font Info:    Try loading font information for U+msa on input line 208.
 
 (C:\CTEX\MiKTeX\tex\latex\amsfonts\umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
@@ -299,7 +303,7 @@ Requested font "msam7" at 6.0pt
  -> msam7
 Requested font "msam5" at 5.0pt
  -> msam5
-LaTeX Font Info:    Try loading font information for U+msb on input line 207.
+LaTeX Font Info:    Try loading font information for U+msb on input line 208.
 
 (C:\CTEX\MiKTeX\tex\latex\amsfonts\umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
@@ -310,7 +314,7 @@ Requested font "msbm7" at 6.0pt
  -> msbm7
 Requested font "msbm5" at 5.0pt
  -> msbm5
-LaTeX Font Info:    Try loading font information for U+lasy on input line 207.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 208.
 
 (C:\CTEX\MiKTeX\tex\latex\base\ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
@@ -322,24 +326,24 @@ Requested font "lasy6" at 6.0pt
 Requested font "lasy5" at 5.0pt
  -> lasy5
 
-Overfull \hbox (91.85365pt too wide) in paragraph at lines 207--207
+Overfull \hbox (91.85365pt too wide) in paragraph at lines 208--208
  []\eaddfnt laleh.shikhgholamhosseing@mavs.uta.edu| 
  []
 
-LaTeX Font Info:    Try loading font information for T1+ptm on input line 207.
+LaTeX Font Info:    Try loading font information for T1+ptm on input line 208.
 (C:\CTEX\MiKTeX\tex\latex\psnfss\t1ptm.fd
 File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
 )
 Requested font "ptmr8t" at 7.0pt
  -> ptmr8t
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 207.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 208.
 
 
 (C:\CTEX\MiKTeX\tex\latex\psnfss\omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <7> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 207.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 208.
 Requested font "aer8" at 8.0pt
  -> aer8
 Requested font "cmr8" at 8.0pt
@@ -356,14 +360,14 @@ Requested font "msbm10" at 8.0pt
  -> msbm10
 Requested font "lasy8" at 8.0pt
  -> lasy8
-LaTeX Font Info:    Try loading font information for OMS+aer on input line 247.
+LaTeX Font Info:    Try loading font information for OMS+aer on input line 248.
 
 
 (C:\CTEX\MiKTeX\tex\latex\ae\omsaer.fd
 File: omsaer.fd 1999/12/27
 )
 LaTeX Font Info:    Font shape `OMS/aer/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 247.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 248.
 Requested font "aebx9" at 9.0pt
  -> aebx9
 
@@ -376,7 +380,7 @@ Requested font "aeti9" at 9.0pt
 
 ]
 \c@definition=\count114
-LaTeX Font Info:    Try loading font information for T1+aett on input line 339.
+LaTeX Font Info:    Try loading font information for T1+aett on input line 343.
 
 
 (C:\CTEX\MiKTeX\tex\latex\ae\t1aett.fd
@@ -388,14 +392,15 @@ Requested font "aer5" at 5.0pt
  -> aer5
 Requested font "aebxti10" at 9.0pt
  -> aebxti10
- [2]
-Overfull \hbox (1.81006pt too wide) in paragraph at lines 393--393
+
+Overfull \hbox (1.81006pt too wide) in paragraph at lines 397--397
 []\secfnt Formal de-scrip-tion about guar-an-teed code 
  []
 
+[2]
 File: foo_tree.eps Graphic file (type eps)
-<foo_tree.eps>
-Overfull \hbox (5.71754pt too wide) in paragraph at lines 399--400
+ <foo_tree.eps>
+Overfull \hbox (5.71754pt too wide) in paragraph at lines 403--404
 [][] 
  []
 
@@ -406,113 +411,133 @@ Requested font "aer6" at 6.0pt
 Requested font "aecsc10" at 9.0pt
  -> aecsc10
  [4] [5]
-Underfull \vbox (badness 5446) has occurred while \output is active []
-
-
-Underfull \vbox (badness 1642) has occurred while \output is active []
-
- [6]
-Overfull \hbox (11.5533pt too wide) in paragraph at lines 729--729
+Overfull \hbox (11.5533pt too wide) in paragraph at lines 725--725
 []\secfnt The cor-re-la-tion be-tween MF-S and re-al fault-
  []
 
 File: result1.eps Graphic file (type eps)
 <result1.eps>
-File: result2.eps Graphic file (type eps)
- <result2.eps> [7]
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 833 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 834 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 834 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 834 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 834 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 834 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 834 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 834 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 834 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 834 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 834 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 834 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 834 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 834 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 834 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 834 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 834 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 834 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 834 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 836 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 836 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 836 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 836 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 836 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 836 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 836 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 836 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 836 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 836 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 836 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 836 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 836 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 836 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 836 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 836 replaced by U+FFFD.
-Invalid UTF-8 byte or sequence at line 836 replaced by U+FFFD.
+Underfull \vbox (badness 5446) has occurred while \output is active []
+
+ [6]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+File: result3.eps Graphic file (type eps)
+
+<result3.eps>
+Overfull \hbox (5.71754pt too wide) in paragraph at lines 760--761
+[][] 
+ []
+
+
+Underfull \vbox (badness 6608) has occurred while \output is active []
+
+ [7]
+
+LaTeX Warning: Text page \thepage  contains only floats.
+
+
+Underfull \hbox (badness 1107) in paragraph at lines 792--793
+\T1/aer/m/n/9 of sig-nif-i-cance for the prob-a-bil-i-ty
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
  [8]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+File: result2.eps Graphic file (type eps)
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
+<result2.eps>
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 914 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 915 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 915 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 915 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 915 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 915 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 915 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 915 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 915 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 915 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 915 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 915 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 915 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 915 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 915 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 915 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 915 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 915 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 915 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 917 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 917 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 917 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 917 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 917 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 917 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 917 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 917 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 917 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 917 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 917 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 917 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 917 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 917 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 917 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 917 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 917 replaced by U+FFFD.
  [9]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
 (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.bbl [10]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -524,12 +549,12 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
 ] (C:\Users\xintao\Desktop\mfs_related\sig-alternate-sample.aux) ) 
 Here is how much of TeX's memory you used:
- 2759 strings out of 430478
- 32121 string characters out of 3191502
- 124780 words of memory out of 3000000
- 5838 multiletter control sequences out of 15000+200000
+ 2822 strings out of 430478
+ 32973 string characters out of 3191502
+ 120886 words of memory out of 3000000
+ 5897 multiletter control sequences out of 15000+200000
  51377 words of font info for 65 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
- 39i,11n,34p,1416b,464s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 39i,14n,34p,1416b,464s stack positions out of 5000i,500n,10000p,200000b,50000s
 
 Output written on sig-alternate-sample.pdf (12 pages).
