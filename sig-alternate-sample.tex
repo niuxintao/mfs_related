@@ -51,6 +51,10 @@
 \usepackage{multirow}
 \usepackage{threeparttable}
 
+\pretolerance=10000
+\tolerance=2000
+\emergencystretch=10pt
+
 \begin{document}
 
 % Copyright
@@ -480,7 +484,7 @@ More formally, we can conclude the relationship of the weak guaranteed code betw
 
 \newtheorem{proposition}{Proposition}
 \begin{proposition}
-Given schemas $s_{1}$, $s_{2}$, where $s_{1} \prec s_{2}$, then $wg(s_{1}) \subseteqq wg(s_{}2)$.
+Given schemas $s_{1}$, $s_{2}$, where $s_{1} \prec s_{2}$, then $wg(s_{1}) \subseteqq wg(s_{2})$.
 \end{proposition}
 
 It is easy to prove this proposition and hence we omit it here. Based on this proposition, to understand which code are under the direct control of some schemas, we need to remove the influence from their subschemas.
@@ -922,7 +926,7 @@ There are several threats to validity in our empirical studies.
 
 First, our experiments are based on only 7 open-source software, of which the program scale is small or medium sized. More subject programs are desired to make the results more general.
 
-Second, we only applied on inputs modeling \cite{ghandehari2013applying} for our program subjects. Other inputs modeling may result in different results, e.g., the overall coverage of the programs with these models, and the characteristics of the MFS, may be different with different models.
+Second, we only applied one inputs modeling \cite{ghandehari2013applying} for our program subjects. Other inputs modeling may result in different results, e.g., the overall coverage of the programs with these models, and the characteristics of the MFS, may be different with different models.
 
 At last, we should balance the number of different types of faults. In fact, based on Table \ref{subject fault}, there is none extraneous code type in the odc class \emph{Interface}. We should introduce more faults of such type to avoid deviation.
 %For example, it is appealing to study the multiple faults in one program, or faults that are related to more than one statements.
